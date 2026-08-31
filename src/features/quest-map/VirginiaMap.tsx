@@ -406,7 +406,7 @@ function placePortals(
 ): PlacedPortal[] {
   const placed: PlacedPortal[] = [];
   const minimumDistance = 88;
-  const edgePadding = 56;
+  const edgePadding = 64;
 
   for (const portal of portals) {
     const anchor = projectVirginiaCoordinate(
@@ -579,13 +579,14 @@ export function VirginiaMap({
         {description}
       </p>
 
-      <svg
-        className={styles.mapSvg}
-        viewBox={`0 0 ${VIEWBOX_WIDTH} ${VIEWBOX_HEIGHT}`}
-        preserveAspectRatio="xMidYMid meet"
-        role="group"
-        aria-label="Virginia map and mission portal controls"
-      >
+      <div className={styles.mapCanvas}>
+        <svg
+          className={styles.mapSvg}
+          viewBox={`0 0 ${VIEWBOX_WIDTH} ${VIEWBOX_HEIGHT}`}
+          preserveAspectRatio="xMidYMid meet"
+          role="group"
+          aria-label="Virginia map and mission portal controls"
+        >
         <title>Virginia mission map</title>
         <desc>{description}</desc>
         <defs>
@@ -798,44 +799,44 @@ export function VirginiaMap({
           </g>
         ) : null}
 
-        <g>
+        </svg>
+
+        <div className={styles.portalLayer}>
           {placedPortals.map(({ portal, center }) => {
             const status = PORTAL_STATUS[portal.displayState];
             const StatusIcon = status.Icon;
             const isSelected = portal.id === selectedId;
             return (
-              <foreignObject
+              <div
                 key={portal.id}
-                x={center.x - 52}
-                y={center.y - 52}
-                width="104"
-                height="104"
-                overflow="visible"
+                className={styles.portalControl}
+                style={{
+                  left: `${(center.x / VIEWBOX_WIDTH) * 100}%`,
+                  top: `${(center.y / VIEWBOX_HEIGHT) * 100}%`,
+                }}
               >
-                <div className={styles.portalControlWrap}>
-                  <button
-                    type="button"
-                    className={`${styles.portalButton} ${PORTAL_STATE_CLASS[portal.displayState]} ${
-                      isSelected ? styles.portalSelected : ""
-                    }`}
-                    aria-label={`${portal.id}: ${portal.title}. Status: ${status.label}. Map position: ${precisionLabel(portal.portal.precision)}.`}
-                    aria-pressed={isSelected}
-                    title={`${portal.id} · ${portal.shortTitle} · ${status.label}`}
-                    onClick={() => onSelect(portal.id)}
-                  >
-                    <span className={styles.missionNumber} aria-hidden="true">
-                      {missionNumber(portal.id)}
-                    </span>
-                    <span className={styles.statusGlyph} aria-hidden="true">
-                      <StatusIcon />
-                    </span>
-                  </button>
-                </div>
-              </foreignObject>
+                <button
+                  type="button"
+                  className={`${styles.portalButton} ${PORTAL_STATE_CLASS[portal.displayState]} ${
+                    isSelected ? styles.portalSelected : ""
+                  }`}
+                  aria-label={`${portal.id}: ${portal.title}. Status: ${status.label}. Map position: ${precisionLabel(portal.portal.precision)}.`}
+                  aria-pressed={isSelected}
+                  title={`${portal.id} · ${portal.shortTitle} · ${status.label}`}
+                  onClick={() => onSelect(portal.id)}
+                >
+                  <span className={styles.missionNumber} aria-hidden="true">
+                    {missionNumber(portal.id)}
+                  </span>
+                  <span className={styles.statusGlyph} aria-hidden="true">
+                    <StatusIcon />
+                  </span>
+                </button>
+              </div>
             );
           })}
-        </g>
-      </svg>
+        </div>
+      </div>
 
       <ul className={styles.legend} aria-label="Portal status key">
         {(Object.keys(PORTAL_STATUS) as PortalDisplayState[]).map((state) => {
