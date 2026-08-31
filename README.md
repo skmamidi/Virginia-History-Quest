@@ -29,6 +29,14 @@ npm run preview
 
 `npm test` runs the Vitest suite once. Use `npm run test:watch` while developing.
 
+## Deploy to GitHub Pages
+
+Push `main` to GitHub. The Pages workflow builds the app with its repository
+base path and publishes `dist/` to
+[https://skmamidi.github.io/Virginia-History-Quest/](https://skmamidi.github.io/Virginia-History-Quest/).
+
+In the repository's **Settings → Pages**, set **Source** to **GitHub Actions**.
+
 ## Project structure
 
 ```text

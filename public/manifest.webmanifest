@@ -1,12 +1,12 @@
 {
-  "id": "/",
+  "id": "/Virginia-History-Quest/",
   "name": "Virginia History Quest",
   "short_name": "VA Quest",
   "description": "Explore Virginia history through an accessible, story-driven mission map.",
   "lang": "en-US",
   "dir": "ltr",
-  "start_url": "/",
-  "scope": "/",
+  "start_url": "/Virginia-History-Quest/",
+  "scope": "/Virginia-History-Quest/",
   "display": "standalone",
   "orientation": "any",
   "background_color": "#f5f1e7",
@@ -15,13 +15,13 @@
   "prefer_related_applications": false,
   "icons": [
     {
-      "src": "/icons/quest-compass-192.png",
+      "src": "/Virginia-History-Quest/icons/quest-compass-192.png",
       "sizes": "192x192",
       "type": "image/png",
       "purpose": "any"
     },
     {
-      "src": "/icons/quest-compass-512.png",
+      "src": "/Virginia-History-Quest/icons/quest-compass-512.png",
       "sizes": "512x512",
       "type": "image/png",
       "purpose": "any"

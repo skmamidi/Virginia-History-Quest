@@ -20,7 +20,7 @@ export function QuestHeader({
       <a className="brand" href="#quest-map" aria-label="Virginia History Quest home">
         <img
           className="brand-mark"
-          src="/assets/quest-compass.png"
+          src={`${import.meta.env.BASE_URL}assets/quest-compass.png`}
           alt=""
           width="56"
           height="56"
