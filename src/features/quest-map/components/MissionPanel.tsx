@@ -56,11 +56,6 @@ export function MissionPanel({ mission, onContinue }: MissionPanelProps) {
           <span aria-hidden="true">{mission.experienceTitle}</span>
           <span className="sr-only">{mission.title}</span>
         </h2>
-        <div className="essential-question">
-          <p className="field-label">Essential question</p>
-          <p>{mission.essentialQuestion}</p>
-        </div>
-        <p className="mission-summary">{mission.hook}</p>
         <p className="mission-reward">{earned || mission.displayState === "restored" ? "Badge earned" : "Your badge to discover"}: <strong>{MISSION_ACTIVITIES[mission.id].badge}</strong></p>
 
         <button className="primary-action" type="button" onClick={onContinue}>
@@ -68,6 +63,13 @@ export function MissionPanel({ mission, onContinue }: MissionPanelProps) {
           <ChevronRight aria-hidden="true" />
         </button>
 
+        <details className="mission-about">
+          <summary>More about this mission</summary>
+        <div className="essential-question">
+          <p className="field-label">Essential question</p>
+          <p>{mission.essentialQuestion}</p>
+        </div>
+        <p className="mission-summary">{mission.hook}</p>
         <dl className="mission-meta">
           <div>
             <dt>Time lens</dt>
@@ -94,6 +96,7 @@ export function MissionPanel({ mission, onContinue }: MissionPanelProps) {
               <strong>Keep investigating:</strong> Open a mission to find its learning sources and explore the evidence with a grown-up.
             </p>
           </div>
+        </details>
         </details>
       </div>
     </aside>

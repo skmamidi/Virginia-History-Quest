@@ -34,7 +34,13 @@ describe("mission adventures", () => {
       await user.click(screen.getByRole("button", { name: index === 2 ? "Reveal my badge" : "Next challenge" }));
     }
     expect(within(screen.getByRole("dialog")).getByText(activity.badge)).toBeVisible();
-    await user.click(screen.getByRole("button", { name: "Back to my map" }));
+    if (id === "VS.1") {
+      await user.click(screen.getByRole("button", { name: "Next adventure: Indigenous Virginia" }));
+      expect(screen.getByRole("heading", { name: "Your mission: Indigenous Virginia" })).toBeVisible();
+      await user.click(screen.getByRole("button", { name: "Close Indigenous Virginia mission briefing" }));
+    } else {
+      await user.click(screen.getByRole("button", { name: "Back to my map" }));
+    }
     expect(screen.getByRole("progressbar")).toHaveAttribute("aria-valuenow", "1");
   });
 
@@ -52,6 +58,8 @@ describe("mission adventures", () => {
     await user.keyboard("{Escape}");
     await user.click(screen.getByRole("button", { name: "Continue mission" }));
     expect(screen.getByRole("heading", { name: "Build a trail from east to west." })).toBeVisible();
+    expect(screen.getByText("Tap the first piece. 0 of 3 placed.")).toBeVisible();
+    expect(screen.getByText("First piece goes here")).toBeVisible();
     for (const label of ["Blue Ridge", "Piedmont", "Coastal Plain"]) await user.click(screen.getByRole("button", { name: `? ${label}` }));
     await user.click(screen.getByRole("button", { name: "Check my discovery" }));
     expect(within(screen.getByRole("dialog")).getByText(/Keep investigating/)).toBeVisible();

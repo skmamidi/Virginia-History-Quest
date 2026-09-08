@@ -1519,3 +1519,62 @@ input:focus-visible,
 @media (max-width: 680px) {
   .mobile-map-hint { display: block; margin: 0; padding: 0.6rem 0.8rem; background: var(--surface); font-size: 0.8rem; font-weight: 750; }
 }
+
+/* A single, state-aware starting point takes precedence over optional exploration. */
+.explorer-guide { display: grid; grid-template-columns: 64px minmax(0, 1fr) minmax(220px, 280px); align-items: center; gap: 1.2rem; margin: 1.2rem 0 0; padding: 1.25rem; border: 2px solid #d3ac4a; border-left: 7px solid #b98415; border-radius: 18px; background: #fff5d6; box-shadow: var(--shadow-sm); }
+.guide-compass { display: grid; place-items: center; width: 64px; height: 64px; border-radius: 50%; color: var(--navy); background: #fffdf8; border: 2px solid #d3ac4a; }
+.guide-compass svg { width: 40px; height: 40px; }
+.guide-copy h2 { margin: 0; font-family: Georgia, serif; font-size: clamp(1.4rem, 2.5vw, 1.9rem); line-height: 1.15; }
+.guide-copy > p { margin: 0.45rem 0 0.75rem; line-height: 1.4; color: #405369; }
+.explorer-route { display: flex; flex-wrap: wrap; gap: 0.55rem 1.1rem; padding: 0; margin: 0; list-style: none; }
+.explorer-route li { display: flex; align-items: center; gap: 0.35rem; font-size: 0.8rem; font-weight: 750; }
+.explorer-route li > span { display: grid; place-items: center; width: 22px; height: 22px; border-radius: 50%; background: var(--navy); color: white; }
+.explorer-route svg { width: 17px; height: 17px; }
+.guide-launch p { display: flex; align-items: center; justify-content: center; gap: 0.3rem; margin: 0.6rem 0 0; font-size: 0.8rem; }
+.guide-launch p svg { width: 18px; height: 18px; }
+.guide-start { background: var(--forest-deep); min-height: 58px; }
+.guide-start:hover { background: #164323; }
+.map-choice-hint { color: #4a5d6d; font-size: 0.88rem; line-height: 1.5; margin: 0.8rem 0; }
+.explorer-tools { margin-bottom: 0.8rem; border-top: 1px solid var(--line); }
+.explorer-tools > summary, .bonus-activities > summary { min-height: 44px; padding: 0.75rem 0.25rem; cursor: pointer; font-size: 0.85rem; font-weight: 750; }
+.explorer-tools > summary span, .bonus-activities > summary span { font-weight: 500; color: var(--muted); }
+.explorer-tools[open] > summary { margin-bottom: 0.4rem; }
+.bonus-activities { min-width: 0; border-top: 1px solid var(--line); }
+.next-step-cue { display: flex; align-items: center; gap: 0.65rem; padding: 0.8rem; margin: 0.6rem 0; border-left: 4px solid var(--blue); background: #e6f3fb; border-radius: 8px; color: var(--navy); line-height: 1.45; font-weight: 750; }
+.next-step-cue svg { width: 24px; height: 24px; flex-shrink: 0; }
+.timeline-answer { list-style: none; padding: 0; display: grid; gap: 0.5rem; }
+.timeline-answer li { display: flex; align-items: center; gap: 0.6rem; min-height: 46px; padding: 0.6rem; border-radius: 10px; }
+.timeline-answer .empty-slot { border: 2px dashed #aebabe; color: #526678; background: #f5f5ef; }
+.timeline-answer .filled-slot { border: 2px solid #8cb295; background: #edf6ea; color: #164b2a; }
+.slot-number { display: grid; place-items: center; width: 25px; height: 25px; border-radius: 50%; border: 1px solid currentColor; flex-shrink: 0; font-weight: 800; }
+.mission-action-bar { position: static; bottom: -1px; z-index: 3; padding: 0.7rem 0; background: var(--surface); box-shadow: 0 -8px 10px var(--surface); }
+.mission-action-bar.action-ready { position: sticky; }
+.mission-action-bar.action-ready .primary-action { background: var(--forest-deep); }
+@media (max-width: 900px) {
+  .explorer-guide { grid-template-columns: 48px minmax(0, 1fr); gap: 0.8rem; padding: 1rem; }
+  .guide-compass { width: 48px; height: 48px; align-self: start; }
+  .guide-compass svg { width: 32px; height: 32px; }
+  .guide-launch { grid-column: 1 / -1; }
+  .guide-launch p { display: none; }
+  .explorer-route { gap: 0.4rem; }
+  .explorer-route svg { display: none; }
+}
+@media (max-width: 680px) {
+  .quest-intro h1 { max-width: none; font-size: 2rem; }
+  .guide-copy h2 { font-size: 1.4rem; }
+  .explorer-route { display: grid; gap: 0.35rem; }
+  .explorer-guide { margin-top: 0.8rem; }
+  .guide-start { margin-top: 0; }
+  .mission-action-bar { bottom: -1.5rem; padding-bottom: 1.5rem; }
+  .bonus-activities { grid-column: 1 / -1; }
+}
+.quest-dock { width: min(calc(100% - 2rem), 640px); grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.extra-explorer-tools { display: flex; flex-wrap: wrap; gap: 0.6rem; padding-bottom: 1rem; }
+.extra-explorer-tools button { min-height: 44px; padding: 0.65rem 0.85rem; background: var(--surface); border: 1px solid var(--line); border-radius: 10px; cursor: pointer; }
+.mission-about { margin-top: 0.6rem; }
+.mission-about > summary { min-height: 44px; padding-top: 0.75rem; cursor: pointer; font-size: 0.88rem; font-weight: 750; }
+@media (max-width: 680px) {
+  .mission-about .mission-summary, .mission-about .mission-meta, .mission-about .evidence-details { display: block; }
+  .quest-dock { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .quest-dock button { font-size: 0.78rem; }
+}

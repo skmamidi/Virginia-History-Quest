@@ -1,4 +1,4 @@
-import { BookOpenCheck, Clock3, Link2, Map, Shield, Users } from "lucide-react";
+import { Compass, Map, Shield } from "lucide-react";
 
 export type DockAction =
   | "map"
@@ -6,7 +6,8 @@ export type DockAction =
   | "timeline"
   | "people"
   | "chains"
-  | "review";
+  | "review"
+  | "guide";
 
 interface QuestDockProps {
   active: "map" | "timeline" | "standards";
@@ -14,19 +15,16 @@ interface QuestDockProps {
 }
 
 const items = [
-  { id: "map", label: "Quest Map", Icon: Map },
-  { id: "missions", label: "Time Portals", Icon: Shield },
-  { id: "timeline", label: "Timeline Lab", Icon: Clock3 },
-  { id: "people", label: "People Deck", Icon: Users },
-  { id: "chains", label: "Chain Lab", Icon: Link2 },
-  { id: "review", label: "Review", Icon: BookOpenCheck },
+  { id: "map", label: "My map", Icon: Map },
+  { id: "missions", label: "Choose mission", Icon: Shield },
+  { id: "guide", label: "My next step", Icon: Compass },
 ] as const;
 
 export function QuestDock({ active, onAction }: QuestDockProps) {
   return (
     <nav className="quest-dock" aria-label="Learner tools">
       {items.map(({ id, label, Icon }) => {
-        const isCurrent = id === "map" ? active === "map" : id === "timeline" ? active === "timeline" : false;
+        const isCurrent = id === "map" && active === "map";
         return (
           <button
             key={id}

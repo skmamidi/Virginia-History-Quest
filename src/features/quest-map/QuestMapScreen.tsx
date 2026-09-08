@@ -21,6 +21,7 @@ import {
 } from "../../contexts/quest-journey/domain/missionProgress";
 import { freshProgress, prepareProgress, passChallenge, hasBadge } from "../../contexts/quest-journey/application/playMission";
 import { MISSION_ACTIVITIES } from "../../contexts/published-content/adapters/missionActivities";
+import { ExplorerGuide } from "./components/ExplorerGuide";
 import { MissionPlayer } from "./components/MissionPlayer";
 import { MissionPanel } from "./components/MissionPanel";
 import { TimelineView, StandardsView } from "./components/MissionViews";
@@ -120,28 +121,31 @@ export function QuestMapScreen() {
     setSelectedId(missionId as MissionId);
     setAllMissionsOpen(false);
     if (window.matchMedia?.("(max-width: 900px)").matches) {
-      requestAnimationFrame(() => document.getElementById("selected-mission-title")?.scrollIntoView({ block: "center" }));
+      requestAnimationFrame(() => document.getElementById("explorer-guide-title")?.scrollIntoView({ block: "center" }));
     }
   }, []);
 
-  const startSelectedMission = useCallback(() => {
+  const openMission = useCallback((missionId: MissionId) => {
+    setSelectedId(missionId);
     const prepared = prepareProgress(progress);
     if (prepared.some((record, index) => record !== progress[index])) saveProgress(prepared);
-    const record = prepared.find((item) => item.missionId === selectedId);
+    const record = prepared.find((item) => item.missionId === missionId);
     if (!record) return;
 
     if (record.state === "AVAILABLE") {
       const next = prepared.map((item) =>
-        item.missionId === selectedId
+        item.missionId === missionId
           ? applyMissionEvent(item, { type: "MISSION_OPENED" })
           : item,
       );
       saveProgress(next);
-      setStatusMessage(`${selectedMission.shortTitle} is ready. Your place is saved.`);
+      setStatusMessage(`${findMission(portals, missionId).shortTitle} is ready. Your place is saved.`);
     }
     if (["AVAILABLE", "ORIENTING"].includes(record.state)) setBriefingOpen(true);
     else setPlayerOpen(true);
-  }, [progress, saveProgress, selectedId, selectedMission.shortTitle]);
+  }, [progress, saveProgress, portals]);
+
+  const startSelectedMission = () => openMission(selectedId);
 
   const completeBriefing = useCallback(() => {
     const record = progress.find((item) => item.missionId === selectedId);
@@ -169,8 +173,12 @@ export function QuestMapScreen() {
   };
 
   const handleDockAction = (action: DockAction) => {
-    if (action === "map") {
+    if (action === "guide") {
+      document.getElementById("explorer-guide-title")?.focus();
+      document.getElementById("explorer-guide-title")?.scrollIntoView({ block: "center" });
+    } else if (action === "map") {
       setView("map");
+      requestAnimationFrame(() => document.getElementById("map-view")?.scrollIntoView({ block: "start" }));
     } else if (action === "missions") {
       setAllMissionsOpen(true);
     } else if (action === "timeline") {
@@ -179,6 +187,8 @@ export function QuestMapScreen() {
       setConnectionMode(action);
     } else if (action === "review") {
       setReviewsOpen(true);
+      const bonus = document.getElementById("bonus-activities") as HTMLDetailsElement | null;
+      if (bonus) bonus.open = true;
       document.getElementById("map-clue-title")?.focus();
     }
   };
@@ -206,7 +216,7 @@ export function QuestMapScreen() {
         <div className="quest-intro">
           <div>
             <h1>Your Virginia Memory Map</h1>
-            <p>Pick a time portal. Solve clues. Collect all 13 explorer badges!</p>
+            <p>Your next adventure is ready below.</p>
           </div>
           <button
             className="all-missions-shortcut"
@@ -219,6 +229,9 @@ export function QuestMapScreen() {
           </button>
         </div>
 
+        <ExplorerGuide mission={selectedMission} onStart={startSelectedMission} />
+        <p className="map-choice-hint">Want a different adventure? Tap a numbered portal on the map or choose All missions.</p>
+
         <div className="mobile-progress" aria-hidden="true">
           <span>{badgeCount} of 13 badges</span>
           <span className="mobile-progress-track">
@@ -226,6 +239,8 @@ export function QuestMapScreen() {
           </span>
         </div>
 
+        <details className="explorer-tools">
+          <summary>Map tools & other views <span>(optional)</span></summary>
         <div className="quest-toolbar">
           <div className="view-tabs" role="tablist" aria-label="Quest views">
             <button
@@ -290,6 +305,13 @@ export function QuestMapScreen() {
           ) : null}
         </div>
 
+          <div className="extra-explorer-tools" aria-label="Extra explorer tools">
+            <button type="button" onClick={() => handleDockAction("people")}>People connections</button>
+            <button type="button" onClick={() => handleDockAction("chains")}>Cause & effect</button>
+            <button type="button" onClick={() => handleDockAction("review")}>Practice a bonus clue</button>
+          </div>
+        </details>
+
         <div className="quest-grid">
           <ProgressRail
             restoredCount={badgeCount}
@@ -351,8 +373,7 @@ export function QuestMapScreen() {
           <p className="briefing-kicker">13 time portals</p>
           <h2 id="mission-directory-title">All missions</h2>
           <p className="modal-lead">
-            Every portal links time, people, place, cause and effect, and evidence.
-            Pick the list or the map—the learning is the same.
+            Pick a topic you’re curious about. We’ll show you how to start.
           </p>
           <ol className="mission-directory-list">
             {portals.map((portal) => (
@@ -386,12 +407,11 @@ export function QuestMapScreen() {
           <p className="briefing-kicker">
             {selectedMission.id} · 3 challenges · Play at your pace
           </p>
-          <h2 id="briefing-title">{selectedMission.title}</h2>
+          <h2 id="briefing-title">Your mission: {selectedMission.shortTitle}</h2>
           <p className="modal-lead">{MISSION_ACTIVITIES[selectedId].goal}</p>
-          <p className="briefing-question">{selectedMission.essentialQuestion}</p>
-          <p className="field-label">Your investigation</p>
+          <p className="field-label">Here’s how to play</p>
           <ol className="briefing-steps">
-            {selectedMission.learningFocus.map((focus) => (
+            {["Read the clue. You can listen to it, too!", "Tap an answer, then tap Check my discovery.", "Solve all 3 challenges to reveal your badge."].map((focus) => (
               <li key={focus}>{focus}</li>
             ))}
           </ol>
@@ -408,14 +428,20 @@ export function QuestMapScreen() {
           mission={selectedMission}
           record={progress.find((item) => item.missionId === selectedId)!}
           audioEnabled={audioEnabled}
-          onClose={() => setPlayerOpen(false)}
+          onClose={() => {
+            setPlayerOpen(false);
+            if (["PROVISIONAL_MASTERY", "MASTERED"].includes(selectedMission.progressState)) {
+              setSelectedId(projection.continueMissionId ?? selectedId);
+            }
+          }}
           onPass={(index) => saveProgress(progress.map((record) =>
             record.missionId === selectedId ? passChallenge(record, index) : record))}
+          nextMissionTitle={portals.find((portal) => portal.id !== selectedId && !hasBadge(progress.find((record) => record.missionId === portal.id)!))?.shortTitle}
           onNext={() => {
             setPlayerOpen(false);
             const remaining = portals.find((portal) => portal.id !== selectedId && !hasBadge(progress.find((record) => record.missionId === portal.id)!));
-            setSelectedId(remaining?.id ?? selectedId);
-            setAllMissionsOpen(true);
+            if (remaining) openMission(remaining.id);
+            else setAllMissionsOpen(true);
           }}
         />
       ) : null}

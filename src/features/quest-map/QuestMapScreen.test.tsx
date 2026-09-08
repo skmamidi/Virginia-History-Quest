@@ -26,6 +26,7 @@ describe("QuestMapScreen", () => {
     const user = userEvent.setup();
     render(<QuestMapScreen />);
 
+    await user.click(screen.getByText("Map tools & other views"));
     await user.click(screen.getByRole("tab", { name: "Timeline" }));
     expect(screen.getByRole("region", { name: /mission timeline/i })).toBeVisible();
 
@@ -42,6 +43,7 @@ describe("QuestMapScreen", () => {
     const user = userEvent.setup();
     render(<QuestMapScreen />);
 
+    await user.click(screen.getByText("Bonus clues & review"));
     await user.click(screen.getByRole("radio", { name: "James River" }));
     expect(
       screen.getByText(/James River connected Jamestown with the Chesapeake Bay/i),
@@ -53,4 +55,23 @@ describe("QuestMapScreen", () => {
     const results = await axe(container);
     expect(results.violations).toEqual([]);
   });
+});
+
+
+it("guides a new explorer directly into a mission and updates the next action", async () => {
+  const user = userEvent.setup();
+  render(<QuestMapScreen />);
+  expect(screen.getByRole("heading", { name: "Start here, explorer!" })).toBeVisible();
+  expect(screen.getByRole("tab", { name: "Standards" })).not.toBeVisible();
+  expect(screen.getByRole("radio", { name: "James River" })).not.toBeVisible();
+  await user.click(screen.getByRole("button", { name: "Start my adventure" }));
+  await user.click(screen.getByRole("button", { name: "Let’s investigate" }));
+  expect(screen.getByText("Read the clue, then tap one answer below.")).toBeVisible();
+  await user.click(screen.getByRole("button", { name: "B Waterfalls and rapids" }));
+  expect(screen.getByText("Ready! Tap Check my discovery below.")).toBeVisible();
+  await user.click(screen.getByRole("button", { name: "Check my discovery" }));
+  expect(screen.getByText("Nice work! Tap Next challenge to keep going.")).toBeVisible();
+  await user.keyboard("{Escape}");
+  expect(screen.getByRole("button", { name: "Continue my adventure" })).toBeVisible();
+  expect(screen.getByText(/Next up: challenge 2 of 3/)).toBeVisible();
 });

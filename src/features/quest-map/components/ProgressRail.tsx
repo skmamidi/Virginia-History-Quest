@@ -1,4 +1,4 @@
-import { BookOpenCheck, Compass, Lightbulb, Search } from "lucide-react";
+import { BookOpenCheck, Compass, Search } from "lucide-react";
 import type { RetrievalChallenge } from "../../../contexts/published-content/domain/retrieval";
 
 interface ProgressRailProps {
@@ -45,13 +45,8 @@ export function ProgressRail({
         </div>
       </section>
 
-      <section className="status-card strength-card" aria-label="Learning strength">
-        <Lightbulb aria-hidden="true" className="status-icon" />
-        <p>
-          Solve clues to earn a badge. <strong>Every discovery counts!</strong>
-        </p>
-      </section>
-
+      <details id="bonus-activities" className="bonus-activities">
+        <summary>Bonus clues & review <span>(optional)</span></summary>
       <section className="status-card challenge-card" aria-labelledby="map-clue-title">
         <div className="challenge-heading">
           <Search aria-hidden="true" className="status-icon" />
@@ -96,6 +91,7 @@ export function ProgressRail({
           </ol>
         ) : null}
       </section>
+      </details>
     </aside>
   );
 }

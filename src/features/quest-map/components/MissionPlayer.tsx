@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import { Award, CheckCircle2, ChevronRight, Lightbulb, RotateCcw, Sparkles, Star, Volume2 } from "lucide-react";
+import { Award, CheckCircle2, ChevronRight, Hand, Lightbulb, RotateCcw, Sparkles, Star, Volume2 } from "lucide-react";
 import { ACTIVITY_SOURCES, MISSION_ACTIVITIES } from "../../../contexts/published-content/adapters/missionActivities";
 import { challengeIndex } from "../../../contexts/quest-journey/application/playMission";
 import type { MissionProgress } from "../../../contexts/quest-journey/domain/missionProgress";
@@ -13,9 +13,10 @@ interface Props {
   onPass: (index: number) => void;
   onClose: () => void;
   onNext: () => void;
+  nextMissionTitle?: string;
 }
 
-export function MissionPlayer({ mission, record, audioEnabled, onPass, onClose, onNext }: Props) {
+export function MissionPlayer({ mission, record, audioEnabled, onPass, onClose, onNext, nextMissionTitle }: Props) {
   const activity = MISSION_ACTIVITIES[mission.id];
   const [index, setIndex] = useState(() => challengeIndex(record));
   const [selected, setSelected] = useState<number | null>(null);
@@ -27,6 +28,12 @@ export function MissionPlayer({ mission, record, audioEnabled, onPass, onClose, 
   const audio = useRef<AudioContext | null>(null);
   const challenge = activity.challenges[index];
   const success = feedback === "correct";
+  const readyToCheck = challenge.kind === "order" ? sequence.length === challenge.choices.length : selected !== null;
+  const nextCue = success ? (index === 2 ? "Tap Reveal my badge to see what you earned!" : "Nice work! Tap Next challenge to keep going.")
+    : feedback === "retry" ? (challenge.kind === "order" ? "Read the clue, then tap Start over to try a new order." : "Read the clue, then tap a different answer.")
+    : readyToCheck ? "Ready! Tap Check my discovery below."
+    : challenge.kind === "order" ? `Tap the ${["first", "second", "third"][sequence.length]} piece. ${sequence.length} of 3 placed.`
+    : index === 0 ? "Read the clue, then tap one answer below." : "Tap one answer below. Need help? Open a clue.";
   const isReview = ["DELAYED_CHECK_DUE", "TARGETED_REVIEW"].includes(record.state);
 
   useEffect(() => {
@@ -84,7 +91,7 @@ export function MissionPlayer({ mission, record, audioEnabled, onPass, onClose, 
           </div>
           <p>You used evidence, made connections, and solved the final challenge.</p>
           <p className="completion-note">{record.state === "MASTERED" ? "Memory check complete. This portal is restored!" : "Your badge is earned! Come back in seven days for a memory check to restore this portal. You can explore another mission right now."}</p>
-          <button className="primary-action" type="button" onClick={onNext}>Choose another adventure <ChevronRight aria-hidden="true" /></button>
+          <button className="primary-action" type="button" onClick={onNext}>{nextMissionTitle ? `Next adventure: ${nextMissionTitle}` : "See all my badges"} <ChevronRight aria-hidden="true" /></button>
           <button className="secondary-action" type="button" onClick={onClose}>Back to my map</button>
         </div>
       ) : (
@@ -97,7 +104,7 @@ export function MissionPlayer({ mission, record, audioEnabled, onPass, onClose, 
             ))}
           </div>
           <h2 id="adventure-title" ref={heading} tabIndex={-1}>{isReview ? "Memory check: " : ""}{challenge.prompt}</h2>
-          <p className="mission-instructions">{challenge.kind === "order" ? "Tap the pieces in order, starting with the first. Use Start over to rearrange them." : "Choose your answer, then check your discovery. Take your time!"}</p>
+          <p className="mission-instructions">{challenge.kind === "order" ? "Build the story from first to last." : "Find the answer using the clue. It’s okay to try again!"}</p>
           {index === 0 ? <div className="clue-card"><Lightbulb aria-hidden="true" /><p>{challenge.clue}</p></div> : (
             <button className="hint-button" type="button" aria-expanded={hintOpen} onClick={() => setHintOpen(!hintOpen)}><Lightbulb aria-hidden="true" />{hintOpen ? "Hide clue" : "Need a clue?"}</button>
           )}
@@ -106,6 +113,7 @@ export function MissionPlayer({ mission, record, audioEnabled, onPass, onClose, 
             window.speechSynthesis.cancel();
             window.speechSynthesis.speak(new SpeechSynthesisUtterance(`${challenge.prompt}. ${challenge.clue}. ${challenge.choices.join(". ")}`));
           }}><Volume2 aria-hidden="true" />Read it to me</button> : null}
+          <p className="next-step-cue" aria-live="polite"><Hand aria-hidden="true" /><span>{nextCue}</span></p>
           <div className="challenge-choices" role="group" aria-label={challenge.kind === "order" ? "Timeline pieces" : "Answer choices"}>
             {(challenge.kind === "order" ? [2, 0, 1] : challenge.choices.map((_, i) => i)).map((value) => (
               <button
@@ -125,16 +133,18 @@ export function MissionPlayer({ mission, record, audioEnabled, onPass, onClose, 
           </div>
           {challenge.kind === "order" ? <>
             <ol className="timeline-answer" aria-label="Your timeline">
-              {sequence.map((value) => <li key={value}>{challenge.choices[value]}</li>)}
+              {[0, 1, 2].map((position) => <li key={position} className={sequence[position] === undefined ? "empty-slot" : "filled-slot"}><span className="slot-number" aria-hidden="true">{position + 1}</span>{sequence[position] === undefined ? ["First piece goes here", "Then…", "Last…"][position] : challenge.choices[sequence[position]]}</li>)}
             </ol>
             {!success ? <button className="hint-button" type="button" disabled={!sequence.length} onClick={() => { setSequence([]); setFeedback(null); }}><RotateCcw aria-hidden="true" />Start over</button> : null}
           </> : null}
           <div className={`challenge-feedback ${success ? "feedback-correct" : ""}`} role="status">
             {feedback === "correct" ? <><strong><Sparkles aria-hidden="true" />{index === 2 ? "Final challenge solved!" : "Discovery made!"}</strong><p>{challenge.explanation}</p></> : feedback === "retry" ? <><strong>Keep investigating—you can try again!</strong><p>{challenge.clue}</p></> : null}
           </div>
+          <div className={`mission-action-bar ${readyToCheck || success ? "action-ready" : ""}`}>
           {success ? <button className="primary-action" type="button" onClick={advance}>{index === 2 ? "Reveal my badge" : "Next challenge"}<ChevronRight aria-hidden="true" /></button> : (
             <button className="primary-action" type="button" disabled={challenge.kind === "order" ? sequence.length !== challenge.choices.length : selected === null} onClick={checkAnswer}>Check my discovery <ChevronRight aria-hidden="true" /></button>
           )}
+          </div>
           <p className="checkpoint-note">Each solved challenge saves your place. No timer. No lost lives.</p>
         </>
       )}
