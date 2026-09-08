@@ -1,3 +1,6 @@
+import type { MissionId } from "../../contexts/published-content/domain/mission";
+import type { MissionState } from "../../contexts/quest-journey/domain/missionProgress";
+
 export type QuestViewMode = "map" | "timeline" | "standards";
 
 export type PortalDisplayState =
@@ -7,7 +10,8 @@ export type PortalDisplayState =
   | "locked";
 
 export interface QuestPortalView {
-  readonly id: string;
+  readonly id: MissionId;
+  readonly progressState: MissionState;
   readonly title: string;
   readonly shortTitle: string;
   readonly experienceTitle: string;

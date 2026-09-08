@@ -424,7 +424,7 @@
 
 @media (max-width: 46rem) {
   .mapRegion {
-    height: 13rem;
+    height: auto;
     overflow-x: auto;
     overflow-y: auto;
     overscroll-behavior-inline: contain;
@@ -433,7 +433,7 @@
   }
 
   .mapCanvas {
-    width: 50rem;
+    width: 38rem;
     max-width: none;
   }
 

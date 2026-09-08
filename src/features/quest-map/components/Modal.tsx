@@ -18,7 +18,16 @@ export function Modal({
 }: ModalProps) {
   const dialogRef = useRef<HTMLDivElement>(null);
 
+  const closeRef = useRef(onClose);
+  closeRef.current = onClose;
+
   useEffect(() => {
+    const backdrop = dialogRef.current?.parentElement;
+    const siblings = Array.from(backdrop?.parentElement?.children ?? []).filter((element) => element !== backdrop) as HTMLElement[];
+    const inertStates = siblings.map((element) => element.inert);
+    siblings.forEach((element) => { element.inert = true; });
+    const previousOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
     const previouslyFocused = document.activeElement as HTMLElement | null;
     const firstFocusable = dialogRef.current?.querySelector<HTMLElement>(
       "[data-autofocus], button, [href], input, select, textarea",
@@ -26,7 +35,7 @@ export function Modal({
     firstFocusable?.focus();
 
     const handleKeyDown = (event: KeyboardEvent) => {
-      if (event.key === "Escape") onClose();
+      if (event.key === "Escape") closeRef.current();
       if (event.key !== "Tab" || !dialogRef.current) return;
 
       const focusable = Array.from(
@@ -49,9 +58,11 @@ export function Modal({
     document.addEventListener("keydown", handleKeyDown);
     return () => {
       document.removeEventListener("keydown", handleKeyDown);
-      previouslyFocused?.focus();
+      siblings.forEach((element, index) => { element.inert = inertStates[index]; });
+      document.body.style.overflow = previousOverflow;
+      if (previouslyFocused?.isConnected) previouslyFocused.focus();
     };
-  }, [onClose]);
+  }, []);
 
   return (
     <div

@@ -1,3 +1,4 @@
+import { MISSION_ACTIVITIES } from "../../../contexts/published-content/adapters/missionActivities";
 import {
   CheckCircle2,
   ChevronRight,
@@ -21,10 +22,15 @@ const stateCopy = {
 } as const;
 
 export function MissionPanel({ mission, onContinue }: MissionPanelProps) {
-  const state = stateCopy[mission.displayState];
+  const earned = ["PROVISIONAL_MASTERY", "DELAYED_CHECK_DUE", "TARGETED_REVIEW"].includes(mission.progressState);
+  const state = earned ? { label: "Badge earned", Icon: CheckCircle2 } : stateCopy[mission.displayState];
   const StateIcon = state.Icon;
   const actionLabel =
-    mission.displayState === "restored"
+    ["DELAYED_CHECK_DUE", "TARGETED_REVIEW"].includes(mission.progressState)
+      ? "Play memory check"
+      : mission.progressState === "PROVISIONAL_MASTERY"
+      ? "Play again"
+      : mission.displayState === "restored"
       ? "Review mission"
       : mission.displayState === "in_progress"
         ? "Continue mission"
@@ -54,7 +60,8 @@ export function MissionPanel({ mission, onContinue }: MissionPanelProps) {
           <p className="field-label">Essential question</p>
           <p>{mission.essentialQuestion}</p>
         </div>
-        <p className="mission-summary">{mission.mapSummary}</p>
+        <p className="mission-summary">{mission.hook}</p>
+        <p className="mission-reward">{earned || mission.displayState === "restored" ? "Badge earned" : "Your badge to discover"}: <strong>{MISSION_ACTIVITIES[mission.id].badge}</strong></p>
 
         <button className="primary-action" type="button" onClick={onContinue}>
           <span>{actionLabel}</span>
@@ -84,8 +91,7 @@ export function MissionPanel({ mission, onContinue }: MissionPanelProps) {
               places—not private or sensitive coordinates.
             </p>
             <p>
-              <strong>Keep investigating:</strong> Published history still needs
-              claim-level sources and reviewer approval.
+              <strong>Keep investigating:</strong> Open a mission to find its learning sources and explore the evidence with a grown-up.
             </p>
           </div>
         </details>

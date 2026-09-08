@@ -31,12 +31,12 @@ export function ProgressRail({
           <p id="progress-title" className="status-number">
             {restoredCount} of {total}
           </p>
-          <p>portals restored</p>
+          <p>explorer badges earned</p>
         </div>
         <div
           className="progress-track"
           role="progressbar"
-          aria-label="Portal restoration progress"
+          aria-label="Badge collection progress"
           aria-valuemin={0}
           aria-valuemax={total}
           aria-valuenow={restoredCount}
@@ -48,7 +48,7 @@ export function ProgressRail({
       <section className="status-card strength-card" aria-label="Learning strength">
         <Lightbulb aria-hidden="true" className="status-icon" />
         <p>
-          You’re getting stronger at <strong>connecting place to choices.</strong>
+          Solve clues to earn a badge. <strong>Every discovery counts!</strong>
         </p>
       </section>
 
@@ -56,7 +56,7 @@ export function ProgressRail({
         <div className="challenge-heading">
           <Search aria-hidden="true" className="status-icon" />
           <div>
-            <h2 id="map-clue-title">{challenge.heading}</h2>
+            <h2 id="map-clue-title" tabIndex={-1}>{challenge.heading}</h2>
             <p>{challenge.prompt}</p>
           </div>
         </div>

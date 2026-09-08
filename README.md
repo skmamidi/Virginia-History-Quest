@@ -1,6 +1,6 @@
 # Virginia History Quest
 
-Virginia History Quest is an accessible React and TypeScript prototype that helps fourth- and fifth-grade learners explore Virginia history through a mission-based map. The current slice focuses on the VS.1–VS.13 quest-map experience and the software boundaries needed to grow it safely.
+Virginia History Quest is an accessible React and TypeScript prototype that helps fourth- and fifth-grade learners explore Virginia history through a mission-based map. The app includes 13 playable missions with clue questions, tap-to-order challenges, final challenges, and collectible explorer badges.
 
 > **Prototype historical-review caveat:** Historical copy, locations, relationships, and generated artwork in this repository have not completed the specification's claim-level sourcing, historian review, tribal/community review, sensitivity review, or publication sign-off. Do not treat the prototype as a production classroom source. “SOL-aligned” does not mean approved by, endorsed by, or officially affiliated with the Virginia Department of Education.
 
@@ -16,7 +16,11 @@ npm ci
 npm run dev
 ```
 
-Open [http://127.0.0.1:5173](http://127.0.0.1:5173).
+Open [http://127.0.0.1:5173/Virginia-History-Quest/](http://127.0.0.1:5173/Virginia-History-Quest/).
+
+Every topic is available to new explorers. Correct answers save checkpoints in this browser; incorrect answers offer clues and unlimited retries. A final challenge earns a badge immediately. Seven days later, a memory check can establish retained mastery and restore the portal. Replays preserve earned badges and the original completion date. A visible notice appears if browser storage cannot save progress.
+
+The sound toggle enables short discovery chimes. Read-aloud uses browser speech synthesis when available. Mission sources are linked inside each activity; the historical-review caveat still applies.
 
 ## Test and build
 

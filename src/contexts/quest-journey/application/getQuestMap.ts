@@ -98,8 +98,9 @@ function toPortal(
 function selectContinueMission(
   portals: readonly QuestMapPortal[],
 ): MissionId | null {
-  const activePortal = portals.find(
-    (portal) => portal.displayState === "in_progress",
+  const activePortal = portals.find((portal) =>
+    ["DELAYED_CHECK_DUE", "TARGETED_REVIEW"].includes(portal.progressState)) ?? portals.find(
+    (portal) => portal.displayState === "in_progress" && portal.progressState !== "PROVISIONAL_MASTERY",
   );
   if (activePortal !== undefined) {
     return activePortal.id;

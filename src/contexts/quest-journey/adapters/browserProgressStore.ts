@@ -47,29 +47,34 @@ export class BrowserProgressStore {
   ) {}
 
   load(seed: readonly MissionProgress[]): readonly MissionProgress[] {
-    const raw = this.storage.getItem(STORAGE_KEY);
-    if (raw === null) return cloneRecords(seed);
-
     try {
+      const raw = this.storage.getItem(STORAGE_KEY);
+      if (raw === null) return cloneRecords(seed);
       const parsed = StoredProgressSchema.parse(JSON.parse(raw));
       if (parsed.contentVersion !== this.contentVersion) {
         return cloneRecords(seed);
       }
+      if (new Set(parsed.records.map((record) => record.missionId)).size !== parsed.records.length) return cloneRecords(seed);
       return cloneRecords(parsed.records);
     } catch {
-      this.storage.removeItem(STORAGE_KEY);
+      // Storage may be denied, even when localStorage itself is accessible.
       return cloneRecords(seed);
     }
   }
 
-  save(records: readonly MissionProgress[]): void {
-    const safeRecords = ProgressRecordSchema.array().parse(records);
-    this.storage.setItem(
-      STORAGE_KEY,
-      JSON.stringify({
-        contentVersion: this.contentVersion,
-        records: safeRecords,
-      }),
-    );
+  save(records: readonly MissionProgress[]): boolean {
+    try {
+      const safeRecords = ProgressRecordSchema.array().parse(records);
+      this.storage.setItem(
+        STORAGE_KEY,
+        JSON.stringify({
+          contentVersion: this.contentVersion,
+          records: safeRecords,
+        }),
+      );
+      return true;
+    } catch {
+      return false;
+    }
   }
 }

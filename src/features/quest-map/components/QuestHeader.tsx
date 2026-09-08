@@ -31,6 +31,7 @@ export function QuestHeader({
         <button
           className="header-button"
           type="button"
+          aria-label={motionPaused ? "Resume motion" : "Pause motion"}
           aria-pressed={motionPaused}
           onClick={onToggleMotion}
         >
@@ -40,6 +41,7 @@ export function QuestHeader({
         <button
           className="header-button"
           type="button"
+          aria-label={audioEnabled ? "Discovery sounds on" : "Discovery sounds off"}
           aria-pressed={audioEnabled}
           onClick={onToggleAudio}
         >
@@ -48,7 +50,7 @@ export function QuestHeader({
           ) : (
             <VolumeX aria-hidden="true" />
           )}
-          <span>{audioEnabled ? "Audio on" : "Audio off"}</span>
+          <span>{audioEnabled ? "Sounds on" : "Sounds off"}</span>
         </button>
         <button
           className="header-button header-menu-button"

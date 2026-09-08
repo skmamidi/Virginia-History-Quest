@@ -30,3 +30,9 @@ describe("GetQuestMap", () => {
     expect(map.portals[3].displayState).toBe("locked");
   });
 });
+
+it("suggests new adventures instead of immediately replaying an earned badge", () => {
+  const records = [{ missionId: "VS.1" as const, state: "PROVISIONAL_MASTERY" as const, lastMeaningfulStep: null }];
+  expect(getQuestMap(MISSION_CATALOG, records).continueMissionId).toBe("VS.2");
+  expect(getQuestMap(MISSION_CATALOG, [...records, { missionId: "VS.3", state: "DELAYED_CHECK_DUE", lastMeaningfulStep: null }]).continueMissionId).toBe("VS.3");
+});

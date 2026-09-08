@@ -52,3 +52,16 @@ describe("BrowserProgressStore", () => {
     expect(new BrowserProgressStore(storage, "2026.08").load(seed)).toEqual(seed);
   });
 });
+
+it("keeps the app usable when browser reads and writes are denied", () => {
+  const denied = { getItem() { throw new Error("denied"); }, setItem() { throw new Error("full"); }, removeItem() { throw new Error("denied"); } };
+  const store = new BrowserProgressStore(denied, "2026.08");
+  expect(store.load(seed)).toEqual(seed);
+  expect(store.save(seed)).toBe(false);
+});
+
+it("rejects duplicate records before they can crash the map", () => {
+  const storage = new MemoryStorage();
+  storage.setItem("virginia-history-quest:progress", JSON.stringify({ contentVersion: "2026.08", records: [seed[0], seed[0]] }));
+  expect(new BrowserProgressStore(storage, "2026.08").load(seed)).toEqual(seed);
+});

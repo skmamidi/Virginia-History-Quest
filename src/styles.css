@@ -1458,3 +1458,64 @@ input:focus-visible,
     background: Highlight;
   }
 }
+
+/* Mission activities extend the map's paper, navy, forest, and gold palette. */
+.mission-player { width: min(740px, 100%); }
+.mission-player .briefing-kicker { padding-right: 3rem; }
+.adventure-progress { display: flex; gap: 0.65rem; margin: 1.2rem 0 1.6rem; }
+.adventure-progress > span { flex: 1; display: flex; align-items: center; gap: 0.4rem; border-bottom: 4px solid #d6cfbf; padding-bottom: 0.65rem; font-size: 0.78rem; font-weight: 800; color: var(--muted); }
+.adventure-progress > .step-active { border-color: var(--forest); color: var(--forest-deep); }
+.adventure-progress svg { width: 20px; height: 20px; flex-shrink: 0; }
+.adventure-progress > span > span { display: grid; place-items: center; width: 24px; height: 24px; border-radius: 50%; background: #e8e6db; flex-shrink: 0; }
+.mission-player h2 { font-size: clamp(1.5rem, 3vw, 2.15rem); line-height: 1.2; padding-right: 0; outline: none; }
+.mission-instructions, .checkpoint-note { color: #475d70; line-height: 1.55; }
+.clue-card { display: flex; align-items: flex-start; gap: 0.75rem; padding: 1rem; border: 1px solid #dfc77a; border-radius: 12px; background: #fff5d6; line-height: 1.6; }
+.clue-card p { margin: 0; }
+.clue-card svg { flex-shrink: 0; width: 24px; }
+.hint-button, .secondary-action { display: inline-flex; min-height: 44px; align-items: center; justify-content: center; gap: 0.5rem; border: 1px solid #bac7ca; border-radius: 10px; background: #f0f6f6; padding: 0.6rem 0.8rem; margin: 0.35rem 0.5rem 0.5rem 0; font-weight: 750; cursor: pointer; }
+.hint-button svg { width: 18px; height: 18px; }
+.challenge-choices { display: grid; gap: 0.6rem; margin-top: 0.8rem; }
+.challenge-choice { display: flex; align-items: center; gap: 0.8rem; width: 100%; min-height: 62px; border: 2px solid #d6cfbf; border-radius: 12px; padding: 0.75rem; background: #fff; text-align: left; font-weight: 750; cursor: pointer; transition: border-color 150ms, transform 150ms; }
+.challenge-choice:hover:not(:disabled) { border-color: var(--blue); transform: translateY(-2px); }
+.challenge-choice[aria-pressed="true"] { border-color: var(--navy); background: #e6f3fb; }
+.choice-marker { display: grid; place-items: center; width: 32px; height: 32px; flex-shrink: 0; border-radius: 9px; background: var(--navy); color: white; }
+.challenge-choice:disabled { cursor: default; }
+.primary-action:disabled, .hint-button:disabled { opacity: 0.5; cursor: not-allowed; }
+.timeline-answer { display: grid; gap: 0.4rem; padding-left: 1.5rem; line-height: 1.4; font-size: 0.9rem; }
+.timeline-answer:empty { display: none; }
+.challenge-feedback:not(:empty) { margin: 1rem 0; padding: 1rem; border-radius: 12px; background: #fff1d7; border: 1px solid #e0c68d; line-height: 1.5; }
+.challenge-feedback.feedback-correct { background: #edf6ea; border-color: #93b48f; color: #164b2a; }
+.challenge-feedback strong { display: flex; align-items: center; gap: 0.5rem; }
+.challenge-feedback p { margin: 0.4rem 0 0; }
+.challenge-feedback svg { width: 20px; flex-shrink: 0; }
+.checkpoint-note { text-align: center; font-size: 0.8rem; }
+.activity-sources { margin-top: 1rem; font-size: 0.8rem; line-height: 1.6; }
+.activity-sources summary { cursor: pointer; min-height: 44px; padding-top: 0.6rem; }
+.activity-sources a { color: var(--navy); }
+.mission-celebration { padding-top: 1.5rem; text-align: center; }
+.earned-badge { display: grid; place-items: center; width: 112px; height: 112px; border: 5px double #b17a12; border-radius: 50%; background: #fff0b9; margin: 0 auto 1rem; animation: badge-arrive 500ms ease-out; }
+.earned-badge svg { width: 66px; height: 66px; color: #795008; }
+.badge-name { margin: 0.7rem 0; font-family: Georgia, serif; font-size: 1.8rem; font-weight: 800; color: var(--forest-deep); }
+.earned-stars { display: flex; justify-content: center; gap: 0.6rem; color: #93610b; }
+.earned-stars svg { fill: #f3c343; width: 32px; height: 32px; }
+.mission-celebration > p { line-height: 1.6; }
+.completion-note { background: #edf6ea; padding: 1rem; border-radius: 12px; }
+.save-warning { position: fixed; z-index: 150; top: 0; left: 0; right: 0; margin: 0; padding: 0.75rem; background: #fff1d7; border-bottom: 2px solid #b17a12; text-align: center; }
+@keyframes badge-arrive { from { transform: scale(0.7) rotate(-12deg); opacity: 0; } to { transform: scale(1) rotate(0); opacity: 1; } }
+@media (max-width: 680px) {
+  .quest-app { padding-bottom: 100px; }
+  .mission-panel { position: static; max-height: none; }
+  .header-actions .header-button:not(.header-menu-button) { display: inline-flex; width: 36px; }
+  .header-button { min-height: 44px; }
+  .brand { white-space: normal; font-size: 0.95rem; }
+  .brand-mark { width: 36px; height: 36px; }
+  .adventure-progress { gap: 0.35rem; }
+  .adventure-progress > span { align-items: flex-start; font-size: 0.7rem; }
+  .mission-player { max-height: 94dvh; }
+  .status-card.progress-card { display: grid; }
+}
+.mission-reward { padding: 0.75rem; border-radius: 10px; background: #fff5d6; line-height: 1.5; font-size: 0.88rem; }
+.mobile-map-hint { display: none; }
+@media (max-width: 680px) {
+  .mobile-map-hint { display: block; margin: 0; padding: 0.6rem 0.8rem; background: var(--surface); font-size: 0.8rem; font-weight: 750; }
+}

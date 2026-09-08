@@ -19,6 +19,9 @@ import {
   applyMissionEvent,
   type MissionProgress,
 } from "../../contexts/quest-journey/domain/missionProgress";
+import { freshProgress, prepareProgress, passChallenge, hasBadge } from "../../contexts/quest-journey/application/playMission";
+import { MISSION_ACTIVITIES } from "../../contexts/published-content/adapters/missionActivities";
+import { MissionPlayer } from "./components/MissionPlayer";
 import { MissionPanel } from "./components/MissionPanel";
 import { TimelineView, StandardsView } from "./components/MissionViews";
 import { Modal } from "./components/Modal";
@@ -27,22 +30,6 @@ import { QuestDock, type DockAction } from "./components/QuestDock";
 import { QuestHeader } from "./components/QuestHeader";
 import type { MapLayers, QuestPortalView, QuestViewMode } from "./types";
 import { VirginiaMap } from "./VirginiaMap";
-
-const SEED_PROGRESS: readonly MissionProgress[] = [
-  { missionId: "VS.1", state: "MASTERED", lastMeaningfulStep: "region-map" },
-  { missionId: "VS.2", state: "MASTERED", lastMeaningfulStep: "evidence" },
-  { missionId: "VS.3", state: "LEARNING", lastMeaningfulStep: "site-map" },
-  { missionId: "VS.4", state: "MASTERED", lastMeaningfulStep: "five-boxes" },
-  { missionId: "VS.5", state: "MASTERED", lastMeaningfulStep: "route-map" },
-  { missionId: "VS.6", state: "MASTERED", lastMeaningfulStep: "rights-chain" },
-  { missionId: "VS.7", state: "AVAILABLE", lastMeaningfulStep: null },
-  { missionId: "VS.8", state: "AVAILABLE", lastMeaningfulStep: null },
-  { missionId: "VS.9", state: "LOCKED", lastMeaningfulStep: null },
-  { missionId: "VS.10", state: "AVAILABLE", lastMeaningfulStep: null },
-  { missionId: "VS.11", state: "LOCKED", lastMeaningfulStep: null },
-  { missionId: "VS.12", state: "AVAILABLE", lastMeaningfulStep: null },
-  { missionId: "VS.13", state: "LOCKED", lastMeaningfulStep: null },
-];
 
 interface StorageLike {
   getItem(key: string): string | null;
@@ -72,7 +59,11 @@ function createProgressStore() {
     }
     return new BrowserProgressStore(storage, MISSION_CATALOG.version);
   } catch {
-    return new BrowserProgressStore(createMemoryStorage(), MISSION_CATALOG.version);
+    return new BrowserProgressStore({
+      getItem: () => null,
+      setItem: () => { throw new Error("Browser storage is unavailable"); },
+      removeItem: () => {},
+    }, MISSION_CATALOG.version);
   }
 }
 
@@ -83,16 +74,12 @@ function findMission(
   return portals.find((portal) => portal.id === missionId) ?? portals[0];
 }
 
-function missionNumber(missionId: string) {
-  return Number(missionId.replace("VS.", ""));
-}
-
 export function QuestMapScreen() {
   const progressStore = useMemo(createProgressStore, []);
   const [progress, setProgress] = useState<readonly MissionProgress[]>(() =>
-    progressStore.load(SEED_PROGRESS),
+    prepareProgress(progressStore.load(freshProgress)),
   );
-  const [selectedId, setSelectedId] = useState<MissionId>("VS.3");
+  const [selectedId, setSelectedId] = useState<MissionId>(() => getQuestMap(MISSION_CATALOG, progress).continueMissionId ?? "VS.1");
   const [view, setView] = useState<QuestViewMode>("map");
   const [layers, setLayers] = useState<MapLayers>({
     terrain: true,
@@ -103,6 +90,8 @@ export function QuestMapScreen() {
   const [audioEnabled, setAudioEnabled] = useState(false);
   const [allMissionsOpen, setAllMissionsOpen] = useState(false);
   const [briefingOpen, setBriefingOpen] = useState(false);
+  const [playerOpen, setPlayerOpen] = useState(false);
+  const [saveWarning, setSaveWarning] = useState("");
   const [connectionMode, setConnectionMode] = useState<"people" | "chains" | null>(
     null,
   );
@@ -116,12 +105,13 @@ export function QuestMapScreen() {
   );
   const portals = projection.portals as readonly QuestPortalView[];
   const selectedMission = findMission(portals, selectedId);
-  const progressPercent = Math.round((projection.restoredCount / portals.length) * 100);
+  const badgeCount = progress.filter(hasBadge).length;
+  const progressPercent = Math.round((badgeCount / portals.length) * 100);
 
   const saveProgress = useCallback(
     (nextProgress: readonly MissionProgress[]) => {
       setProgress(nextProgress);
-      progressStore.save(nextProgress);
+      setSaveWarning(progressStore.save(nextProgress) ? "" : "Your progress is safe for this visit, but this browser could not save it for next time.");
     },
     [progressStore],
   );
@@ -129,14 +119,19 @@ export function QuestMapScreen() {
   const selectMission = useCallback((missionId: string) => {
     setSelectedId(missionId as MissionId);
     setAllMissionsOpen(false);
+    if (window.matchMedia?.("(max-width: 900px)").matches) {
+      requestAnimationFrame(() => document.getElementById("selected-mission-title")?.scrollIntoView({ block: "center" }));
+    }
   }, []);
 
   const startSelectedMission = useCallback(() => {
-    const record = progress.find((item) => item.missionId === selectedId);
+    const prepared = prepareProgress(progress);
+    if (prepared.some((record, index) => record !== progress[index])) saveProgress(prepared);
+    const record = prepared.find((item) => item.missionId === selectedId);
     if (!record) return;
 
     if (record.state === "AVAILABLE") {
-      const next = progress.map((item) =>
+      const next = prepared.map((item) =>
         item.missionId === selectedId
           ? applyMissionEvent(item, { type: "MISSION_OPENED" })
           : item,
@@ -144,7 +139,8 @@ export function QuestMapScreen() {
       saveProgress(next);
       setStatusMessage(`${selectedMission.shortTitle} is ready. Your place is saved.`);
     }
-    setBriefingOpen(true);
+    if (["AVAILABLE", "ORIENTING"].includes(record.state)) setBriefingOpen(true);
+    else setPlayerOpen(true);
   }, [progress, saveProgress, selectedId, selectedMission.shortTitle]);
 
   const completeBriefing = useCallback(() => {
@@ -164,8 +160,8 @@ export function QuestMapScreen() {
       saveProgress(next);
     }
     setBriefingOpen(false);
-    setView("map");
-    setStatusMessage("Briefing complete. Select map evidence to keep exploring.");
+    setPlayerOpen(true);
+    setStatusMessage("Your investigation is ready. Solve three challenges to earn a badge.");
   }, [progress, saveProgress, selectedId]);
 
   const toggleLayer = (layer: keyof MapLayers) => {
@@ -183,7 +179,7 @@ export function QuestMapScreen() {
       setConnectionMode(action);
     } else if (action === "review") {
       setReviewsOpen(true);
-      document.getElementById("map-clue-title")?.focus?.();
+      document.getElementById("map-clue-title")?.focus();
     }
   };
 
@@ -201,7 +197,7 @@ export function QuestMapScreen() {
         }}
         onToggleAudio={() => {
           setAudioEnabled((current) => !current);
-          setStatusMessage(audioEnabled ? "Audio is off." : "Audio is on. Nothing plays automatically.");
+          setStatusMessage(audioEnabled ? "Discovery sounds are off." : "Discovery sounds are on. Solve a challenge to hear a chime.");
         }}
         onOpenMissions={() => setAllMissionsOpen(true)}
       />
@@ -210,10 +206,11 @@ export function QuestMapScreen() {
         <div className="quest-intro">
           <div>
             <h1>Your Virginia Memory Map</h1>
-            <p>Choose a portal to uncover how place shaped the story.</p>
+            <p>Pick a time portal. Solve clues. Collect all 13 explorer badges!</p>
           </div>
           <button
             className="all-missions-shortcut"
+            aria-label="All missions"
             type="button"
             onClick={() => setAllMissionsOpen(true)}
           >
@@ -223,7 +220,7 @@ export function QuestMapScreen() {
         </div>
 
         <div className="mobile-progress" aria-hidden="true">
-          <span>{projection.restoredCount} of 13 restored</span>
+          <span>{badgeCount} of 13 badges</span>
           <span className="mobile-progress-track">
             <span style={{ width: `${progressPercent}%` }} />
           </span>
@@ -295,7 +292,7 @@ export function QuestMapScreen() {
 
         <div className="quest-grid">
           <ProgressRail
-            restoredCount={projection.restoredCount}
+            restoredCount={badgeCount}
             total={portals.length}
             answer={retrievalAnswer}
             onAnswer={setRetrievalAnswer}
@@ -307,6 +304,7 @@ export function QuestMapScreen() {
           <div className="map-stage">
             {view === "map" ? (
               <div id="map-view" role="tabpanel" aria-label="Map view">
+                <p className="mobile-map-hint">Swipe the map sideways to find more portals</p>
                 <VirginiaMap
                   portals={portals}
                   selectedId={selectedId}
@@ -337,6 +335,7 @@ export function QuestMapScreen() {
         </div>
       </main>
 
+      {saveWarning ? <p className="save-warning" role="status">{saveWarning}</p> : null}
       <QuestDock active={view} onAction={handleDockAction} />
       <p className="sr-only" aria-live="polite">
         {statusMessage}
@@ -358,14 +357,14 @@ export function QuestMapScreen() {
           <ol className="mission-directory-list">
             {portals.map((portal) => (
               <li key={portal.id}>
-                <button type="button" onClick={() => selectMission(portal.id)}>
+                <button type="button" aria-label={`${portal.id} ${portal.title}`} onClick={() => selectMission(portal.id)}>
                   <span className="mission-directory-code">{portal.id}</span>
                   <span className="mission-directory-title">
                     <strong>{portal.title}</strong>
-                    <small>{portal.heroLocation}</small>
+                    <small>{hasBadge(progress.find((record) => record.missionId === portal.id)!) ? `Badge: ${MISSION_ACTIVITIES[portal.id].badge}` : portal.heroLocation}</small>
                   </span>
-                  {portal.displayState === "restored" ? (
-                    <CheckCircle2 aria-label="Restored" />
+                  {hasBadge(progress.find((record) => record.missionId === portal.id)!) ? (
+                    <CheckCircle2 aria-label="Badge earned" />
                   ) : portal.displayState === "locked" ? (
                     <ShieldCheck aria-label="Preview" />
                   ) : (
@@ -385,10 +384,10 @@ export function QuestMapScreen() {
           onClose={() => setBriefingOpen(false)}
         >
           <p className="briefing-kicker">
-            {selectedMission.id} · About 4 minutes
+            {selectedMission.id} · 3 challenges · Play at your pace
           </p>
           <h2 id="briefing-title">{selectedMission.title}</h2>
-          <p className="modal-lead">{selectedMission.hook}</p>
+          <p className="modal-lead">{MISSION_ACTIVITIES[selectedId].goal}</p>
           <p className="briefing-question">{selectedMission.essentialQuestion}</p>
           <p className="field-label">Your investigation</p>
           <ol className="briefing-steps">
@@ -397,10 +396,28 @@ export function QuestMapScreen() {
             ))}
           </ol>
           <button className="primary-action" type="button" onClick={completeBriefing}>
-            <span>Start map evidence</span>
+            <span>Let’s investigate</span>
             <ChevronRight aria-hidden="true" />
           </button>
         </Modal>
+      ) : null}
+
+      {playerOpen ? (
+        <MissionPlayer
+          key={selectedId}
+          mission={selectedMission}
+          record={progress.find((item) => item.missionId === selectedId)!}
+          audioEnabled={audioEnabled}
+          onClose={() => setPlayerOpen(false)}
+          onPass={(index) => saveProgress(progress.map((record) =>
+            record.missionId === selectedId ? passChallenge(record, index) : record))}
+          onNext={() => {
+            setPlayerOpen(false);
+            const remaining = portals.find((portal) => portal.id !== selectedId && !hasBadge(progress.find((record) => record.missionId === portal.id)!));
+            setSelectedId(remaining?.id ?? selectedId);
+            setAllMissionsOpen(true);
+          }}
+        />
       ) : null}
 
       {connectionMode ? (
