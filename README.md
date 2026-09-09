@@ -68,3 +68,67 @@ The production build includes a web app manifest, install icons, and a generated
 ## Content publication
 
 Prototype mission records are software fixtures, not approved curriculum packages. Production content must remain versioned outside React components and may publish only after IDs resolve, factual claims have approved sources, rights and accessibility metadata are complete, and required historical and community reviewers have signed off.
+
+
+## Field-trip connections
+
+“Connect our field trips” links Yorktown, Harpers Ferry and the John Brown Museum,
+Norfolk, Hampton / Hampton Roads, Sailor’s Creek, High Bridge Trail, and Appomattox
+through three short stories. Fort Monroe is presented as a nearby Hampton connection,
+without assuming the learners visited the fort. The place sequence represents historical
+connections, not driving directions or one army’s exact route.
+
+Children read place clues, optionally discuss or sketch memories, and solve connection
+questions. Three discovery stamps save locally under a separate versioned key; no names,
+location tracking, or personal recollections are collected. Related missions link to the
+trail, and the Civil War timeline and industry activity include visited places.
+Historical source links are included at each stop. The prototype review caveat above
+still applies.
+
+## Virginia Studies SOL practice expansion
+
+The app includes **96 original questions in 32 three-question trails**, distributed
+across VS.1–VS.13. Select a mission and choose **Practice this topic · SOL questions**
+in the guide, **Practice SOL questions** in its panel, or the practice action after
+earning a badge. Each trail has a short teaching passage, four-choice questions,
+optional clues and browser read-aloud, explanations, retries, and a recommended
+next trail. Practice does not alter mission badges or the seven-day memory check.
+
+Coverage review (September 9, 2026): all thirteen SOLpass 2023 Virginia Studies
+study guides were reviewed in the browser, with sample questions inspected from
+the geography, Indigenous, Jamestown, and Reconstruction activities. This was not
+an exhaustive playthrough of every SOLpass game. The app contains newly authored
+questions addressing the reviewed concepts, not a reproduction of the subscription
+question bank or official released SOL test items. No school credentials are
+embedded in code, browser storage created by the app, or links.
+
+| Sections | Added teaching and practice |
+| --- | --- |
+| VS.1 | Five regions, four river/town pairs, neighbors, Eastern Shore, Lake Drummond |
+| VS.2 | Language families, Werowocomoco, environment, living tribal nations |
+| VS.3 | Company/charter, settlement motives, survival, 1619 assembly and Point Comfort, women |
+| VS.4 | Barter/credit/debt, settlement patterns, labor systems, hereditary slavery, capital move |
+| VS.5 | Representation, political choices, leaders, Yorktown alliance and spy, Richmond |
+| VS.6 | Founders/documents, representative government, westward movement, Nat Turner |
+| VS.7 | Harpers Ferry, Tubman, West Virginia, battles/ironclads, diverse military and intelligence roles |
+| VS.8 | Rebuilding, schools, sharecropping, amendments, Langston, Plessy, voting barriers |
+| VS.9 | Resources and transport, industrial cities, farm machinery, migration and urbanization |
+| VS.10 | Rationing, gardens, bonds, Wilson, military service and remembrance |
+| VS.11 | Students/courts, economic and civic activists, voting, Holton and Wilder |
+| VS.12 | All eight Virginia-born presidents, sequence, roles, birthplace versus later home |
+| VS.13 | Industries/resources, goods/services, tourism, imports/exports, technology and innovation |
+
+Each section links to its SOLpass guide and the VDOE standards page. Additional
+primary sources qualify details: Langston took his seat in 1890 after a contested
+election; the Confederate ironclad was **CSS Virginia**; Mary Jane Richards's
+intelligence story is distinguished from later legends about “Mary Bowser.”
+Appomattox remains the surrender of Lee's particular army, not every Confederate army.
+This practice broadens learning coverage; completion is not a prediction of an SOL score.
+
+Practice discoveries are stored separately under
+`virginia-history-quest:sol-practice:v1`. Only known question IDs are accepted;
+invalid entries and duplicate IDs are ignored. Correct answers save a checkpoint.
+Closing and returning resumes at the first unanswered question after the lesson.
+Replay does not increase the discovery count. Unavailable storage leaves practice
+usable and displays a save warning. Progress is local to this browser; no account
+or server is required.

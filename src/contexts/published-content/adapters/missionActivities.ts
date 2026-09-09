@@ -72,7 +72,7 @@ export const MISSION_ACTIVITIES: Record<MissionId, MissionActivity> = {
     badge: "Evidence Connector", goal: "Connect slavery, the Civil War, and the struggle for freedom.",
     challenges: [
       choice("Which issue was central to Southern secession?", "Seceding states sought to protect slavery. Secession means leaving the Union.", ["A shortage of rivers", "Protecting slavery", "Choosing a national bird"], 1, "Slavery was central to secession and the conflict that led to the Civil War."),
-      order("Place these events on the timeline.", "The war began in 1861. West Virginia became a state in 1863. The war ended in 1865.", ["1861: Civil War begins", "1863: West Virginia becomes a state", "1865: Civil War ends"], "Virginia was divided by the war. West Virginia became a separate state during the conflict."),
+      order("Connect three places you visited: earliest event first.", "Sailor’s Creek was fought on April 6, 1865. The High Bridge crossing on April 7 helped Union troops pursue Lee’s army. Lee surrendered at Appomattox on April 9.", ["April 6: Sailor’s Creek", "April 7: High Bridge crossing", "April 9: Appomattox surrender"], "Your visits connect through Lee’s retreat: battle losses, a river crossing, then surrender. Other Confederate armies surrendered later."),
       choice("Which amendment abolished slavery in the United States?", "The Thirteenth Amendment was ratified in 1865, the year the Civil War ended.", ["First Amendment", "Tenth Amendment", "Thirteenth Amendment"], 2, "The Thirteenth Amendment abolished slavery, except as punishment for a crime. The struggle for equal rights continued."),
     ],
   },
@@ -87,7 +87,7 @@ export const MISSION_ACTIVITIES: Record<MissionId, MissionActivity> = {
   "VS.9": {
     badge: "Network Navigator", goal: "Reconnect resources, railroads, and growing towns.",
     challenges: [
-      choice("How did railroads help Virginia’s industries?", "Trains moved coal, lumber, and other goods between inland communities and markets.", ["They stopped trade", "They connected goods to markets", "They removed the need for workers"], 1, "Rail connections helped industries and cities grow by moving people and heavy goods."),
+      choice("How did railroads, like the route at High Bridge, help Virginia’s industries?", "High Bridge Trail follows a former railroad corridor. Railroads carried heavy goods between inland communities and markets.", ["They stopped trade", "They connected goods to markets", "They removed the need for workers"], 1, "Rail connections helped industries and cities grow by moving people and heavy goods."),
       order("Build a resource-to-market route.", "A resource is gathered, transported, and then used or sold.", ["Gather coal or lumber", "Carry it by rail", "Deliver it to a market"], "A railroad connected places into a network; an isolated track alone could not do the job."),
       choice("A railroad helps a factory grow. What else should an investigator ask?", "Economic growth can affect owners, workers, and nearby communities differently.", ["How did workers and communities experience it?", "Were all people affected identically?", "Can we ignore the people?"], 0, "Follow both the goods and the people to understand the benefits and costs of industrial change."),
     ],
@@ -127,6 +127,8 @@ export const MISSION_ACTIVITIES: Record<MissionId, MissionActivity> = {
 };
 
 export const ACTIVITY_SOURCES = [
+  { label: "NPS: Sailor’s Creek and High Bridge connections", url: "https://www.nps.gov/articles/000/traversing-history-at-sailor-s-creek-and-high-bridge-state-parks.htm" },
+  { label: "Virginia State Parks: High Bridge Trail", url: "https://www.dcr.virginia.gov/state-parks/high-bridge-trail" },
   { label: "National Park Service: The Story of Brown", url: "https://www.nps.gov/brvb/planyourvisit/the-story-of-brown.htm" },
   { label: "Commonwealth of Virginia: History and Facts", url: "https://www.commonwealth.virginia.gov/about-virginia/history-and-facts-on-virginia/" },
   { label: "Virginia Department of Education: Virginia Studies resources", url: "https://www.doe.virginia.gov/teaching-learning-assessment/k-12-standards-instruction/history-and-social-science/standards-of-learning" },

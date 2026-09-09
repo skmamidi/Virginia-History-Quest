@@ -1,3 +1,4 @@
+import { MissionTripClue } from "./FieldTripTrail";
 import { MISSION_ACTIVITIES } from "../../../contexts/published-content/adapters/missionActivities";
 import {
   CheckCircle2,
@@ -12,6 +13,8 @@ import type { QuestPortalView } from "../types";
 interface MissionPanelProps {
   mission: QuestPortalView;
   onContinue: () => void;
+  onTrip: (chapter: number) => void;
+  onPractice: () => void;
 }
 
 const stateCopy = {
@@ -21,7 +24,7 @@ const stateCopy = {
   locked: { label: "Preview available", Icon: LockKeyhole },
 } as const;
 
-export function MissionPanel({ mission, onContinue }: MissionPanelProps) {
+export function MissionPanel({ mission, onContinue, onTrip, onPractice }: MissionPanelProps) {
   const earned = ["PROVISIONAL_MASTERY", "DELAYED_CHECK_DUE", "TARGETED_REVIEW"].includes(mission.progressState);
   const state = earned ? { label: "Badge earned", Icon: CheckCircle2 } : stateCopy[mission.displayState];
   const StateIcon = state.Icon;
@@ -63,6 +66,9 @@ export function MissionPanel({ mission, onContinue }: MissionPanelProps) {
           <ChevronRight aria-hidden="true" />
         </button>
 
+        <button className="secondary-action practice-launch" type="button" onClick={onPractice}><span>Practice SOL questions<small>Short stories · 3 questions at a time</small></span><ChevronRight aria-hidden="true" /></button>
+
+        <MissionTripClue missionId={mission.id} onOpen={onTrip} />
         <details className="mission-about">
           <summary>More about this mission</summary>
         <div className="essential-question">

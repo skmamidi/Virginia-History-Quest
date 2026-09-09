@@ -2,7 +2,7 @@ import { Award, ChevronRight, Compass, Search } from "lucide-react";
 import type { QuestPortalView } from "../types";
 import { MISSION_ACTIVITIES } from "../../../contexts/published-content/adapters/missionActivities";
 
-export function ExplorerGuide({ mission, onStart }: { mission: QuestPortalView; onStart: () => void }) {
+export function ExplorerGuide({ mission, onStart, onPractice }: { mission: QuestPortalView; onStart: () => void; onPractice?: () => void }) {
   const isNew = mission.progressState === "AVAILABLE" || mission.progressState === "ORIENTING";
   const isReplay = mission.progressState === "PROVISIONAL_MASTERY" || mission.progressState === "MASTERED";
   const isReview = mission.progressState === "DELAYED_CHECK_DUE" || mission.progressState === "TARGETED_REVIEW";
@@ -23,6 +23,7 @@ export function ExplorerGuide({ mission, onStart }: { mission: QuestPortalView; 
         <button className="primary-action guide-start" type="button" onClick={onStart}>
           {isNew ? "Start my adventure" : isReplay ? "Replay this adventure" : isReview ? "Start my memory check" : "Continue my adventure"}<ChevronRight aria-hidden="true" />
         </button>
+        {onPractice ? <button className="guide-practice" type="button" onClick={onPractice}>Practice this topic · SOL questions</button> : null}
         <p><Award aria-hidden="true" />{MISSION_ACTIVITIES[mission.id].badge} badge</p>
       </div>
     </section>

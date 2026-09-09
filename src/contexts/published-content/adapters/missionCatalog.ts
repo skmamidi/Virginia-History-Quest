@@ -69,7 +69,7 @@ const missionCatalogSource = {
       heroLocation: "Lower James River landscape",
       mapSummary:
         "A broad Lower James River point connects the Chesapeake watershed with the Jamestown story.",
-      dateLabel: "1607–1624",
+      dateLabel: "1606–1624",
       eraLabel: "Early Jamestown",
       hook: "Investigate why the settlement struggled and how people responded.",
       learningFocus: ["Settlement choices", "Survival and encounters", "Government"],
@@ -113,7 +113,7 @@ const missionCatalogSource = {
       heroLocation: "Virginia’s Revolutionary routes",
       mapSummary:
         "A generalized Tidewater point anchors a statewide story of ideas, choices, and Revolutionary movement.",
-      dateLabel: "1775–1781",
+      dateLabel: "1775–1783",
       eraLabel: "American Revolution",
       hook: "Connect powerful ideas to difficult choices and their consequences.",
       learningFocus: ["Ideas and rights", "Choices and perspectives", "War and independence"],
@@ -136,7 +136,7 @@ const missionCatalogSource = {
       heroLocation: "Virginia’s civic and westward networks",
       mapSummary:
         "A broad Piedmont point links public ideas, government, migration, and resistance across Virginia.",
-      dateLabel: "1781–1850s",
+      dateLabel: "1776–1850s",
       eraLabel: "The new nation",
       hook: "Test how promises about rights worked in practice for different people.",
       learningFocus: ["Rights and government", "Expansion", "Resistance and limits"],
@@ -159,7 +159,7 @@ const missionCatalogSource = {
       heroLocation: "Virginia’s Civil War landscapes",
       mapSummary:
         "A statewide generalized point represents connected home-front, freedom, and military landscapes.",
-      dateLabel: "1861–1865",
+      dateLabel: "1859–1865",
       eraLabel: "Civil War",
       hook: "Build an evidence chain from slavery and division to war and emancipation.",
       learningFocus: ["Slavery and division", "Service and freedom", "Consequences"],
@@ -182,7 +182,7 @@ const missionCatalogSource = {
       heroLocation: "Virginia’s Reconstruction communities",
       mapSummary:
         "A generalized central Virginia point represents community, school, government, and resistance networks.",
-      dateLabel: "1865–1877",
+      dateLabel: "1865–1890s",
       eraLabel: "Reconstruction",
       hook: "Measure new freedoms alongside the barriers people continued to face.",
       learningFocus: ["Freedom and citizenship", "Education", "Change and resistance"],
@@ -204,7 +204,7 @@ const missionCatalogSource = {
       heroLocation: "Virginia’s rail and city network",
       mapSummary:
         "A generalized rail-corridor point connects western resources, cities, and coastal trade.",
-      dateLabel: "1870s–early 1900s",
+      dateLabel: "1870s–today",
       eraLabel: "Industrial change",
       hook: "Reconnect rails, resources, workers, and cities to see a changing system.",
       learningFocus: ["Railroad networks", "Cities and industry", "Uneven change"],

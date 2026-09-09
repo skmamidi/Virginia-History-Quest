@@ -1,3 +1,4 @@
+import { MissionTripClue } from "./FieldTripTrail";
 import { useEffect, useRef, useState } from "react";
 import { Award, CheckCircle2, ChevronRight, Hand, Lightbulb, RotateCcw, Sparkles, Star, Volume2 } from "lucide-react";
 import { ACTIVITY_SOURCES, MISSION_ACTIVITIES } from "../../../contexts/published-content/adapters/missionActivities";
@@ -13,10 +14,11 @@ interface Props {
   onPass: (index: number) => void;
   onClose: () => void;
   onNext: () => void;
+  onPractice?: () => void;
   nextMissionTitle?: string;
 }
 
-export function MissionPlayer({ mission, record, audioEnabled, onPass, onClose, onNext, nextMissionTitle }: Props) {
+export function MissionPlayer({ mission, record, audioEnabled, onPass, onClose, onNext, onPractice, nextMissionTitle }: Props) {
   const activity = MISSION_ACTIVITIES[mission.id];
   const [index, setIndex] = useState(() => challengeIndex(record));
   const [selected, setSelected] = useState<number | null>(null);
@@ -90,8 +92,10 @@ export function MissionPlayer({ mission, record, audioEnabled, onPass, onClose, 
             {[1, 2, 3].map((star) => <Star key={star} aria-hidden="true" />)}
           </div>
           <p>You used evidence, made connections, and solved the final challenge.</p>
+          <MissionTripClue missionId={mission.id} />
           <p className="completion-note">{record.state === "MASTERED" ? "Memory check complete. This portal is restored!" : "Your badge is earned! Come back in seven days for a memory check to restore this portal. You can explore another mission right now."}</p>
           <button className="primary-action" type="button" onClick={onNext}>{nextMissionTitle ? `Next adventure: ${nextMissionTitle}` : "See all my badges"} <ChevronRight aria-hidden="true" /></button>
+          {onPractice ? <button className="secondary-action" type="button" onClick={onPractice}>Practice SOL questions</button> : null}
           <button className="secondary-action" type="button" onClick={onClose}>Back to my map</button>
         </div>
       ) : (

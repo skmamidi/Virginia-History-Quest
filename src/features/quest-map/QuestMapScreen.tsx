@@ -7,6 +7,7 @@ import {
   List,
   Map as MapIcon,
   Mountain,
+  MapPin,
   ShieldCheck,
   Waves,
 } from "lucide-react";
@@ -21,6 +22,8 @@ import {
 } from "../../contexts/quest-journey/domain/missionProgress";
 import { freshProgress, prepareProgress, passChallenge, hasBadge } from "../../contexts/quest-journey/application/playMission";
 import { MISSION_ACTIVITIES } from "../../contexts/published-content/adapters/missionActivities";
+import { SolPractice } from "./components/SolPractice";
+import { FieldTripTrail } from "./components/FieldTripTrail";
 import { ExplorerGuide } from "./components/ExplorerGuide";
 import { MissionPlayer } from "./components/MissionPlayer";
 import { MissionPanel } from "./components/MissionPanel";
@@ -92,6 +95,8 @@ export function QuestMapScreen() {
   const [allMissionsOpen, setAllMissionsOpen] = useState(false);
   const [briefingOpen, setBriefingOpen] = useState(false);
   const [playerOpen, setPlayerOpen] = useState(false);
+  const [tripChapter, setTripChapter] = useState<number | null>(null);
+  const [practiceOpen, setPracticeOpen] = useState(false);
   const [saveWarning, setSaveWarning] = useState("");
   const [connectionMode, setConnectionMode] = useState<"people" | "chains" | null>(
     null,
@@ -229,7 +234,10 @@ export function QuestMapScreen() {
           </button>
         </div>
 
-        <ExplorerGuide mission={selectedMission} onStart={startSelectedMission} />
+        <ExplorerGuide mission={selectedMission} onStart={startSelectedMission} onPractice={() => setPracticeOpen(true)} />
+        <button className="field-trip-launch" type="button" onClick={() => setTripChapter(0)}>
+          <MapPin aria-hidden="true" /><span><strong>Connect our field trips</strong><small>Yorktown, Harpers Ferry, Hampton Roads & the road to Appomattox</small></span><ChevronRight aria-hidden="true" />
+        </button>
         <p className="map-choice-hint">Want a different adventure? Tap a numbered portal on the map or choose All missions.</p>
 
         <div className="mobile-progress" aria-hidden="true">
@@ -353,7 +361,8 @@ export function QuestMapScreen() {
             )}
           </div>
 
-          <MissionPanel mission={selectedMission} onContinue={startSelectedMission} />
+          <MissionPanel mission={selectedMission} onContinue={startSelectedMission} onTrip={setTripChapter}
+            onPractice={() => setPracticeOpen(true)} />
         </div>
       </main>
 
@@ -398,6 +407,10 @@ export function QuestMapScreen() {
         </Modal>
       ) : null}
 
+      {practiceOpen ? <SolPractice key={selectedId} missionId={selectedId} title={selectedMission.shortTitle} onClose={() => setPracticeOpen(false)} /> : null}
+
+      {tripChapter !== null ? <FieldTripTrail initialChapter={tripChapter} onClose={() => setTripChapter(null)} onMission={(id) => { setTripChapter(null); openMission(id); }} /> : null}
+
       {briefingOpen ? (
         <Modal
           label={`${selectedMission.shortTitle} mission briefing`}
@@ -436,6 +449,7 @@ export function QuestMapScreen() {
           }}
           onPass={(index) => saveProgress(progress.map((record) =>
             record.missionId === selectedId ? passChallenge(record, index) : record))}
+          onPractice={() => { setPlayerOpen(false); setPracticeOpen(true); }}
           nextMissionTitle={portals.find((portal) => portal.id !== selectedId && !hasBadge(progress.find((record) => record.missionId === portal.id)!))?.shortTitle}
           onNext={() => {
             setPlayerOpen(false);
