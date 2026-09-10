@@ -94,3 +94,85 @@ Content references checked during integration:
 
 These additions remain prototype curriculum content. Sources and software checks
 are recorded; independent teacher/historian review has not been performed.
+
+
+## Population and climate revision
+
+The population sample was replaced with all 133 county-equivalent records in the
+[Census 2020 Virginia county table](https://tigerweb.geo.census.gov/tigerwebmain/Files/bas25/tigerweb_bas25_county_2020_tab20_va.html).
+`virginiaPopulation2020.json` retains GEOID, NAME, POP100, AREALAND, and INTPTLON /
+INTPTLAT for 95 counties and 38 independent cities. An identical duplicate parsed
+Winchester row was removed by GEOID. The unique populations sum to the statewide
+2020 Census total of 8,631,393. Coordinates are locality representative points;
+dots do not portray locality boundaries. Density is calculated uniformly as
+POP100 / (AREALAND / 2,589,988.110336), with final display rounding to one decimal.
+This gives Arlington 9,179.5 rather than the earlier QuickFacts sample’s 9,179.6;
+all current displayed values and practice copy follow the same source calculation.
+Legend intervals now have explicit continuous upper/lower bounds, including
+non-integer values. City and county names remain distinct.
+
+Climate additions are original child-friendly explanations, supported by:
+
+- [NWS: rising air expands and cools; sinking air compresses and warms](https://www.weather.gov/bgm/WeatherInActionDownSlopeWinds).
+- [NWS: cloud development](https://www.weather.gov/source/zhu/ZHU_Training_Page/clouds/cloud_development/clouds.htm)
+  and [NWS: weather education](https://www.weather.gov/jkl/education).
+- [NOAA: unequal heating of land and water and sea breezes](https://www.ndbc.noaa.gov/education/seabreeze_ans.shtml)
+  and [NOAA: ocean–atmosphere climate interactions](https://pfeg.noaa.gov/research/climatemarine/cmfoceanatm/cmfoceanatm.html).
+- [NOAA: sunlight varies with latitude](https://oceanexplorer.noaa.gov/ocean-fact/temp-vary/)
+  and [NOAA: Virginia regional climate](https://statesummaries.ncics.org/chapter/va/).
+- [Virginia DCR: physiography and rain shadows](https://www.dcr.virginia.gov/natural-heritage/natural-communities/document/ncoverviewphys-veg.pdf),
+  with [NWS Southern Appalachian precipitation research](https://www.weather.gov/mrx/heavyrainclimo)
+  supporting the dependence on wind direction and upslope/downslope flow.
+- [NWS: warm and cold air layers determine winter precipitation](https://www.weather.gov/arx/why_wintrymix).
+
+The mountain-air illustration is an original schematic side view, not a Virginia
+cross section or numerical weather simulation. Explanations distinguish temperature
+from moisture supply, annual averages from daily weather, coastal moderation from
+“always warmer,” and mountains from sheltered valleys. No new measured climate
+layer or numerical climate normals have been introduced. The general “About these
+learning materials” UI panel was removed at the user’s request.
+
+## Scrapbook place explorer (September 2026)
+
+`virginiaExplorePlaces.json` is an authored collection of 70 prominent public-facing
+historical, cultural, and natural attractions: 5 Appalachian Plateau, 13 Valley
+and Ridge, 7 Blue Ridge, 19 Piedmont, and 26 Coastal Plain. It is explicitly not an
+inventory of every historic property. Each record links to its operator, government
+agency, or official tourism organization for further reading and trip planning.
+Stories and detective prompts are original paraphrases; photographs and publisher
+worksheet layouts are not reproduced. No opening times, admission prices, or
+claims of guaranteed public access are stored. All 70 URLs were checked; two 404s
+were replaced with verified tourism sources. Some official operators reject automated
+requests (403); their sites were confirmed through indexed official sources.
+
+The catalog includes Indigenous communities in the present tense and the histories
+of enslaved people, emancipation, civil rights, technology, music, and conservation.
+Nature entries prompt a human-history connection for the scrapbook assignment.
+Learning about a place earns only a temporary reading discovery, never a visited
+flag. Choosing a place fills a wholly empty page or opens an existing matching page;
+existing photos, captions, reflections, and other work are preserved.
+
+`virginiaRegionPaths.json` is derived from the public
+[VIMS WetCAT physiographic regions layer](https://cmap22.vims.edu/arcgis/rest/services/WetCAT/PhysiographicRegions/MapServer/0),
+which credits USGS/Fenneman's 1:7,000,000-scale *Physical Divisions of the United
+States* (1946). Retrieved as GeoJSON in EPSG:4326 with maxAllowableOffset=0.003;
+projected using the same equirectangular teaching projection as the Census land
+outline. Polygons are grouped into five provinces, drawn as SVG paths, and clipped
+to the existing 2024 Census land outline. These are coarse overview boundaries,
+not a local geological survey. Separate neighboring polygons and interior rings
+are retained. The map, data, and stories are bundled locally; map exploration needs
+no remote map tiles, geolocation, or live place service.
+
+Coordinates are approximate attraction locations, not navigation instructions.
+Richmond spans the Fall Line; downtown sites are grouped with Coastal Plain while
+western Richmond museums are grouped with Piedmont. Pocahontas and Guest River
+Gorge are grouped with the Plateau's coalfield/edge sites. Those records include
+transition notes because the coarse USGS polygon can assign an adjacent province.
+Birch Knob sits on the Virginia–Kentucky boundary. Site groupings describe their
+geographic context, not the tourism industry's differently named regions.
+
+Broader discovery links point to the
+[Virginia DHR register](https://www.dhr.virginia.gov/historic-registers/)
+and [Virginia Tourism museum directory](https://www.virginia.org/things-to-do/attractions/museums-and-exhibits/history/).
+The UI explains that a register listing does not imply visitor access. Families can
+enter additional sites manually in the scrapbook.

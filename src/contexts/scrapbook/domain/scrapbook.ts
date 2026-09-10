@@ -33,3 +33,14 @@ export function projectChecklist(book: Scrapbook) {
     organized: book.organized, rehearsed: book.rehearsed,
   };
 }
+
+// Planning never replaces photos, reflections, or a page already in progress.
+export function pageForPlace(book: Scrapbook, name: string, preferred = 0) {
+  const normalize = (text: string) => text.trim().toLocaleLowerCase().replace(/[’']/g, '');
+  const existing = book.visits.findIndex(v => normalize(v.place) === normalize(name));
+  if (existing >= 0) return { index: existing, existing: true };
+  const blank = blankScrapbook().visits[0];
+  const empty = (visit: Visit) => (Object.keys(blank) as (keyof Visit)[]).every(key => visit[key] === blank[key]);
+  const index = book.visits[preferred] && empty(book.visits[preferred]) ? preferred : book.visits.findIndex(empty);
+  return index < 0 ? null : { index, existing: false };
+}

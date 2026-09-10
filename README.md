@@ -159,10 +159,35 @@ submission, or cross-device synchronization is implied. Preview includes a print
 layout usable with the browser's Save as PDF option. Browser storage can be cleared,
 so download backups for durable retention.
 
-The five map-lab population values describe whole localities in 2020, not current
-estimates or counts at individual points. Climate diagrams show broad teaching
+The population explorer includes all 95 counties and 38 independent cities, with
+name search, county/city filters, total residents, density, and map highlighting.
+The 133 records reconcile to 8,631,393 residents in the 2020 Census. Densities use
+the Census land area in square meters converted to square miles, rounded to one
+decimal; they describe whole localities, not individual neighborhoods. Climate diagrams show broad teaching
 patterns, not measured ranges or forecasts; the supplied climate maps do not
 identify an averaging period. Region bands are approximate. Practice is transient
 and does not award or change mission badges. See `docs/ATTRIBUTIONS.md` for sources,
 map derivation, and the two corrected handout statements. Existing prototype
 content-review limitations still apply.
+
+
+Climate explanations connect elevation, decreasing air pressure, air expansion and
+cooling, water’s heat storage, latitude, mountain lifting, rain shadows, and winter
+precipitation layers to Virginia examples. An interactive three-step diagram follows
+moist air uphill, through cloud formation, and downhill. The three climate questions
+now check understanding of these causes. The “About these learning materials”
+section has been removed from the map lab; provenance remains in these docs and
+specific science/data source links remain beside the lessons.
+
+### Scrapbook discovery map
+
+Inside **My Virginia scrapbook → Explore places**, browse 70 historical, cultural,
+and natural attractions grouped by Virginia's five geographic regions. The map
+supports zooming, dragging, directional controls, clusters of nearby places, and
+keyboard-accessible pins. The full alphabetical directory supports region, interest,
+and text filters. Every place has a short story, detective prompt, official source,
+and a way to plan it on an empty scrapbook page. Duplicate selections open the
+existing page; pages containing any work are never overwritten. Reading discoveries
+are temporary and distinct from actual visits. The full DHR register is linked for
+places beyond the collection. Region boundaries and pins are approximate; see
+`docs/ATTRIBUTIONS.md` for data sources and boundary conventions.

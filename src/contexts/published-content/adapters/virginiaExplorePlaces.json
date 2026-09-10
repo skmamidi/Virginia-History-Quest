@@ -1,0 +1,1052 @@
+[
+  {
+    "id": "breaks",
+    "name": "Breaks Interstate Park",
+    "region": 0,
+    "kind": "Nature",
+    "town": "Breaks",
+    "at": [
+      -82.3,
+      37.28
+    ],
+    "story": "The Russell Fork cut a deep gorge through layers of rock. The park crosses the Virginia–Kentucky border and tells stories about the land and its people.",
+    "quest": "Find a rock layer from an overlook. How could a river change this landscape over a very long time?",
+    "url": "https://www.breakspark.com/",
+    "regionNote": ""
+  },
+  {
+    "id": "ralph-stanley",
+    "name": "Ralph Stanley Museum",
+    "region": 0,
+    "kind": "Museums & culture",
+    "town": "Clintwood",
+    "at": [
+      -82.456,
+      37.151
+    ],
+    "story": "Songs can carry history. This museum celebrates Ralph Stanley and the mountain music traditions that shaped his bluegrass career.",
+    "quest": "Look for an instrument. How did recordings let local music reach faraway listeners?",
+    "url": "https://ralphstanleymuseum.com/",
+    "regionNote": ""
+  },
+  {
+    "id": "pocahontas-mine",
+    "name": "Pocahontas Exhibition Mine",
+    "region": 0,
+    "kind": "History",
+    "town": "Pocahontas",
+    "at": [
+      -81.339,
+      37.303
+    ],
+    "story": "Coal mining changed jobs, railroads, and towns in southwest Virginia. This former mine helps visitors learn how miners worked underground.",
+    "quest": "Find a mining tool. What problem did it help a worker solve?",
+    "url": "https://energy.virginia.gov/public/Pocahontas-Exhibition-Mine.shtml",
+    "regionNote": "Pocahontas sits near the boundary between the Appalachian Plateau coalfields and Valley and Ridge. It is grouped with the coalfield sites here."
+  },
+  {
+    "id": "guest-river",
+    "name": "Guest River Gorge",
+    "region": 0,
+    "kind": "Nature",
+    "town": "Near Coeburn",
+    "at": [
+      -82.45144,
+      36.92324
+    ],
+    "story": "A former railroad route follows the Guest River through a rocky gorge. The trail connects the story of moving goods with the story of erosion.",
+    "quest": "Look for evidence of the old railroad. Why would builders follow a river valley?",
+    "url": "https://www.virginia.org/things-to-do/outdoors/biking/rails-to-trails/",
+    "regionNote": "This trail explores the edge of the Cumberland Plateau, where the landscape meets Valley and Ridge."
+  },
+  {
+    "id": "birch-knob",
+    "name": "Birch Knob Observation Tower",
+    "region": 0,
+    "kind": "Nature",
+    "town": "Near Clintwood",
+    "at": [
+      -82.455,
+      37.256
+    ],
+    "story": "A mountain viewpoint reveals the ridges and valleys around Virginia's coal country. The landscape helps explain why travel routes bend around mountains.",
+    "quest": "Sketch the horizon. Which shapes look like ridges, and which gaps might people travel through?",
+    "url": "https://visitdickensoncounty.com/reaching-new-heights-discover-the-birch-knob-observation-tower-in-dickenson-county-virginia/",
+    "regionNote": "This viewpoint is on the Virginia–Kentucky border. The overview map cannot show every small bend in the boundary."
+  },
+  {
+    "id": "southwest-museum",
+    "name": "Southwest Virginia Museum",
+    "region": 1,
+    "kind": "Museums & culture",
+    "town": "Big Stone Gap",
+    "at": [
+      -82.774,
+      36.862
+    ],
+    "story": "Objects in a historic stone house tell stories of southwest Virginia, including the coal boom and the people who built communities here.",
+    "quest": "Choose one everyday object. What does it reveal about life before your grandparents were born?",
+    "url": "https://www.dcr.virginia.gov/state-parks/southwest-virginia-museum",
+    "regionNote": ""
+  },
+  {
+    "id": "natural-tunnel",
+    "name": "Natural Tunnel State Park",
+    "region": 1,
+    "kind": "Nature",
+    "town": "Duffield",
+    "at": [
+      -82.746,
+      36.697
+    ],
+    "story": "Water shaped a huge tunnel through limestone. People later used this natural passage as a railroad route.",
+    "quest": "How is a tunnel made by water different from one dug by people?",
+    "url": "https://www.dcr.virginia.gov/state-parks/natural-tunnel",
+    "regionNote": ""
+  },
+  {
+    "id": "wilderness-road",
+    "name": "Wilderness Road State Park",
+    "region": 1,
+    "kind": "History",
+    "town": "Ewing",
+    "at": [
+      -83.529,
+      36.624
+    ],
+    "story": "The reconstructed Martin's Station helps explain travel and settlement along the Wilderness Road. These changes also affected Indigenous peoples already living in the region.",
+    "quest": "Why were mountain gaps important to travelers carrying supplies?",
+    "url": "https://www.dcr.virginia.gov/state-parks/wilderness-road",
+    "regionNote": ""
+  },
+  {
+    "id": "country-music",
+    "name": "Birthplace of Country Music Museum",
+    "region": 1,
+    "kind": "Museums & culture",
+    "town": "Bristol",
+    "at": [
+      -82.182,
+      36.596
+    ],
+    "story": "The 1927 Bristol Sessions helped spread country music through recordings. The museum explores the performers, technology, and traditions behind those sounds.",
+    "quest": "Compare a recording device from the past with one you use today.",
+    "url": "https://birthplaceofcountrymusic.org/museum/",
+    "regionNote": ""
+  },
+  {
+    "id": "barter",
+    "name": "Barter Theatre",
+    "region": 1,
+    "kind": "Museums & culture",
+    "town": "Abingdon",
+    "at": [
+      -81.976,
+      36.711
+    ],
+    "story": "This theater opened during the Great Depression. Early audiences could trade food for admission, linking the arts with a community's needs.",
+    "quest": "Why might trading food for a ticket have helped both actors and families?",
+    "url": "https://bartertheatre.com/",
+    "regionNote": ""
+  },
+  {
+    "id": "frontier",
+    "name": "Frontier Culture Museum",
+    "region": 1,
+    "kind": "Museums & culture",
+    "town": "Staunton",
+    "at": [
+      -79.072,
+      38.128
+    ],
+    "story": "Outdoor exhibits explore the lives of people from different cultures who helped shape the Shenandoah Valley, including African, European, and Indigenous communities.",
+    "quest": "Compare two buildings. What do their materials tell you about the people who made them?",
+    "url": "https://www.frontiermuseum.org/",
+    "regionNote": ""
+  },
+  {
+    "id": "woodrow-wilson",
+    "name": "Woodrow Wilson Presidential Library",
+    "region": 1,
+    "kind": "History",
+    "town": "Staunton",
+    "at": [
+      -79.069,
+      38.15
+    ],
+    "story": "Wilson was born in Staunton and later became president during World War I. His story also invites questions about segregation and who had access to rights.",
+    "quest": "Find a source from Wilson's lifetime. Whose perspective does it show, and whose is missing?",
+    "url": "https://www.woodrowwilson.org/",
+    "regionNote": ""
+  },
+  {
+    "id": "shenandoah-museum",
+    "name": "Museum of the Shenandoah Valley",
+    "region": 1,
+    "kind": "Museums & culture",
+    "town": "Winchester",
+    "at": [
+      -78.183,
+      39.185
+    ],
+    "story": "Art, objects, gardens, and historic buildings reveal how people have lived in and pictured the Shenandoah Valley.",
+    "quest": "Find an object made in the valley. How does it connect to the landscape?",
+    "url": "https://www.themsv.org/",
+    "regionNote": ""
+  },
+  {
+    "id": "cedar-creek",
+    "name": "Cedar Creek & Belle Grove",
+    "region": 1,
+    "kind": "History",
+    "town": "Middletown",
+    "at": [
+      -78.307,
+      39.018
+    ],
+    "story": "This landscape holds stories of farming, slavery, and the Civil War. The 1864 Battle of Cedar Creek was a major Union victory in the valley.",
+    "quest": "Why might farms, roads, and a valley become important during a war?",
+    "url": "https://www.nps.gov/cebe/",
+    "regionNote": ""
+  },
+  {
+    "id": "natural-bridge",
+    "name": "Natural Bridge State Park",
+    "region": 1,
+    "kind": "Nature",
+    "town": "Natural Bridge",
+    "at": [
+      -79.545,
+      37.628
+    ],
+    "story": "Cedar Creek shaped a limestone arch. The site connects geology with Monacan history and the long history of people visiting this landmark.",
+    "quest": "Explain how a natural bridge differs from a bridge designed by engineers.",
+    "url": "https://www.dcr.virginia.gov/state-parks/natural-bridge",
+    "regionNote": ""
+  },
+  {
+    "id": "luray",
+    "name": "Luray Caverns",
+    "region": 1,
+    "kind": "Nature",
+    "town": "Luray",
+    "at": [
+      -78.484,
+      38.664
+    ],
+    "story": "Water slowly dissolves limestone and leaves mineral deposits underground. These caverns show how tiny changes can build remarkable shapes over time.",
+    "quest": "Which formations hang down, and which grow up? Ask how water helps form them.",
+    "url": "https://luraycaverns.com/",
+    "regionNote": ""
+  },
+  {
+    "id": "transportation",
+    "name": "Virginia Museum of Transportation",
+    "region": 1,
+    "kind": "Museums & culture",
+    "town": "Roanoke",
+    "at": [
+      -79.947,
+      37.273
+    ],
+    "story": "Railroads helped Roanoke grow. Preserved locomotives and vehicles show how transportation changed work, trade, and travel.",
+    "quest": "Compare a steam locomotive with a modern train. What powers each one?",
+    "url": "https://www.vmt.org/",
+    "regionNote": ""
+  },
+  {
+    "id": "new-river-trail",
+    "name": "New River Trail State Park",
+    "region": 1,
+    "kind": "Nature",
+    "town": "Foster Falls",
+    "at": [
+      -80.85,
+      36.884
+    ],
+    "story": "An old railroad corridor became a trail. At Foster Falls, buildings and river views help tell the story of industry and transportation.",
+    "quest": "Find a clue that this was once a railroad. Why reuse an old route?",
+    "url": "https://www.dcr.virginia.gov/state-parks/new-river-trail",
+    "regionNote": ""
+  },
+  {
+    "id": "shenandoah",
+    "name": "Shenandoah National Park · Big Meadows",
+    "region": 2,
+    "kind": "Nature",
+    "town": "Skyline Drive",
+    "at": [
+      -78.469,
+      38.518
+    ],
+    "story": "Mountain forests and meadows hold human stories too. Creating the park displaced families, and Civilian Conservation Corps workers helped build its facilities.",
+    "quest": "Ask how the park changed life for people who lived here before it opened.",
+    "url": "https://www.nps.gov/shen/learn/historyculture/index.htm",
+    "regionNote": ""
+  },
+  {
+    "id": "humpback",
+    "name": "Humpback Rocks Mountain Farm",
+    "region": 2,
+    "kind": "History",
+    "town": "Blue Ridge Parkway",
+    "at": [
+      -78.899,
+      37.968
+    ],
+    "story": "Historic farm buildings were moved here to help visitors understand mountain farming. They show how families used nearby wood, land, and tools.",
+    "quest": "Choose a farm building. What job did it do for the family?",
+    "url": "https://www.nps.gov/blri/planyourvisit/humpback-rocks-mp-5-8.htm",
+    "regionNote": ""
+  },
+  {
+    "id": "peaks-otter",
+    "name": "Peaks of Otter",
+    "region": 2,
+    "kind": "Nature",
+    "town": "Blue Ridge Parkway",
+    "at": [
+      -79.609,
+      37.446
+    ],
+    "story": "Mountain peaks surround a place with a long human history. Johnson Farm preserves clues to family farming in the mountains.",
+    "quest": "How would steep slopes change where a family built a home or planted crops?",
+    "url": "https://www.nps.gov/blri/planyourvisit/peaks-of-otter-mp-85-6.htm",
+    "regionNote": ""
+  },
+  {
+    "id": "mabry",
+    "name": "Mabry Mill",
+    "region": 2,
+    "kind": "History",
+    "town": "Meadows of Dan",
+    "at": [
+      -80.44,
+      36.75
+    ],
+    "story": "Ed and Lizzy Mabry used this mill to grind corn and saw lumber. Water power helped mountain families do work before electricity was widely available.",
+    "quest": "Trace how moving water could make a millstone turn.",
+    "url": "https://www.nps.gov/blri/planyourvisit/mabry-mill-mp-176.htm",
+    "regionNote": ""
+  },
+  {
+    "id": "blue-ridge-music",
+    "name": "Blue Ridge Music Center",
+    "region": 2,
+    "kind": "Museums & culture",
+    "town": "Near Galax",
+    "at": [
+      -80.943,
+      36.571
+    ],
+    "story": "Exhibits explore the roots of Appalachian music, including African and European influences. Instruments and songs help tell stories across generations.",
+    "quest": "Listen for two different instruments. How do their sounds work together?",
+    "url": "https://www.nps.gov/blri/planyourvisit/blue-ridge-music-center-mp-213.htm",
+    "regionNote": ""
+  },
+  {
+    "id": "grayson",
+    "name": "Grayson Highlands State Park",
+    "region": 2,
+    "kind": "Nature",
+    "town": "Mouth of Wilson",
+    "at": [
+      -81.502,
+      36.624
+    ],
+    "story": "High mountain landscapes offer clues about elevation, weather, and wildlife. The park also shares stories of the people who lived and worked in these highlands.",
+    "quest": "Compare this landscape with the coast. How might colder weather change plants and daily life?",
+    "url": "https://www.dcr.virginia.gov/state-parks/grayson-highlands",
+    "regionNote": ""
+  },
+  {
+    "id": "blue-ridge-tunnel",
+    "name": "Blue Ridge Tunnel",
+    "region": 2,
+    "kind": "History",
+    "town": "Afton",
+    "at": [
+      -78.856,
+      38.032
+    ],
+    "story": "Workers built a railroad tunnel through the Blue Ridge in the 1850s. Their engineering and difficult labor helped connect places separated by mountains.",
+    "quest": "Why did the railroad go through the mountain instead of over its top?",
+    "url": "https://nelsoncountyva.myrec.com/info/facilities/details.aspx?ActivityID=144415",
+    "regionNote": ""
+  },
+  {
+    "id": "monticello",
+    "name": "Monticello",
+    "region": 3,
+    "kind": "History",
+    "town": "Charlottesville",
+    "at": [
+      -78.453,
+      38.009
+    ],
+    "story": "Thomas Jefferson designed this home. Its history includes his ideas about liberty and the lives of the people he enslaved who built and maintained the plantation.",
+    "quest": "Look for the name and story of an enslaved person, as well as Jefferson's story.",
+    "url": "https://www.monticello.org/",
+    "regionNote": ""
+  },
+  {
+    "id": "montpelier",
+    "name": "James Madison's Montpelier",
+    "region": 3,
+    "kind": "History",
+    "town": "Orange",
+    "at": [
+      -78.169,
+      38.219
+    ],
+    "story": "Madison helped shape the Constitution. Montpelier also tells the stories of the enslaved community whose labor supported the estate.",
+    "quest": "How can studying different people's lives change our understanding of one place?",
+    "url": "https://www.montpelier.org/",
+    "regionNote": ""
+  },
+  {
+    "id": "highland",
+    "name": "James Monroe's Highland",
+    "region": 3,
+    "kind": "History",
+    "town": "Charlottesville",
+    "at": [
+      -78.456,
+      37.982
+    ],
+    "story": "Highland explores President James Monroe's life and the lives of people enslaved on his plantation. Archaeology helps historians revise what they know.",
+    "quest": "What might a small object found in the ground reveal that a written account leaves out?",
+    "url": "https://highland.org/",
+    "regionNote": ""
+  },
+  {
+    "id": "appomattox",
+    "name": "Appomattox Court House",
+    "region": 3,
+    "kind": "History",
+    "town": "Appomattox",
+    "at": [
+      -78.797,
+      37.378
+    ],
+    "story": "In 1865, Robert E. Lee surrendered his army to Ulysses S. Grant here. This was a major step toward ending the Civil War, though fighting elsewhere continued.",
+    "quest": "Why is a surrender agreement a useful primary source for a historian?",
+    "url": "https://www.nps.gov/apco/",
+    "regionNote": ""
+  },
+  {
+    "id": "booker",
+    "name": "Booker T. Washington National Monument",
+    "region": 3,
+    "kind": "History",
+    "town": "Hardy",
+    "at": [
+      -79.766,
+      37.123
+    ],
+    "story": "Booker T. Washington was born enslaved here. After emancipation, he became an educator and helped build Tuskegee Institute in Alabama.",
+    "quest": "How could learning to read open opportunities that slavery had denied people?",
+    "url": "https://www.nps.gov/bowa/",
+    "regionNote": ""
+  },
+  {
+    "id": "red-hill",
+    "name": "Patrick Henry's Red Hill",
+    "region": 3,
+    "kind": "History",
+    "town": "Brookneal",
+    "at": [
+      -78.901,
+      37.033
+    ],
+    "story": "Henry's final home tells stories about the Revolutionary era and plantation life, including the people he enslaved.",
+    "quest": "How can a historic site help us examine the gap between words about liberty and people's lives?",
+    "url": "https://www.redhill.org/",
+    "regionNote": ""
+  },
+  {
+    "id": "poplar-forest",
+    "name": "Thomas Jefferson's Poplar Forest",
+    "region": 3,
+    "kind": "History",
+    "town": "Forest",
+    "at": [
+      -79.269,
+      37.348
+    ],
+    "story": "Jefferson designed an eight-sided retreat here. Restoration and archaeology reveal the work of craftspeople and enslaved people who made the plantation function.",
+    "quest": "Find an architectural shape. What could a building tell us about its designer and its builders?",
+    "url": "https://www.poplarforest.org/",
+    "regionNote": ""
+  },
+  {
+    "id": "moton",
+    "name": "Robert Russa Moton Museum",
+    "region": 3,
+    "kind": "History",
+    "town": "Farmville",
+    "at": [
+      -78.396,
+      37.29
+    ],
+    "story": "In 1951, students led by Barbara Johns protested unequal school conditions here. Their lawsuit became part of Brown v. Board of Education.",
+    "quest": "What made students' voices powerful? Find one detail about the conditions they challenged.",
+    "url": "https://motonmuseum.org/",
+    "regionNote": ""
+  },
+  {
+    "id": "high-bridge",
+    "name": "High Bridge Trail State Park",
+    "region": 3,
+    "kind": "History",
+    "town": "Near Farmville",
+    "at": [
+      -78.318,
+      37.326
+    ],
+    "story": "A former railroad bridge crosses the Appomattox River. The area was important during the closing days of the Civil War and is now part of a trail.",
+    "quest": "Why might both armies care about controlling a bridge?",
+    "url": "https://www.dcr.virginia.gov/state-parks/high-bridge-trail",
+    "regionNote": ""
+  },
+  {
+    "id": "manassas",
+    "name": "Manassas National Battlefield Park",
+    "region": 3,
+    "kind": "History",
+    "town": "Manassas",
+    "at": [
+      -77.522,
+      38.813
+    ],
+    "story": "Two major Civil War battles took place here. The first challenged the belief that the war would end quickly.",
+    "quest": "Use a battlefield map to find a road or hill. Why might it matter to soldiers?",
+    "url": "https://www.nps.gov/mana/",
+    "regionNote": ""
+  },
+  {
+    "id": "balls-bluff",
+    "name": "Ball's Bluff Battlefield Regional Park",
+    "region": 3,
+    "kind": "History",
+    "town": "Leesburg",
+    "at": [
+      -77.527,
+      39.129
+    ],
+    "story": "A Civil War battle unfolded on high ground above the Potomac River. The river and steep banks affected what soldiers could do.",
+    "quest": "Describe how a river can be both a travel route and an obstacle.",
+    "url": "https://www.novaparks.com/parks/balls-bluff-battlefield-regional-park",
+    "regionNote": ""
+  },
+  {
+    "id": "great-falls",
+    "name": "Great Falls Park",
+    "region": 3,
+    "kind": "History",
+    "town": "McLean",
+    "at": [
+      -77.251,
+      38.993
+    ],
+    "story": "The Potomac drops over rocks near the Fall Line. Remains of the Patowmack Canal show how people tried to help boats move around the falls.",
+    "quest": "Why did boats need locks and a canal to get past the falls?",
+    "url": "https://www.nps.gov/grfa/learn/historyculture/index.htm",
+    "regionNote": ""
+  },
+  {
+    "id": "oatlands",
+    "name": "Oatlands Historic House & Gardens",
+    "region": 3,
+    "kind": "History",
+    "town": "Leesburg",
+    "at": [
+      -77.617,
+      39.039
+    ],
+    "story": "This former plantation shares the histories of its owners and of enslaved people whose work sustained it. Buildings and gardens preserve evidence of that labor.",
+    "quest": "Find whose work made one part of the estate possible.",
+    "url": "https://oatlands.org/",
+    "regionNote": ""
+  },
+  {
+    "id": "morven",
+    "name": "Morven Park",
+    "region": 3,
+    "kind": "History",
+    "town": "Leesburg",
+    "at": [
+      -77.565,
+      39.138
+    ],
+    "story": "A historic estate tells stories about Virginia government, farming, and everyday life. Its buildings and collections show how the property changed over time.",
+    "quest": "Choose one object and ask what it says about its owner's daily life.",
+    "url": "https://www.morvenpark.org/",
+    "regionNote": ""
+  },
+  {
+    "id": "sully",
+    "name": "Sully Historic Site",
+    "region": 3,
+    "kind": "History",
+    "town": "Chantilly",
+    "at": [
+      -77.455,
+      38.909
+    ],
+    "story": "Sully preserves a historic house and the stories of the people who lived and worked there, including enslaved workers.",
+    "quest": "Compare the spaces used by different people. What do they reveal about unequal power?",
+    "url": "https://www.fairfaxcounty.gov/parks/sully-historic-site",
+    "regionNote": ""
+  },
+  {
+    "id": "udvar-hazy",
+    "name": "Steven F. Udvar-Hazy Center",
+    "region": 3,
+    "kind": "Museums & culture",
+    "town": "Chantilly",
+    "at": [
+      -77.444,
+      38.911
+    ],
+    "story": "Aircraft and spacecraft reveal the history of flight. The space shuttle Discovery helps tell the story of exploring beyond Earth.",
+    "quest": "Choose an aircraft. What problem did its designers solve with its shape?",
+    "url": "https://airandspace.si.edu/visit/udvar-hazy-center",
+    "regionNote": ""
+  },
+  {
+    "id": "virginia-history",
+    "name": "Virginia Museum of History & Culture",
+    "region": 3,
+    "kind": "Museums & culture",
+    "town": "Richmond",
+    "at": [
+      -77.475,
+      37.559
+    ],
+    "story": "Objects and documents connect many different Virginia stories across time. The museum invites visitors to examine the evidence behind history.",
+    "quest": "Find two objects from different centuries. What changed, and what stayed similar?",
+    "url": "https://virginiahistory.org/",
+    "regionNote": ""
+  },
+  {
+    "id": "science-museum",
+    "name": "Science Museum of Virginia",
+    "region": 3,
+    "kind": "Museums & culture",
+    "town": "Richmond",
+    "at": [
+      -77.467,
+      37.563
+    ],
+    "story": "A former railroad station now houses a science museum. The building itself is a clue to Richmond's transportation history.",
+    "quest": "Look for a feature left from the train station. Why preserve it inside a science museum?",
+    "url": "https://smv.org/",
+    "regionNote": ""
+  },
+  {
+    "id": "sailors-creek",
+    "name": "Sailor's Creek Battlefield Historical State Park",
+    "region": 3,
+    "kind": "History",
+    "town": "Rice",
+    "at": [
+      -78.217,
+      37.3
+    ],
+    "story": "Fighting here in April 1865 weakened Lee's army shortly before the surrender at Appomattox. The landscape helps explain this final campaign.",
+    "quest": "Put this battle and the Appomattox surrender in time order.",
+    "url": "https://www.dcr.virginia.gov/state-parks/sailors-creek",
+    "regionNote": ""
+  },
+  {
+    "id": "jamestowne",
+    "name": "Historic Jamestowne",
+    "region": 4,
+    "kind": "History",
+    "town": "Jamestown",
+    "at": [
+      -76.779,
+      37.208
+    ],
+    "story": "Archaeologists study the site of England's first permanent North American colony, founded in 1607. Evidence reveals encounters and conflict with Virginia Indian peoples.",
+    "quest": "What can a broken piece of pottery tell an archaeologist about daily life?",
+    "url": "https://historicjamestowne.org/",
+    "regionNote": ""
+  },
+  {
+    "id": "jamestown-settlement",
+    "name": "Jamestown Settlement",
+    "region": 4,
+    "kind": "Museums & culture",
+    "town": "Jamestown",
+    "at": [
+      -76.776,
+      37.226
+    ],
+    "story": "This museum explores the cultures of Virginia Indians, English colonists, and Africans in seventeenth-century Virginia. Outdoor areas are reconstructions used for learning.",
+    "quest": "How is a reconstructed building different from an original archaeological site?",
+    "url": "https://www.jyfmuseums.org/visit/jamestown-settlement",
+    "regionNote": ""
+  },
+  {
+    "id": "williamsburg",
+    "name": "Colonial Williamsburg",
+    "region": 4,
+    "kind": "History",
+    "town": "Williamsburg",
+    "at": [
+      -76.701,
+      37.271
+    ],
+    "story": "A restored and reconstructed colonial capital brings trades, government, and daily life into view. Its stories include free and enslaved people.",
+    "quest": "Watch a trade or study a tool. How did skilled workers make things before factories?",
+    "url": "https://www.colonialwilliamsburg.org/",
+    "regionNote": ""
+  },
+  {
+    "id": "yorktown",
+    "name": "Yorktown Battlefield",
+    "region": 4,
+    "kind": "History",
+    "town": "Yorktown",
+    "at": [
+      -76.499,
+      37.234
+    ],
+    "story": "American and French forces trapped Cornwallis's army in 1781. The surrender helped bring the Revolutionary War toward its end.",
+    "quest": "Why did cooperation between armies and a navy matter here?",
+    "url": "https://www.nps.gov/york/",
+    "regionNote": ""
+  },
+  {
+    "id": "revolution-museum",
+    "name": "American Revolution Museum at Yorktown",
+    "region": 4,
+    "kind": "Museums & culture",
+    "town": "Yorktown",
+    "at": [
+      -76.519,
+      37.239
+    ],
+    "story": "Exhibits and reconstructed outdoor settings explore the Revolution and the people who experienced it, from soldiers to farming families.",
+    "quest": "Find one way the war affected someone who was not a soldier.",
+    "url": "https://www.jyfmuseums.org/visit/american-revolution-museum-at-yorktown",
+    "regionNote": ""
+  },
+  {
+    "id": "fort-monroe",
+    "name": "Fort Monroe National Monument",
+    "region": 4,
+    "kind": "History",
+    "town": "Hampton",
+    "at": [
+      -76.308,
+      37.004
+    ],
+    "story": "During the Civil War, enslaved people sought freedom at this Union-held fort. Their actions helped change the course of emancipation.",
+    "quest": "Learn the names of Frank Baker, James Townsend, and Shepard Mallory. Why do their choices matter?",
+    "url": "https://www.nps.gov/fomr/",
+    "regionNote": ""
+  },
+  {
+    "id": "mariners",
+    "name": "The Mariners' Museum and Park",
+    "region": 4,
+    "kind": "Museums & culture",
+    "town": "Newport News",
+    "at": [
+      -76.488,
+      37.055
+    ],
+    "story": "Ships and maritime objects show how waterways connected people. The USS Monitor story links engineering with the Civil War.",
+    "quest": "How did an ironclad warship differ from a wooden sailing ship?",
+    "url": "https://www.marinersmuseum.org/",
+    "regionNote": ""
+  },
+  {
+    "id": "air-space",
+    "name": "Virginia Air & Space Science Center",
+    "region": 4,
+    "kind": "Museums & culture",
+    "town": "Hampton",
+    "at": [
+      -76.345,
+      37.024
+    ],
+    "story": "Aircraft and spacecraft connect Hampton Roads with aviation and space exploration. Engineers and scientists worked together to solve new problems.",
+    "quest": "Choose a spacecraft. What would its crew need to survive beyond Earth?",
+    "url": "https://vasc.org/",
+    "regionNote": ""
+  },
+  {
+    "id": "nauticus",
+    "name": "Nauticus & Battleship Wisconsin",
+    "region": 4,
+    "kind": "Museums & culture",
+    "town": "Norfolk",
+    "at": [
+      -76.293,
+      36.847
+    ],
+    "story": "A maritime museum and historic battleship reveal how ships work and how the sea shapes Norfolk. Wisconsin helps tell twentieth-century naval history.",
+    "quest": "Find a feature that helped a large ship communicate, navigate, or protect its crew.",
+    "url": "https://nauticus.org/",
+    "regionNote": ""
+  },
+  {
+    "id": "chrysler",
+    "name": "Chrysler Museum of Art",
+    "region": 4,
+    "kind": "Museums & culture",
+    "town": "Norfolk",
+    "at": [
+      -76.289,
+      36.857
+    ],
+    "story": "Art and glass can be historical evidence. The museum brings together objects made by people from many places and times.",
+    "quest": "Choose an artwork. What clues suggest when and where it was made?",
+    "url": "https://chrysler.org/",
+    "regionNote": ""
+  },
+  {
+    "id": "first-landing",
+    "name": "First Landing State Park",
+    "region": 4,
+    "kind": "History",
+    "town": "Virginia Beach",
+    "at": [
+      -76.05,
+      36.918
+    ],
+    "story": "English colonists landed near Cape Henry in 1607 before continuing to Jamestown. The park also preserves coastal forests and waterways.",
+    "quest": "Why might a sheltered water route have mattered to people arriving by ship?",
+    "url": "https://www.dcr.virginia.gov/state-parks/first-landing",
+    "regionNote": ""
+  },
+  {
+    "id": "cape-henry",
+    "name": "Cape Henry Lighthouse",
+    "region": 4,
+    "kind": "History",
+    "town": "Virginia Beach",
+    "at": [
+      -76.008,
+      36.927
+    ],
+    "story": "A lighthouse guided ships near the entrance to Chesapeake Bay. Its story connects early federal government with safer maritime travel.",
+    "quest": "Why would sailors need a recognizable light pattern rather than just any bright light?",
+    "url": "https://preservationvirginia.org/historic-sites/cape-henry-lighthouse/",
+    "regionNote": ""
+  },
+  {
+    "id": "chincoteague",
+    "name": "Chincoteague National Wildlife Refuge",
+    "region": 4,
+    "kind": "Nature",
+    "town": "Assateague Island",
+    "at": [
+      -75.357,
+      37.905
+    ],
+    "story": "Barrier islands, marshes, and beaches support wildlife. The refuge also offers ways to learn how people have used and protected this changing coast.",
+    "quest": "How can moving sand change a place that looks permanent on a map?",
+    "url": "https://www.fws.gov/refuge/chincoteague",
+    "regionNote": ""
+  },
+  {
+    "id": "machicomoco",
+    "name": "Machicomoco State Park",
+    "region": 4,
+    "kind": "History",
+    "town": "Hayes",
+    "at": [
+      -76.463,
+      37.31
+    ],
+    "story": "Interpretive displays share Virginia Indian history and the continuing presence of Indigenous communities. The York River connects this landscape with many generations of people.",
+    "quest": "Find the name of a Virginia tribe. What can you learn about its community today?",
+    "url": "https://www.dcr.virginia.gov/state-parks/machicomoco",
+    "regionNote": ""
+  },
+  {
+    "id": "chippokes",
+    "name": "Chippokes State Park",
+    "region": 4,
+    "kind": "History",
+    "town": "Surry",
+    "at": [
+      -76.735,
+      37.138
+    ],
+    "story": "A historic agricultural landscape and farm museum show how farming changed over centuries. Its story includes enslaved people and later farm workers.",
+    "quest": "Compare two farm tools. How would each change a person's workday?",
+    "url": "https://www.dcr.virginia.gov/state-parks/chippokes",
+    "regionNote": ""
+  },
+  {
+    "id": "bacons-castle",
+    "name": "Bacon's Castle",
+    "region": 4,
+    "kind": "History",
+    "town": "Surry",
+    "at": [
+      -76.722,
+      37.109
+    ],
+    "story": "This rare seventeenth-century brick house is connected to Bacon's Rebellion and centuries of plantation life, including slavery.",
+    "quest": "Look at the brickwork. What can a building preserve that a written story cannot?",
+    "url": "https://preservationvirginia.org/historic-sites/bacons-castle/",
+    "regionNote": ""
+  },
+  {
+    "id": "stratford",
+    "name": "Stratford Hall",
+    "region": 4,
+    "kind": "History",
+    "town": "Montross",
+    "at": [
+      -76.839,
+      38.151
+    ],
+    "story": "The Lee family home overlooks the Potomac. The site's history includes the enslaved community and the work that supported a large plantation.",
+    "quest": "Find a story about a worker. How does it add to the story of the house?",
+    "url": "https://www.stratfordhall.org/",
+    "regionNote": ""
+  },
+  {
+    "id": "washington-birthplace",
+    "name": "George Washington Birthplace National Monument",
+    "region": 4,
+    "kind": "History",
+    "town": "Colonial Beach",
+    "at": [
+      -76.931,
+      38.194
+    ],
+    "story": "This site preserves the landscape of Washington's birthplace. Archaeology and interpretation help distinguish what survives from later memorial buildings.",
+    "quest": "Which features are original evidence, and which were created later to remember the past?",
+    "url": "https://www.nps.gov/gewa/",
+    "regionNote": ""
+  },
+  {
+    "id": "mount-vernon",
+    "name": "George Washington's Mount Vernon",
+    "region": 4,
+    "kind": "History",
+    "town": "Mount Vernon",
+    "at": [
+      -77.087,
+      38.708
+    ],
+    "story": "Washington's riverside estate tells stories of the first president and of the enslaved people whose labor supported his home and farms.",
+    "quest": "Find one way the Potomac River influenced life or work at the estate.",
+    "url": "https://www.mountvernon.org/",
+    "regionNote": ""
+  },
+  {
+    "id": "alexandria-black-history",
+    "name": "Alexandria Black History Museum",
+    "region": 4,
+    "kind": "Museums & culture",
+    "town": "Alexandria",
+    "at": [
+      -77.046,
+      38.813
+    ],
+    "story": "This museum preserves and shares African American history in Alexandria. Community stories connect local experiences with the larger struggle for equality.",
+    "quest": "Choose a local person's story. How does it connect to a change in the wider country?",
+    "url": "https://www.alexandriava.gov/BlackHistory",
+    "regionNote": ""
+  },
+  {
+    "id": "maggie-walker",
+    "name": "Maggie L. Walker National Historic Site",
+    "region": 4,
+    "kind": "History",
+    "town": "Richmond",
+    "at": [
+      -77.437,
+      37.548
+    ],
+    "story": "Maggie Lena Walker became a bank president and community leader despite racial and gender discrimination. Her home tells a story of economic opportunity and service.",
+    "quest": "How could a community bank help people buy homes or start businesses?",
+    "url": "https://www.nps.gov/mawa/",
+    "regionNote": "Richmond straddles the Fall Line between Piedmont and Coastal Plain. These downtown places are grouped with the eastern sites; overview boundary lines are approximate."
+  },
+  {
+    "id": "virginia-capitol",
+    "name": "Virginia State Capitol",
+    "region": 4,
+    "kind": "History",
+    "town": "Richmond",
+    "at": [
+      -77.434,
+      37.538
+    ],
+    "story": "Virginia's legislature meets at Capitol Square. The building and its surroundings help explain how state government works and how representation has changed.",
+    "quest": "Who represents your community today? Compare that with who could vote in early Virginia.",
+    "url": "https://www.virginiacapitol.gov/",
+    "regionNote": "Richmond straddles the Fall Line between Piedmont and Coastal Plain. These downtown places are grouped with the eastern sites; overview boundary lines are approximate."
+  },
+  {
+    "id": "st-johns",
+    "name": "Historic St. John's Church",
+    "region": 4,
+    "kind": "History",
+    "town": "Richmond",
+    "at": [
+      -77.419,
+      37.531
+    ],
+    "story": "Patrick Henry spoke here in 1775 as delegates debated preparing for conflict with Britain. The church connects a local gathering with the Revolution.",
+    "quest": "Why might a powerful speech influence a difficult public decision?",
+    "url": "https://www.historicstjohnschurch.org/",
+    "regionNote": "Richmond straddles the Fall Line between Piedmont and Coastal Plain. These downtown places are grouped with the eastern sites; overview boundary lines are approximate."
+  },
+  {
+    "id": "pamunkey",
+    "name": "Pamunkey Indian Museum & Cultural Center",
+    "region": 4,
+    "kind": "Museums & culture",
+    "town": "King William",
+    "at": [
+      -77.001,
+      37.572
+    ],
+    "story": "The Pamunkey Tribe shares its own history and culture through this museum. It helps visitors understand a living community with deep ties to Virginia.",
+    "quest": "Look for a pottery tradition. How can a craft connect generations?",
+    "url": "https://pamunkey.org/museum-cultural-center",
+    "regionNote": ""
+  },
+  {
+    "id": "petersburg",
+    "name": "Petersburg National Battlefield",
+    "region": 4,
+    "kind": "History",
+    "town": "Petersburg",
+    "at": [
+      -77.356,
+      37.245
+    ],
+    "story": "A long Civil War siege focused on Petersburg's railroads and supply routes. The park explains how the campaign affected soldiers and civilians.",
+    "quest": "Why would cutting a railroad make it harder to supply an army?",
+    "url": "https://www.nps.gov/pete/",
+    "regionNote": ""
+  },
+  {
+    "id": "berkeley",
+    "name": "Berkeley Plantation",
+    "region": 4,
+    "kind": "History",
+    "town": "Charles City",
+    "at": [
+      -77.177,
+      37.318
+    ],
+    "story": "This James River plantation preserves a historic house and layered stories of colonial Virginia, the Harrison family, and enslaved labor.",
+    "quest": "How did the river connect the plantation to people and markets farther away?",
+    "url": "https://www.berkeleyplantation.com/",
+    "regionNote": ""
+  }
+]

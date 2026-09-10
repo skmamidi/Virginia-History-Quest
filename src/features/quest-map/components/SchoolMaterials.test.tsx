@@ -74,12 +74,46 @@ it('explores all five regions, switches map legends, and gives retry feedback fo
       expect(screen.getByRole('button', { name: 'Check my answer' })).toBeDisabled();
       fireEvent.click(group.getByRole('button', { name: question.choices[(question.answer + 1) % 3] }));
       fireEvent.click(screen.getByRole('button', { name: 'Check my answer' }));
-      expect(screen.getByRole('status')).toHaveTextContent('Not quite');
+      expect(within(screen.getByRole('region', { name: 'Map practice' })).getByRole('status')).toHaveTextContent('Not quite');
       fireEvent.click(group.getByRole('button', { name: question.choices[question.answer] }));
       fireEvent.click(screen.getByRole('button', { name: 'Check my answer' }));
-      expect(screen.getByRole('status')).toHaveTextContent(question.why);
+      expect(within(screen.getByRole('region', { name: 'Map practice' })).getByRole('status')).toHaveTextContent(question.why);
       fireEvent.click(screen.getByRole('button', { name: /Next map clue|Finish this practice/ }));
     }
     expect(screen.getByRole('heading', { name: 'Map detective discoveries complete!' })).toBeVisible();
   }
+});
+
+
+it('lists all counties and cities, filters names without confusing like-named localities, and highlights the chosen place', () => {
+  render(<MapLab onClose={() => {}} onScrapbook={() => {}} />);
+  expect(screen.queryByText('About these learning materials')).not.toBeInTheDocument();
+  fireEvent.click(screen.getByRole('button', { name: 'Population' }));
+  const table = within(screen.getByRole('table'));
+  expect(table.getAllByRole('row')).toHaveLength(134);
+  fireEvent.change(screen.getByLabelText('Show'), { target: { value: 'county' } });
+  expect(table.getAllByRole('row')).toHaveLength(96);
+  fireEvent.change(screen.getByLabelText('Find a county or city'), { target: { value: 'Fairfax' } });
+  expect(table.getByRole('button', { name: 'Fairfax County' })).toBeVisible();
+  expect(table.queryByRole('button', { name: 'Fairfax city' })).not.toBeInTheDocument();
+  fireEvent.change(screen.getByLabelText('Show'), { target: { value: 'all' } });
+  expect(table.getAllByRole('row')).toHaveLength(3);
+  fireEvent.click(table.getByRole('button', { name: 'Fairfax city' }));
+  expect(screen.getByText('Highlighted on the map: Fairfax city')).toBeVisible();
+  fireEvent.change(screen.getByLabelText('Find a county or city'), { target: { value: 'no such county' } });
+  expect(screen.getByText(/No matching places/)).toBeVisible();
+  fireEvent.change(screen.getByLabelText('Find a county or city'), { target: { value: '' } });
+  fireEvent.change(screen.getByLabelText('Show'), { target: { value: 'city' } });
+  expect(table.getAllByRole('row')).toHaveLength(39);
+});
+
+it('explains changing air pressure and follows moist air through lifting, clouds, and a rain shadow', () => {
+  render(<MapLab onClose={() => {}} onScrapbook={() => {}} />);
+  fireEvent.click(screen.getByRole('button', { name: 'Climate' }));
+  expect(screen.getByRole('heading', { name: 'Water slows temperature changes' })).toBeVisible();
+  fireEvent.click(screen.getByRole('button', { name: '3. Air descends' }));
+  expect(screen.getByText(/Air sinking on the other side compresses and warms/)).toBeVisible();
+  fireEvent.click(screen.getByRole('button', { name: 'Snowfall patterns' }));
+  expect(screen.getByRole('heading', { name: 'A valley can sit in a rain shadow' })).toBeVisible();
+  expect(screen.getByRole('heading', { name: 'Snow needs moisture and a cold path down' })).toBeVisible();
 });

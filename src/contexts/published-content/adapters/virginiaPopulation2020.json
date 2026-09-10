@@ -1,0 +1,1465 @@
+[
+  {
+    "id": "51001",
+    "name": "Accomack County",
+    "kind": "county",
+    "at": [
+      -75.7578073,
+      37.7659435
+    ],
+    "population": 33413,
+    "landAreaSquareMeters": 1163688510
+  },
+  {
+    "id": "51003",
+    "name": "Albemarle County",
+    "kind": "county",
+    "at": [
+      -78.5535056,
+      38.0241841
+    ],
+    "population": 112395,
+    "landAreaSquareMeters": 1866027512
+  },
+  {
+    "id": "51510",
+    "name": "Alexandria city",
+    "kind": "city",
+    "at": [
+      -77.0836695,
+      38.8192511
+    ],
+    "population": 159467,
+    "landAreaSquareMeters": 38682331
+  },
+  {
+    "id": "51005",
+    "name": "Alleghany County",
+    "kind": "county",
+    "at": [
+      -80.008669,
+      37.7879048
+    ],
+    "population": 15223,
+    "landAreaSquareMeters": 1156616595
+  },
+  {
+    "id": "51007",
+    "name": "Amelia County",
+    "kind": "county",
+    "at": [
+      -77.9774619,
+      37.3319271
+    ],
+    "population": 13265,
+    "landAreaSquareMeters": 920379348
+  },
+  {
+    "id": "51009",
+    "name": "Amherst County",
+    "kind": "county",
+    "at": [
+      -79.1547557,
+      37.6293013
+    ],
+    "population": 31307,
+    "landAreaSquareMeters": 1227554639
+  },
+  {
+    "id": "51011",
+    "name": "Appomattox County",
+    "kind": "county",
+    "at": [
+      -78.8109404,
+      37.3707253
+    ],
+    "population": 16119,
+    "landAreaSquareMeters": 865635290
+  },
+  {
+    "id": "51013",
+    "name": "Arlington County",
+    "kind": "county",
+    "at": [
+      -77.1007034,
+      38.8783374
+    ],
+    "population": 238643,
+    "landAreaSquareMeters": 67332992
+  },
+  {
+    "id": "51015",
+    "name": "Augusta County",
+    "kind": "county",
+    "at": [
+      -79.1409749,
+      38.1725895
+    ],
+    "population": 77487,
+    "landAreaSquareMeters": 2504708859
+  },
+  {
+    "id": "51017",
+    "name": "Bath County",
+    "kind": "county",
+    "at": [
+      -79.7312032,
+      38.0683679
+    ],
+    "population": 4209,
+    "landAreaSquareMeters": 1370626042
+  },
+  {
+    "id": "51019",
+    "name": "Bedford County",
+    "kind": "county",
+    "at": [
+      -79.5272234,
+      37.3122568
+    ],
+    "population": 79462,
+    "landAreaSquareMeters": 1968691314
+  },
+  {
+    "id": "51021",
+    "name": "Bland County",
+    "kind": "county",
+    "at": [
+      -81.1258532,
+      37.1306124
+    ],
+    "population": 6270,
+    "landAreaSquareMeters": 926296566
+  },
+  {
+    "id": "51023",
+    "name": "Botetourt County",
+    "kind": "county",
+    "at": [
+      -79.7975457,
+      37.5654822
+    ],
+    "population": 33596,
+    "landAreaSquareMeters": 1401898974
+  },
+  {
+    "id": "51520",
+    "name": "Bristol city",
+    "kind": "city",
+    "at": [
+      -82.1575641,
+      36.6169541
+    ],
+    "population": 17219,
+    "landAreaSquareMeters": 33336227
+  },
+  {
+    "id": "51025",
+    "name": "Brunswick County",
+    "kind": "county",
+    "at": [
+      -77.8614832,
+      36.7642043
+    ],
+    "population": 15849,
+    "landAreaSquareMeters": 1466826058
+  },
+  {
+    "id": "51027",
+    "name": "Buchanan County",
+    "kind": "county",
+    "at": [
+      -82.0381508,
+      37.2681198
+    ],
+    "population": 20355,
+    "landAreaSquareMeters": 1302387766
+  },
+  {
+    "id": "51029",
+    "name": "Buckingham County",
+    "kind": "county",
+    "at": [
+      -78.5291687,
+      37.573928
+    ],
+    "population": 16824,
+    "landAreaSquareMeters": 1501215437
+  },
+  {
+    "id": "51530",
+    "name": "Buena Vista city",
+    "kind": "city",
+    "at": [
+      -79.3581337,
+      37.7293448
+    ],
+    "population": 6641,
+    "landAreaSquareMeters": 16674752
+  },
+  {
+    "id": "51031",
+    "name": "Campbell County",
+    "kind": "county",
+    "at": [
+      -79.0954282,
+      37.2101515
+    ],
+    "population": 55696,
+    "landAreaSquareMeters": 1303430815
+  },
+  {
+    "id": "51033",
+    "name": "Caroline County",
+    "kind": "county",
+    "at": [
+      -77.3537363,
+      38.0280328
+    ],
+    "population": 30887,
+    "landAreaSquareMeters": 1365872669
+  },
+  {
+    "id": "51035",
+    "name": "Carroll County",
+    "kind": "county",
+    "at": [
+      -80.7278307,
+      36.7319632
+    ],
+    "population": 29155,
+    "landAreaSquareMeters": 1229575927
+  },
+  {
+    "id": "51036",
+    "name": "Charles City County",
+    "kind": "county",
+    "at": [
+      -77.05417,
+      37.3610537
+    ],
+    "population": 6773,
+    "landAreaSquareMeters": 473711551
+  },
+  {
+    "id": "51037",
+    "name": "Charlotte County",
+    "kind": "county",
+    "at": [
+      -78.6585682,
+      37.0090421
+    ],
+    "population": 11529,
+    "landAreaSquareMeters": 1231010117
+  },
+  {
+    "id": "51540",
+    "name": "Charlottesville city",
+    "kind": "city",
+    "at": [
+      -78.4853806,
+      38.0376579
+    ],
+    "population": 46553,
+    "landAreaSquareMeters": 26534887
+  },
+  {
+    "id": "51550",
+    "name": "Chesapeake city",
+    "kind": "city",
+    "at": [
+      -76.3017884,
+      36.6793761
+    ],
+    "population": 249422,
+    "landAreaSquareMeters": 876598059
+  },
+  {
+    "id": "51041",
+    "name": "Chesterfield County",
+    "kind": "county",
+    "at": [
+      -77.5858474,
+      37.3784338
+    ],
+    "population": 364548,
+    "landAreaSquareMeters": 1096875585
+  },
+  {
+    "id": "51043",
+    "name": "Clarke County",
+    "kind": "county",
+    "at": [
+      -77.9907479,
+      39.1153068
+    ],
+    "population": 14783,
+    "landAreaSquareMeters": 455664156
+  },
+  {
+    "id": "51570",
+    "name": "Colonial Heights city",
+    "kind": "city",
+    "at": [
+      -77.3968043,
+      37.2616846
+    ],
+    "population": 18170,
+    "landAreaSquareMeters": 19475360
+  },
+  {
+    "id": "51580",
+    "name": "Covington city",
+    "kind": "city",
+    "at": [
+      -79.9854337,
+      37.7810603
+    ],
+    "population": 5737,
+    "landAreaSquareMeters": 14163840
+  },
+  {
+    "id": "51045",
+    "name": "Craig County",
+    "kind": "county",
+    "at": [
+      -80.2310507,
+      37.4736031
+    ],
+    "population": 4892,
+    "landAreaSquareMeters": 849770441
+  },
+  {
+    "id": "51047",
+    "name": "Culpeper County",
+    "kind": "county",
+    "at": [
+      -77.9564759,
+      38.4859303
+    ],
+    "population": 52552,
+    "landAreaSquareMeters": 982067832
+  },
+  {
+    "id": "51049",
+    "name": "Cumberland County",
+    "kind": "county",
+    "at": [
+      -78.2528364,
+      37.5201891
+    ],
+    "population": 9675,
+    "landAreaSquareMeters": 770454311
+  },
+  {
+    "id": "51590",
+    "name": "Danville city",
+    "kind": "city",
+    "at": [
+      -79.4080707,
+      36.5833337
+    ],
+    "population": 42590,
+    "landAreaSquareMeters": 110858275
+  },
+  {
+    "id": "51051",
+    "name": "Dickenson County",
+    "kind": "county",
+    "at": [
+      -82.3492199,
+      37.1367011
+    ],
+    "population": 14124,
+    "landAreaSquareMeters": 855841910
+  },
+  {
+    "id": "51053",
+    "name": "Dinwiddie County",
+    "kind": "county",
+    "at": [
+      -77.6354922,
+      37.0734984
+    ],
+    "population": 27947,
+    "landAreaSquareMeters": 1304903543
+  },
+  {
+    "id": "51595",
+    "name": "Emporia city",
+    "kind": "city",
+    "at": [
+      -77.5359753,
+      36.696182
+    ],
+    "population": 5766,
+    "landAreaSquareMeters": 17979469
+  },
+  {
+    "id": "51057",
+    "name": "Essex County",
+    "kind": "county",
+    "at": [
+      -76.9337475,
+      37.936389
+    ],
+    "population": 10599,
+    "landAreaSquareMeters": 666574654
+  },
+  {
+    "id": "51600",
+    "name": "Fairfax city",
+    "kind": "city",
+    "at": [
+      -77.2990252,
+      38.8531833
+    ],
+    "population": 24146,
+    "landAreaSquareMeters": 16163923
+  },
+  {
+    "id": "51059",
+    "name": "Fairfax County",
+    "kind": "county",
+    "at": [
+      -77.2732524,
+      38.8295203
+    ],
+    "population": 1150309,
+    "landAreaSquareMeters": 1012740194
+  },
+  {
+    "id": "51610",
+    "name": "Falls Church city",
+    "kind": "city",
+    "at": [
+      -77.1756027,
+      38.884722
+    ],
+    "population": 14658,
+    "landAreaSquareMeters": 5300259
+  },
+  {
+    "id": "51061",
+    "name": "Fauquier County",
+    "kind": "county",
+    "at": [
+      -77.8215005,
+      38.7440956
+    ],
+    "population": 72972,
+    "landAreaSquareMeters": 1678296506
+  },
+  {
+    "id": "51063",
+    "name": "Floyd County",
+    "kind": "county",
+    "at": [
+      -80.3502662,
+      36.9314331
+    ],
+    "population": 15476,
+    "landAreaSquareMeters": 986585625
+  },
+  {
+    "id": "51065",
+    "name": "Fluvanna County",
+    "kind": "county",
+    "at": [
+      -78.2834938,
+      37.830584
+    ],
+    "population": 27249,
+    "landAreaSquareMeters": 743637222
+  },
+  {
+    "id": "51620",
+    "name": "Franklin city",
+    "kind": "city",
+    "at": [
+      -76.9413956,
+      36.6840142
+    ],
+    "population": 8180,
+    "landAreaSquareMeters": 21438216
+  },
+  {
+    "id": "51067",
+    "name": "Franklin County",
+    "kind": "county",
+    "at": [
+      -79.8827149,
+      36.9911862
+    ],
+    "population": 54477,
+    "landAreaSquareMeters": 1788673577
+  },
+  {
+    "id": "51069",
+    "name": "Frederick County",
+    "kind": "county",
+    "at": [
+      -78.2638291,
+      39.2036601
+    ],
+    "population": 91419,
+    "landAreaSquareMeters": 1070014040
+  },
+  {
+    "id": "51630",
+    "name": "Fredericksburg city",
+    "kind": "city",
+    "at": [
+      -77.4866583,
+      38.2992718
+    ],
+    "population": 27982,
+    "landAreaSquareMeters": 27066499
+  },
+  {
+    "id": "51640",
+    "name": "Galax city",
+    "kind": "city",
+    "at": [
+      -80.9143083,
+      36.6656397
+    ],
+    "population": 6720,
+    "landAreaSquareMeters": 21332079
+  },
+  {
+    "id": "51071",
+    "name": "Giles County",
+    "kind": "county",
+    "at": [
+      -80.698321,
+      37.3180719
+    ],
+    "population": 16787,
+    "landAreaSquareMeters": 925207242
+  },
+  {
+    "id": "51073",
+    "name": "Gloucester County",
+    "kind": "county",
+    "at": [
+      -76.5235051,
+      37.4035413
+    ],
+    "population": 38711,
+    "landAreaSquareMeters": 564134153
+  },
+  {
+    "id": "51075",
+    "name": "Goochland County",
+    "kind": "county",
+    "at": [
+      -77.9176263,
+      37.7188141
+    ],
+    "population": 24727,
+    "landAreaSquareMeters": 730521428
+  },
+  {
+    "id": "51077",
+    "name": "Grayson County",
+    "kind": "county",
+    "at": [
+      -81.2153233,
+      36.6522287
+    ],
+    "population": 15333,
+    "landAreaSquareMeters": 1144218750
+  },
+  {
+    "id": "51079",
+    "name": "Greene County",
+    "kind": "county",
+    "at": [
+      -78.4701629,
+      38.2979805
+    ],
+    "population": 20552,
+    "landAreaSquareMeters": 403900808
+  },
+  {
+    "id": "51081",
+    "name": "Greensville County",
+    "kind": "county",
+    "at": [
+      -77.5602774,
+      36.6803363
+    ],
+    "population": 11391,
+    "landAreaSquareMeters": 764229052
+  },
+  {
+    "id": "51083",
+    "name": "Halifax County",
+    "kind": "county",
+    "at": [
+      -78.9396142,
+      36.766461
+    ],
+    "population": 34022,
+    "landAreaSquareMeters": 2117913733
+  },
+  {
+    "id": "51650",
+    "name": "Hampton city",
+    "kind": "city",
+    "at": [
+      -76.2972931,
+      37.0479606
+    ],
+    "population": 137148,
+    "landAreaSquareMeters": 133290524
+  },
+  {
+    "id": "51085",
+    "name": "Hanover County",
+    "kind": "county",
+    "at": [
+      -77.4913168,
+      37.7602149
+    ],
+    "population": 109979,
+    "landAreaSquareMeters": 1211053950
+  },
+  {
+    "id": "51660",
+    "name": "Harrisonburg city",
+    "kind": "city",
+    "at": [
+      -78.8733028,
+      38.4362547
+    ],
+    "population": 51814,
+    "landAreaSquareMeters": 44907736
+  },
+  {
+    "id": "51087",
+    "name": "Henrico County",
+    "kind": "county",
+    "at": [
+      -77.300333,
+      37.4375205
+    ],
+    "population": 334389,
+    "landAreaSquareMeters": 605248504
+  },
+  {
+    "id": "51089",
+    "name": "Henry County",
+    "kind": "county",
+    "at": [
+      -79.9806618,
+      36.6206119
+    ],
+    "population": 50948,
+    "landAreaSquareMeters": 990284627
+  },
+  {
+    "id": "51091",
+    "name": "Highland County",
+    "kind": "county",
+    "at": [
+      -79.5644718,
+      38.3662431
+    ],
+    "population": 2232,
+    "landAreaSquareMeters": 1075266902
+  },
+  {
+    "id": "51670",
+    "name": "Hopewell city",
+    "kind": "city",
+    "at": [
+      -77.2989443,
+      37.2910098
+    ],
+    "population": 23033,
+    "landAreaSquareMeters": 26817672
+  },
+  {
+    "id": "51093",
+    "name": "Isle of Wight County",
+    "kind": "county",
+    "at": [
+      -76.7075688,
+      36.9014184
+    ],
+    "population": 38606,
+    "landAreaSquareMeters": 817621463
+  },
+  {
+    "id": "51095",
+    "name": "James City County",
+    "kind": "county",
+    "at": [
+      -76.7778878,
+      37.3248367
+    ],
+    "population": 78254,
+    "landAreaSquareMeters": 368550688
+  },
+  {
+    "id": "51097",
+    "name": "King and Queen County",
+    "kind": "county",
+    "at": [
+      -76.9055814,
+      37.7177719
+    ],
+    "population": 6608,
+    "landAreaSquareMeters": 816151628
+  },
+  {
+    "id": "51099",
+    "name": "King George County",
+    "kind": "county",
+    "at": [
+      -77.1626377,
+      38.2771795
+    ],
+    "population": 26723,
+    "landAreaSquareMeters": 465234042
+  },
+  {
+    "id": "51101",
+    "name": "King William County",
+    "kind": "county",
+    "at": [
+      -77.0910539,
+      37.7082604
+    ],
+    "population": 17810,
+    "landAreaSquareMeters": 709424847
+  },
+  {
+    "id": "51103",
+    "name": "Lancaster County",
+    "kind": "county",
+    "at": [
+      -76.4126628,
+      37.7048433
+    ],
+    "population": 10919,
+    "landAreaSquareMeters": 345309178
+  },
+  {
+    "id": "51105",
+    "name": "Lee County",
+    "kind": "county",
+    "at": [
+      -83.1301117,
+      36.7017206
+    ],
+    "population": 22173,
+    "landAreaSquareMeters": 1127622849
+  },
+  {
+    "id": "51678",
+    "name": "Lexington city",
+    "kind": "city",
+    "at": [
+      -79.4443196,
+      37.7823316
+    ],
+    "population": 7320,
+    "landAreaSquareMeters": 6473001
+  },
+  {
+    "id": "51107",
+    "name": "Loudoun County",
+    "kind": "county",
+    "at": [
+      -77.6388976,
+      39.0812
+    ],
+    "population": 420959,
+    "landAreaSquareMeters": 1335776887
+  },
+  {
+    "id": "51109",
+    "name": "Louisa County",
+    "kind": "county",
+    "at": [
+      -77.959795,
+      37.9727041
+    ],
+    "population": 37596,
+    "landAreaSquareMeters": 1282165151
+  },
+  {
+    "id": "51111",
+    "name": "Lunenburg County",
+    "kind": "county",
+    "at": [
+      -78.2405281,
+      36.9455547
+    ],
+    "population": 11936,
+    "landAreaSquareMeters": 1118097706
+  },
+  {
+    "id": "51680",
+    "name": "Lynchburg city",
+    "kind": "city",
+    "at": [
+      -79.1954582,
+      37.3990161
+    ],
+    "population": 79009,
+    "landAreaSquareMeters": 126695080
+  },
+  {
+    "id": "51113",
+    "name": "Madison County",
+    "kind": "county",
+    "at": [
+      -78.2769614,
+      38.4120586
+    ],
+    "population": 13837,
+    "landAreaSquareMeters": 830449705
+  },
+  {
+    "id": "51683",
+    "name": "Manassas city",
+    "kind": "city",
+    "at": [
+      -77.4826328,
+      38.7468077
+    ],
+    "population": 42772,
+    "landAreaSquareMeters": 25493247
+  },
+  {
+    "id": "51685",
+    "name": "Manassas Park city",
+    "kind": "city",
+    "at": [
+      -77.442323,
+      38.7693983
+    ],
+    "population": 17219,
+    "landAreaSquareMeters": 7857542
+  },
+  {
+    "id": "51690",
+    "name": "Martinsville city",
+    "kind": "city",
+    "at": [
+      -79.8636475,
+      36.6835269
+    ],
+    "population": 13485,
+    "landAreaSquareMeters": 28374648
+  },
+  {
+    "id": "51115",
+    "name": "Mathews County",
+    "kind": "county",
+    "at": [
+      -76.2688078,
+      37.4253479
+    ],
+    "population": 8533,
+    "landAreaSquareMeters": 222508059
+  },
+  {
+    "id": "51117",
+    "name": "Mecklenburg County",
+    "kind": "county",
+    "at": [
+      -78.3689592,
+      36.6872563
+    ],
+    "population": 30319,
+    "landAreaSquareMeters": 1619544367
+  },
+  {
+    "id": "51119",
+    "name": "Middlesex County",
+    "kind": "county",
+    "at": [
+      -76.5280819,
+      37.6069753
+    ],
+    "population": 10625,
+    "landAreaSquareMeters": 337548267
+  },
+  {
+    "id": "51121",
+    "name": "Montgomery County",
+    "kind": "county",
+    "at": [
+      -80.3877942,
+      37.1755376
+    ],
+    "population": 99721,
+    "landAreaSquareMeters": 1001932838
+  },
+  {
+    "id": "51125",
+    "name": "Nelson County",
+    "kind": "county",
+    "at": [
+      -78.8834401,
+      37.789079
+    ],
+    "population": 14775,
+    "landAreaSquareMeters": 1219224535
+  },
+  {
+    "id": "51127",
+    "name": "New Kent County",
+    "kind": "county",
+    "at": [
+      -76.9993305,
+      37.5101601
+    ],
+    "population": 22945,
+    "landAreaSquareMeters": 543978694
+  },
+  {
+    "id": "51700",
+    "name": "Newport News city",
+    "kind": "city",
+    "at": [
+      -76.5219802,
+      37.0761357
+    ],
+    "population": 186247,
+    "landAreaSquareMeters": 178675298
+  },
+  {
+    "id": "51710",
+    "name": "Norfolk city",
+    "kind": "city",
+    "at": [
+      -76.2446413,
+      36.9230149
+    ],
+    "population": 238005,
+    "landAreaSquareMeters": 137981433
+  },
+  {
+    "id": "51131",
+    "name": "Northampton County",
+    "kind": "county",
+    "at": [
+      -75.9240177,
+      37.3027754
+    ],
+    "population": 12282,
+    "landAreaSquareMeters": 548331037
+  },
+  {
+    "id": "51133",
+    "name": "Northumberland County",
+    "kind": "county",
+    "at": [
+      -76.3796882,
+      37.8569747
+    ],
+    "population": 11839,
+    "landAreaSquareMeters": 495808170
+  },
+  {
+    "id": "51720",
+    "name": "Norton city",
+    "kind": "city",
+    "at": [
+      -82.625996,
+      36.9315489
+    ],
+    "population": 3687,
+    "landAreaSquareMeters": 19411824
+  },
+  {
+    "id": "51135",
+    "name": "Nottoway County",
+    "kind": "county",
+    "at": [
+      -78.0538655,
+      37.1411668
+    ],
+    "population": 15642,
+    "landAreaSquareMeters": 814265584
+  },
+  {
+    "id": "51137",
+    "name": "Orange County",
+    "kind": "county",
+    "at": [
+      -78.0110923,
+      38.2493265
+    ],
+    "population": 36254,
+    "landAreaSquareMeters": 883395803
+  },
+  {
+    "id": "51139",
+    "name": "Page County",
+    "kind": "county",
+    "at": [
+      -78.4918718,
+      38.6232085
+    ],
+    "population": 23709,
+    "landAreaSquareMeters": 802941044
+  },
+  {
+    "id": "51141",
+    "name": "Patrick County",
+    "kind": "county",
+    "at": [
+      -80.286413,
+      36.6671385
+    ],
+    "population": 17608,
+    "landAreaSquareMeters": 1250852627
+  },
+  {
+    "id": "51730",
+    "name": "Petersburg city",
+    "kind": "city",
+    "at": [
+      -77.3923681,
+      37.2047302
+    ],
+    "population": 33458,
+    "landAreaSquareMeters": 58845730
+  },
+  {
+    "id": "51143",
+    "name": "Pittsylvania County",
+    "kind": "county",
+    "at": [
+      -79.3985019,
+      36.8217206
+    ],
+    "population": 60501,
+    "landAreaSquareMeters": 2509705692
+  },
+  {
+    "id": "51735",
+    "name": "Poquoson city",
+    "kind": "city",
+    "at": [
+      -76.3035337,
+      37.1283599
+    ],
+    "population": 12460,
+    "landAreaSquareMeters": 39773692
+  },
+  {
+    "id": "51740",
+    "name": "Portsmouth city",
+    "kind": "city",
+    "at": [
+      -76.3569725,
+      36.8593388
+    ],
+    "population": 97915,
+    "landAreaSquareMeters": 86248203
+  },
+  {
+    "id": "51145",
+    "name": "Powhatan County",
+    "kind": "county",
+    "at": [
+      -77.9128553,
+      37.5494041
+    ],
+    "population": 30333,
+    "landAreaSquareMeters": 673921300
+  },
+  {
+    "id": "51147",
+    "name": "Prince Edward County",
+    "kind": "county",
+    "at": [
+      -78.4329574,
+      37.2248813
+    ],
+    "population": 21849,
+    "landAreaSquareMeters": 906356805
+  },
+  {
+    "id": "51149",
+    "name": "Prince George County",
+    "kind": "county",
+    "at": [
+      -77.2209931,
+      37.1873255
+    ],
+    "population": 43010,
+    "landAreaSquareMeters": 687232243
+  },
+  {
+    "id": "51153",
+    "name": "Prince William County",
+    "kind": "county",
+    "at": [
+      -77.4795791,
+      38.7011187
+    ],
+    "population": 482204,
+    "landAreaSquareMeters": 868307146
+  },
+  {
+    "id": "51155",
+    "name": "Pulaski County",
+    "kind": "county",
+    "at": [
+      -80.7134439,
+      37.0633853
+    ],
+    "population": 33800,
+    "landAreaSquareMeters": 828380601
+  },
+  {
+    "id": "51750",
+    "name": "Radford city",
+    "kind": "city",
+    "at": [
+      -80.5591486,
+      37.1201203
+    ],
+    "population": 16070,
+    "landAreaSquareMeters": 25061729
+  },
+  {
+    "id": "51157",
+    "name": "Rappahannock County",
+    "kind": "county",
+    "at": [
+      -78.1688241,
+      38.6845215
+    ],
+    "population": 7348,
+    "landAreaSquareMeters": 689900924
+  },
+  {
+    "id": "51760",
+    "name": "Richmond city",
+    "kind": "city",
+    "at": [
+      -77.4760085,
+      37.531399
+    ],
+    "population": 226610,
+    "landAreaSquareMeters": 155205068
+  },
+  {
+    "id": "51159",
+    "name": "Richmond County",
+    "kind": "county",
+    "at": [
+      -76.7305609,
+      37.9428936
+    ],
+    "population": 8923,
+    "landAreaSquareMeters": 495925429
+  },
+  {
+    "id": "51770",
+    "name": "Roanoke city",
+    "kind": "city",
+    "at": [
+      -79.9581739,
+      37.278458
+    ],
+    "population": 100011,
+    "landAreaSquareMeters": 110129887
+  },
+  {
+    "id": "51161",
+    "name": "Roanoke County",
+    "kind": "county",
+    "at": [
+      -80.1912371,
+      37.330792
+    ],
+    "population": 96929,
+    "landAreaSquareMeters": 648917440
+  },
+  {
+    "id": "51163",
+    "name": "Rockbridge County",
+    "kind": "county",
+    "at": [
+      -79.4477537,
+      37.8145174
+    ],
+    "population": 22650,
+    "landAreaSquareMeters": 1545053255
+  },
+  {
+    "id": "51165",
+    "name": "Rockingham County",
+    "kind": "county",
+    "at": [
+      -78.8853291,
+      38.5076118
+    ],
+    "population": 83757,
+    "landAreaSquareMeters": 2200952762
+  },
+  {
+    "id": "51167",
+    "name": "Russell County",
+    "kind": "county",
+    "at": [
+      -82.0959342,
+      36.9334198
+    ],
+    "population": 25781,
+    "landAreaSquareMeters": 1226421370
+  },
+  {
+    "id": "51775",
+    "name": "Salem city",
+    "kind": "city",
+    "at": [
+      -80.0552407,
+      37.2853329
+    ],
+    "population": 25346,
+    "landAreaSquareMeters": 37597966
+  },
+  {
+    "id": "51169",
+    "name": "Scott County",
+    "kind": "county",
+    "at": [
+      -82.6136238,
+      36.7127756
+    ],
+    "population": 21576,
+    "landAreaSquareMeters": 1387786259
+  },
+  {
+    "id": "51171",
+    "name": "Shenandoah County",
+    "kind": "county",
+    "at": [
+      -78.5739867,
+      38.856204
+    ],
+    "population": 44186,
+    "landAreaSquareMeters": 1315922186
+  },
+  {
+    "id": "51173",
+    "name": "Smyth County",
+    "kind": "county",
+    "at": [
+      -81.5397861,
+      36.8423183
+    ],
+    "population": 29800,
+    "landAreaSquareMeters": 1169221994
+  },
+  {
+    "id": "51175",
+    "name": "Southampton County",
+    "kind": "county",
+    "at": [
+      -77.1038135,
+      36.7200678
+    ],
+    "population": 17996,
+    "landAreaSquareMeters": 1552048348
+  },
+  {
+    "id": "51177",
+    "name": "Spotsylvania County",
+    "kind": "county",
+    "at": [
+      -77.6572264,
+      38.1824314
+    ],
+    "population": 140032,
+    "landAreaSquareMeters": 1039617283
+  },
+  {
+    "id": "51179",
+    "name": "Stafford County",
+    "kind": "county",
+    "at": [
+      -77.4580475,
+      38.4230836
+    ],
+    "population": 156927,
+    "landAreaSquareMeters": 695382260
+  },
+  {
+    "id": "51790",
+    "name": "Staunton city",
+    "kind": "city",
+    "at": [
+      -79.0618761,
+      38.1579778
+    ],
+    "population": 25750,
+    "landAreaSquareMeters": 51593818
+  },
+  {
+    "id": "51800",
+    "name": "Suffolk city",
+    "kind": "city",
+    "at": [
+      -76.6347808,
+      36.6971573
+    ],
+    "population": 94324,
+    "landAreaSquareMeters": 1033846634
+  },
+  {
+    "id": "51181",
+    "name": "Surry County",
+    "kind": "county",
+    "at": [
+      -76.8801717,
+      37.1197611
+    ],
+    "population": 6561,
+    "landAreaSquareMeters": 722475750
+  },
+  {
+    "id": "51183",
+    "name": "Sussex County",
+    "kind": "county",
+    "at": [
+      -77.2597319,
+      36.9266454
+    ],
+    "population": 10829,
+    "landAreaSquareMeters": 1269725163
+  },
+  {
+    "id": "51185",
+    "name": "Tazewell County",
+    "kind": "county",
+    "at": [
+      -81.5629237,
+      37.1253949
+    ],
+    "population": 40429,
+    "landAreaSquareMeters": 1343663014
+  },
+  {
+    "id": "51810",
+    "name": "Virginia Beach city",
+    "kind": "city",
+    "at": [
+      -76.0291418,
+      36.7795254
+    ],
+    "population": 459470,
+    "landAreaSquareMeters": 633821983
+  },
+  {
+    "id": "51187",
+    "name": "Warren County",
+    "kind": "county",
+    "at": [
+      -78.207594,
+      38.9082214
+    ],
+    "population": 40727,
+    "landAreaSquareMeters": 555804025
+  },
+  {
+    "id": "51191",
+    "name": "Washington County",
+    "kind": "county",
+    "at": [
+      -81.9503218,
+      36.7478138
+    ],
+    "population": 53935,
+    "landAreaSquareMeters": 1453483671
+  },
+  {
+    "id": "51820",
+    "name": "Waynesboro city",
+    "kind": "city",
+    "at": [
+      -78.9014197,
+      38.0671571
+    ],
+    "population": 22196,
+    "landAreaSquareMeters": 38771596
+  },
+  {
+    "id": "51193",
+    "name": "Westmoreland County",
+    "kind": "county",
+    "at": [
+      -76.8039326,
+      38.109311
+    ],
+    "population": 18477,
+    "landAreaSquareMeters": 593954110
+  },
+  {
+    "id": "51830",
+    "name": "Williamsburg city",
+    "kind": "city",
+    "at": [
+      -76.7081925,
+      37.269481
+    ],
+    "population": 15425,
+    "landAreaSquareMeters": 23149766
+  },
+  {
+    "id": "51840",
+    "name": "Winchester city",
+    "kind": "city",
+    "at": [
+      -78.1763562,
+      39.1738688
+    ],
+    "population": 28120,
+    "landAreaSquareMeters": 23809503
+  },
+  {
+    "id": "51195",
+    "name": "Wise County",
+    "kind": "county",
+    "at": [
+      -82.6215601,
+      36.9745607
+    ],
+    "population": 36130,
+    "landAreaSquareMeters": 1044868455
+  },
+  {
+    "id": "51197",
+    "name": "Wythe County",
+    "kind": "county",
+    "at": [
+      -81.0830095,
+      36.8998679
+    ],
+    "population": 28290,
+    "landAreaSquareMeters": 1196450499
+  },
+  {
+    "id": "51199",
+    "name": "York County",
+    "kind": "county",
+    "at": [
+      -76.395533,
+      37.2209139
+    ],
+    "population": 70045,
+    "landAreaSquareMeters": 271198492
+  }
+]
