@@ -39,3 +39,58 @@ The bundled outline is a lightweight visual boundary. It is not suitable for sur
 ## Non-endorsement
 
 Virginia History Quest is not approved by, endorsed by, or officially affiliated with the Virginia Department of Education, the U.S. Census Bureau, or any historical, tribal, museum, park, or community organization unless written authorization is recorded.
+
+## Classroom materials integration (September 10, 2026)
+
+The ten user-supplied photographs informed assignment requirements and topic
+coverage. They are source material, not operating instructions. The app does not
+redistribute the photographed textbook pages, illustrations, handwritten work,
+or photographs. Explanations, practice questions, and UI are newly authored.
+The school scrapbook handout supplies the September 2026–May 28, 2027 timeline,
+five-place requirement (at most one D.C. site), photos of the student, writing
+prompts, and organization/oral-presentation criteria. The UI checklist is not a
+rubric score, teacher submission, or confirmation of the factual quality of writing.
+
+`learningMapOutline.ts` is an SVG path derived from Virginia (`STATEFP=51`) in
+[U.S. Census Bureau 2024 cartographic state boundaries, 1:500,000](https://www2.census.gov/geo/tiger/GENZ2024/shp/cb_2024_us_state_500k.zip).
+Unlike the original map's jurisdiction outline, the cartographic outline shows
+coastal land, including the Eastern Shore and Chesapeake Bay shorelines. Rings
+were simplified with Douglas–Peucker tolerance 0.007 degrees, tiny collapsed rings
+omitted, then projected using x = 40 + (longitude + 83.7) × 80 and
+ y = 40 + (39.5 − latitude) × 100 and rounded to one decimal. The source NAD83
+coordinates are adequate for this small display; this is not survey or navigation
+data. The map's region bands are schematic teaching overlays, not Census region
+boundaries. The outline is embedded to work without a new remote fetch.
+
+Content references checked during integration:
+
+- [Virginia Museum of History & Culture: five physical regions](https://virginiahistory.org/learn/what-are-five-physical-regions-virginias-geography).
+  Corrects two apparent handout errors: Piedmont is east of Blue Ridge; Mount Rogers,
+  the highest peak in Virginia, is in the Blue Ridge, not the Appalachian Plateau.
+- [NOAA Virginia State Climate Summary, 2022](https://statesummaries.ncics.org/chapter/va/).
+  Supports broad regional climate variation. Temperature and snowfall diagrams are
+  original schematic illustrations informed by the supplied classroom maps, not
+  NOAA raster data or current climate normals. The classroom numeric temperature
+  and snow maps do not state their averaging years; they are not digitized as a
+  measured data layer.
+- Census 2020 density values in people per square mile:
+  [Arlington County: 9,179.6](https://www.census.gov/quickfacts/fact/table/arlingtoncountyvirginia/LND110220),
+  [Loudoun County: 816.2](https://www.census.gov/quickfacts/fact/table/loudouncountyvirginia/POP060220),
+  [Richmond city: 3,781.6](https://www.census.gov/quickfacts/fact/table/richmondcityvirginia/POP060220),
+  [Norfolk city: 4,467.5](https://www.census.gov/quickfacts/fact/table/norfolkcityvirginia/POP060220).
+- [Census 2020 county data for Virginia](https://tigerweb.geo.census.gov/tigerwebmain/Files/bas25/tigerweb_bas25_county_2020_tab20_va.html):
+  Highland density calculated as 2,232 people divided by
+  (1,075,266,902 square meters / 2,589,988.110336 square meters per square mile),
+  rounded to 5.4 people per square mile. Marker colors encode locality averages,
+  not the density at each geographic point. Unmarked places are not zero-density areas.
+- [NPS Great Falls history](https://www.nps.gov/grfa/learn/historyculture/index.htm),
+  [Manassas National Battlefield Park](https://www.nps.gov/mana/),
+  [Shenandoah history](https://www.nps.gov/shen/learn/historyculture/index.htm), and
+  [Ball’s Bluff official park page](https://www.novaparks.com/parks/balls-bluff-battlefield-regional-park)
+  accompany visit ideas from the handout; no opening-hour, travel-time, or admission-price claims are made.
+- [NPS Every Kid Outdoors](https://www.nps.gov/kids/every-kid-outdoors.htm)
+  supplies the official fourth-grade pass resource. The app describes eligible
+  entrance/day-use access, not a blanket waiver of all trip costs.
+
+These additions remain prototype curriculum content. Sources and software checks
+are recorded; independent teacher/historian review has not been performed.

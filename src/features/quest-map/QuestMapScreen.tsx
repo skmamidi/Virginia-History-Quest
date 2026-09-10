@@ -22,6 +22,8 @@ import {
 } from "../../contexts/quest-journey/domain/missionProgress";
 import { freshProgress, prepareProgress, passChallenge, hasBadge } from "../../contexts/quest-journey/application/playMission";
 import { MISSION_ACTIVITIES } from "../../contexts/published-content/adapters/missionActivities";
+import { Scrapbook } from "./components/Scrapbook";
+import { MapLab } from "./components/MapLab";
 import { SolPractice } from "./components/SolPractice";
 import { FieldTripTrail } from "./components/FieldTripTrail";
 import { ExplorerGuide } from "./components/ExplorerGuide";
@@ -97,6 +99,7 @@ export function QuestMapScreen() {
   const [playerOpen, setPlayerOpen] = useState(false);
   const [tripChapter, setTripChapter] = useState<number | null>(null);
   const [practiceOpen, setPracticeOpen] = useState(false);
+  const [schoolWorkspace, setSchoolWorkspace] = useState<"scrapbook" | "maps" | null>(null);
   const [saveWarning, setSaveWarning] = useState("");
   const [connectionMode, setConnectionMode] = useState<"people" | "chains" | null>(
     null,
@@ -238,6 +241,10 @@ export function QuestMapScreen() {
         <button className="field-trip-launch" type="button" onClick={() => setTripChapter(0)}>
           <MapPin aria-hidden="true" /><span><strong>Connect our field trips</strong><small>Yorktown, Harpers Ferry, Hampton Roads & the road to Appomattox</small></span><ChevronRight aria-hidden="true" />
         </button>
+        <div className="school-launchers" aria-label="Classroom connections">
+          <button type="button" onClick={() => setSchoolWorkspace("scrapbook")}><BookOpen aria-hidden="true" /><span><strong>My Virginia scrapbook</strong><small>Plan five visits. Collect photos. Tell your stories.</small></span><ChevronRight aria-hidden="true" /></button>
+          <button type="button" onClick={() => setSchoolWorkspace("maps")}><MapIcon aria-hidden="true" /><span><strong>Virginia map lab</strong><small>Explore regions, climate, population & map tools.</small></span><ChevronRight aria-hidden="true" /></button>
+        </div>
         <p className="map-choice-hint">Want a different adventure? Tap a numbered portal on the map or choose All missions.</p>
 
         <div className="mobile-progress" aria-hidden="true">
@@ -407,6 +414,8 @@ export function QuestMapScreen() {
         </Modal>
       ) : null}
 
+      {schoolWorkspace === "scrapbook" ? <Scrapbook onClose={() => setSchoolWorkspace(null)} /> : null}
+      {schoolWorkspace === "maps" ? <MapLab onClose={() => setSchoolWorkspace(null)} onScrapbook={() => setSchoolWorkspace("scrapbook")} /> : null}
       {practiceOpen ? <SolPractice key={selectedId} missionId={selectedId} title={selectedMission.shortTitle} onClose={() => setPracticeOpen(false)} /> : null}
 
       {tripChapter !== null ? <FieldTripTrail initialChapter={tripChapter} onClose={() => setTripChapter(null)} onMission={(id) => { setTripChapter(null); openMission(id); }} /> : null}

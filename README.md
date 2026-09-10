@@ -132,3 +132,37 @@ Closing and returning resumes at the first unanswered question after the lesson.
 Replay does not increase the discovery count. Unavailable storage leaves practice
 usable and displays a save warning. Progress is local to this browser; no account
 or server is required.
+
+## Classroom scrapbook and map lab
+
+Two classroom connections sit below the explorer guide:
+
+- **My Virginia scrapbook** supports the supplied September 2026–May 28, 2027
+  assignment: five distinct visited historical sites, at most one in Washington,
+  D.C., student photos, reasons for choosing each place, historical importance,
+  reflections, organization, and oral-presentation rehearsal. A checklist supports
+  review rather than assigning a grade. Four official-site ideas connect local
+  trips with historical questions. The other field-trip stories remain available.
+- **Virginia map lab** adds five selectable region explanations and comparison,
+  temperature/snowfall concept maps, a dated population-density map with a numeric
+  table and source links, compass/relative-location/scale practice, an optional
+  raised-relief activity, and twelve original questions with explanations and retries.
+
+Scrapbook drafts save under `virginia-history-quest:scrapbook:v1` in localStorage,
+separately from all mission progress. Photo processing happens locally: supported
+JPG/PNG/WebP images are decoded, reduced to at most 1,000 pixels on the longest
+side, and re-encoded as JPEG without the original camera metadata. Photos are not
+uploaded. Students may instead confirm a photo in a physical scrapbook. Storage
+failures show a warning and retain the current in-memory draft. JSON download and
+validated, explicitly confirmed restoration provide backups; no account, teacher
+submission, or cross-device synchronization is implied. Preview includes a print
+layout usable with the browser's Save as PDF option. Browser storage can be cleared,
+so download backups for durable retention.
+
+The five map-lab population values describe whole localities in 2020, not current
+estimates or counts at individual points. Climate diagrams show broad teaching
+patterns, not measured ranges or forecasts; the supplied climate maps do not
+identify an averaging period. Region bands are approximate. Practice is transient
+and does not award or change mission badges. See `docs/ATTRIBUTIONS.md` for sources,
+map derivation, and the two corrected handout statements. Existing prototype
+content-review limitations still apply.

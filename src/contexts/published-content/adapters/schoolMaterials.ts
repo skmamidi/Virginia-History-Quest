@@ -1,0 +1,35 @@
+export const REGION_LESSONS = [
+  { name: 'Appalachian Plateau', color: '#96aa70', location: 'Virginia’s far southwestern corner; west of Valley and Ridge.', landscape: 'High land with a relatively flat top, cut by streams into steep valleys and cliffs.', notice: 'Look for rugged slopes and forested gorges. Coal is one of the region’s underground resources.', place: 'Guest River Gorge', word: 'Plateau: elevated land with a relatively flat top.' },
+  { name: 'Valley and Ridge', color: '#e3ba54', location: 'West of the Blue Ridge Mountains and east of the Appalachian Plateau.', landscape: 'Long ridges alternate with low valleys. The Shenandoah Valley is here.', notice: 'Compare wooded ridges with farms on valley floors. Water has formed caves in limestone.', place: 'Shenandoah Valley', word: 'Valley: low land between higher areas. Ridge: a long raised strip of land.' },
+  { name: 'Blue Ridge Mountains', color: '#71b4b8', location: 'Between Valley and Ridge on the west and Piedmont on the east.', landscape: 'Old, rounded mountains with forests. Mount Rogers, Virginia’s highest peak, is in this region.', notice: 'Look for mountain slopes and changing elevation. Higher places are often cooler.', place: 'Shenandoah National Park', word: 'Elevation: how high land is above sea level.' },
+  { name: 'Piedmont', color: '#e5b58a', location: 'East of the Blue Ridge Mountains; west of the Fall Line.', landscape: 'Rolling hills, river valleys, forests, and fields. Piedmont means “foot of the mountains.”', notice: 'At the Fall Line, rivers descend toward the Coastal Plain, making rapids and waterfalls.', place: 'Loudoun County’s rolling countryside', word: 'Fall Line: the transition between Piedmont and Coastal Plain.' },
+  { name: 'Coastal Plain (Tidewater)', color: '#e38f78', location: 'East of the Fall Line, beside the Chesapeake Bay and Atlantic Ocean.', landscape: 'Low, mostly flat land with wetlands and sandy shores. The Eastern Shore is part of this region.', notice: 'The Potomac, Rappahannock, York, and James rivers flow toward the Chesapeake Bay.', place: 'Chincoteague National Wildlife Refuge', word: 'Bay: water partly surrounded by land. Brackish: fresh and salt water mixed.' },
+] as const;
+export const VISIT_IDEAS = [
+  { name: 'Ball’s Bluff Battlefield', region: 'Piedmont', clue: 'Investigate a Civil War battle and the memorials that help people remember it.', url: 'https://www.novaparks.com/parks/balls-bluff-battlefield-regional-park' },
+  { name: 'Great Falls Park', region: 'Piedmont', clue: 'Connect the Potomac’s rapids with the Patowmack Canal and the challenge of moving goods by boat.', url: 'https://www.nps.gov/grfa/learn/historyculture/index.htm' },
+  { name: 'Manassas National Battlefield Park', region: 'Piedmont', clue: 'Find evidence explaining the First and Second Battles of Manassas.', url: 'https://www.nps.gov/mana/' },
+  { name: 'Shenandoah National Park', region: 'Blue Ridge Mountains', clue: 'Look beyond the scenery: investigate Skyline Drive, park creation, and the people who lived here.', url: 'https://www.nps.gov/shen/learn/historyculture/index.htm' },
+] as const;
+export const MAP_QUESTIONS = {
+  regions: [
+    { question: 'Travel east from the Blue Ridge Mountains. Which region comes next?', choices: ['Piedmont', 'Valley and Ridge', 'Appalachian Plateau'], answer: 0, why: 'Piedmont lies east of the Blue Ridge. Valley and Ridge lies west.' },
+    { question: 'Which two regions meet at the Fall Line?', choices: ['Blue Ridge and Valley and Ridge', 'Piedmont and Coastal Plain', 'Coastal Plain and Appalachian Plateau'], answer: 1, why: 'The Fall Line marks the change from the rolling Piedmont to the lower Coastal Plain.' },
+    { question: 'Where would you find Virginia’s highest peak, Mount Rogers?', choices: ['Coastal Plain', 'Appalachian Plateau', 'Blue Ridge Mountains'], answer: 2, why: 'Mount Rogers is in the Blue Ridge Mountains. A high plateau is not the same as the highest peak.' },
+  ],
+  climate: [
+    { question: 'Which map would help compare the usual amount of snow in different places?', choices: ['A population map', 'An average annual snowfall map', 'A political map'], answer: 1, why: 'Snowfall maps describe snow patterns over time. Read the legend: snowfall is often measured in inches.' },
+    { question: 'The coast is generally warmer than high mountain areas. What can you conclude?', choices: ['It never snows on the coast', 'The mountains are hotter every day', 'Averages describe a pattern, with exceptions'], answer: 2, why: 'Climate is a long-term pattern. Weather changes from day to day, and a climate map cannot promise snow on a trip.' },
+    { question: 'A temperature legend says 55–56 °F. What does that range mean on an annual-average map?', choices: ['The average temperature over the year', 'The high temperature every afternoon', 'The number of inches of rain'], answer: 0, why: 'The title says annual average, and °F means degrees Fahrenheit. Always check the title, time period, and units.' },
+  ],
+  population: [
+    { question: 'Arlington has 9,179.6 people per square mile. What does this describe?', choices: ['Everyone lives in one square mile', 'The total number of people in Virginia', 'How closely people live together, on average'], answer: 2, why: 'Population density divides the number of residents by land area. It is different from total population.' },
+    { question: 'Which of these places belongs in the 1,001–5,000 legend category?', choices: ['Arlington County', 'Norfolk city', 'Highland County'], answer: 1, why: 'Norfolk’s 2020 density is 4,467.5 people per square mile, inside this category.' },
+    { question: 'Can the climate and population maps alone prove why people live somewhere?', choices: ['Yes, temperature is the only reason', 'No; we also need evidence about jobs, transport, history, and choices', 'Yes, darker colors always mean warmer places'], answer: 1, why: 'Two patterns can be related without one proving the cause of the other. Map colors mean only what each legend says.' },
+  ],
+  tools: [
+    { question: 'Which state is directly south of Virginia?', choices: ['Maryland', 'North Carolina', 'West Virginia'], answer: 1, why: 'North Carolina shares Virginia’s southern border. Maryland is to the north; West Virginia is northwest.' },
+    { question: 'On the practice scale, one bar is 50 miles. About how far are two bars?', choices: ['25 miles', '50 miles', '100 miles'], answer: 2, why: 'Two equal bars represent 50 + 50 = 100 miles. This is straight-line map distance, not a driving route.' },
+    { question: 'Which map would you choose to locate state borders?', choices: ['A political map', 'A snowfall map', 'A population-density map without borders'], answer: 0, why: 'Political maps show boundaries of states, countries, and other places.' },
+  ],
+} as const;
