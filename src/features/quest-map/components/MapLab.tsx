@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Modal } from './Modal';
+import { PageContent } from './PageContent';
 import { LearningMap } from './LearningMap';
 import { PopulationExplorer } from './PopulationExplorer';
 import { ClimateExplanation } from './ClimateExplanation';
@@ -30,7 +30,7 @@ export function MapLab({ onClose, onScrapbook }: { onClose: () => void; onScrapb
   const [place, setPlace] = useState(() => POPULATION_PLACES.findIndex(p => p.name === 'Loudoun County'));
   const current = MAP_TOPICS.find(t => t.id === topic)!;
   const selected = REGION_LESSONS[region];
-  return <Modal label="Virginia map lab" titleId="map-lab-title" className="school-workspace map-lab" onClose={onClose}>
+  return <PageContent label="Virginia map lab" titleId="map-lab-title" className="school-workspace map-lab" onClose={onClose}>
     <p className="briefing-kicker">Look closely · Ask questions · Find evidence</p><h2 id="map-lab-title">Virginia map lab</h2>
     <nav className="map-topic-nav" aria-label="Map lab topics">{MAP_TOPICS.map(t => <button type="button" key={t.id} aria-pressed={topic === t.id} onClick={() => setTopic(t.id)}>{t.label}</button>)}</nav>
     <h3 className="map-topic-heading">{current.title}</h3><p className="modal-lead">{current.intro}</p>
@@ -52,5 +52,5 @@ export function MapLab({ onClose, onScrapbook }: { onClose: () => void; onScrapb
     </>}
     <MapPractice key={topic} topic={topic} />
 
-  </Modal>;
+  </PageContent>;
 }

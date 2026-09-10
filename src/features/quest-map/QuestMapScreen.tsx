@@ -1,4 +1,4 @@
-import { useCallback, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import {
   BookOpen,
   CheckCircle2,
@@ -31,6 +31,9 @@ import { MissionPlayer } from "./components/MissionPlayer";
 import { MissionPanel } from "./components/MissionPanel";
 import { TimelineView, StandardsView } from "./components/MissionViews";
 import { Modal } from "./components/Modal";
+import { PageContent } from "./components/PageContent";
+import { JourneyNavigation, JourneyWayfinding, routeLabel } from "./components/JourneyNavigation";
+import { useJourneyNavigation } from "./useJourneyNavigation";
 import { ProgressRail } from "./components/ProgressRail";
 import { QuestDock, type DockAction } from "./components/QuestDock";
 import { QuestHeader } from "./components/QuestHeader";
@@ -85,7 +88,8 @@ export function QuestMapScreen() {
   const [progress, setProgress] = useState<readonly MissionProgress[]>(() =>
     prepareProgress(progressStore.load(freshProgress)),
   );
-  const [selectedId, setSelectedId] = useState<MissionId>(() => getQuestMap(MISSION_CATALOG, progress).continueMissionId ?? "VS.1");
+  const { route, from, navigate, back } = useJourneyNavigation();
+  const [mapSelectedId, setSelectedId] = useState<MissionId>(() => getQuestMap(MISSION_CATALOG, progress).continueMissionId ?? "VS.1");
   const [view, setView] = useState<QuestViewMode>("map");
   const [layers, setLayers] = useState<MapLayers>({
     terrain: true,
@@ -94,12 +98,18 @@ export function QuestMapScreen() {
   });
   const [motionPaused, setMotionPaused] = useState(false);
   const [audioEnabled, setAudioEnabled] = useState(false);
-  const [allMissionsOpen, setAllMissionsOpen] = useState(false);
-  const [briefingOpen, setBriefingOpen] = useState(false);
-  const [playerOpen, setPlayerOpen] = useState(false);
-  const [tripChapter, setTripChapter] = useState<number | null>(null);
-  const [practiceOpen, setPracticeOpen] = useState(false);
-  const [schoolWorkspace, setSchoolWorkspace] = useState<"scrapbook" | "maps" | null>(null);
+  const [tripChapter, setTripChapterIndex] = useState(0);
+  const selectedId = 'missionId' in route ? route.missionId : mapSelectedId;
+  const selectedRecord = progress.find(p => p.missionId === selectedId)!;
+  const allMissionsOpen = route.kind === 'missions';
+  const briefingOpen = route.kind === 'mission' && ['AVAILABLE', 'ORIENTING'].includes(selectedRecord.state);
+  const playerOpen = route.kind === 'mission' && !briefingOpen;
+  const practiceOpen = route.kind === 'practice';
+  const schoolWorkspace = route.kind === 'maps' || route.kind === 'scrapbook' ? route.kind : null;
+  const setAllMissionsOpen = (open: boolean) => open ? navigate({ kind: 'missions' }) : back();
+  const setPracticeOpen = (open: boolean) => open ? navigate({ kind: 'practice', missionId: selectedId }) : back();
+  const setSchoolWorkspace = (kind: 'scrapbook' | 'maps' | null) => kind ? navigate({ kind }) : back();
+  const setTripChapter = (chapter: number | null) => { if (chapter === null) back(); else { setTripChapterIndex(chapter); navigate({ kind: 'trips' }); } };
   const [saveWarning, setSaveWarning] = useState("");
   const [connectionMode, setConnectionMode] = useState<"people" | "chains" | null>(
     null,
@@ -127,7 +137,6 @@ export function QuestMapScreen() {
 
   const selectMission = useCallback((missionId: string) => {
     setSelectedId(missionId as MissionId);
-    setAllMissionsOpen(false);
     if (window.matchMedia?.("(max-width: 900px)").matches) {
       requestAnimationFrame(() => document.getElementById("explorer-guide-title")?.scrollIntoView({ block: "center" }));
     }
@@ -149,11 +158,18 @@ export function QuestMapScreen() {
       saveProgress(next);
       setStatusMessage(`${findMission(portals, missionId).shortTitle} is ready. Your place is saved.`);
     }
-    if (["AVAILABLE", "ORIENTING"].includes(record.state)) setBriefingOpen(true);
-    else setPlayerOpen(true);
-  }, [progress, saveProgress, portals]);
+    navigate({ kind: "mission", missionId });
+  }, [progress, saveProgress, portals, navigate]);
 
   const startSelectedMission = () => openMission(selectedId);
+  useEffect(() => {
+    if (route.kind === 'mission' && selectedRecord.state === 'AVAILABLE') openMission(route.missionId);
+  }, [route, selectedRecord.state, openMission]);
+  useEffect(() => {
+    document.title = `${routeLabel(route, id => findMission(portals, id).shortTitle)} · Virginia History Quest`;
+    window.speechSynthesis?.cancel();
+  }, [route, portals]);
+
 
   const completeBriefing = useCallback(() => {
     const record = progress.find((item) => item.missionId === selectedId);
@@ -171,8 +187,6 @@ export function QuestMapScreen() {
       );
       saveProgress(next);
     }
-    setBriefingOpen(false);
-    setPlayerOpen(true);
     setStatusMessage("Your investigation is ready. Solve three challenges to earn a badge.");
   }, [progress, saveProgress, selectedId]);
 
@@ -203,10 +217,11 @@ export function QuestMapScreen() {
 
   return (
     <div className={`quest-app ${motionPaused ? "motion-paused" : ""}`}>
-      <a className="skip-link" href="#quest-map">
-        Skip to the quest map
+      <a className="skip-link" onClick={event => { event.preventDefault(); const main = document.getElementById(route.kind === "home" ? "quest-map" : "journey-content"); main?.focus(); main?.scrollIntoView({ block: "start" }); }} href={route.kind === "home" ? "#quest-map" : "#journey-content"}>
+        Skip to learning content
       </a>
       <QuestHeader
+        onHome={() => navigate({ kind: "home" })}
         motionPaused={motionPaused}
         audioEnabled={audioEnabled}
         onToggleMotion={() => {
@@ -220,10 +235,11 @@ export function QuestMapScreen() {
         onOpenMissions={() => setAllMissionsOpen(true)}
       />
 
-      <main className="quest-main" id="quest-map">
+      <JourneyNavigation route={route} navigate={navigate} />
+      <main className="quest-main" id="quest-map" tabIndex={-1} hidden={route.kind !== "home"}>
         <div className="quest-intro">
           <div>
-            <h1>Your Virginia Memory Map</h1>
+            <h1 tabIndex={-1}>Your Virginia Memory Map</h1>
             <p>Your next adventure is ready below.</p>
           </div>
           <button
@@ -374,13 +390,15 @@ export function QuestMapScreen() {
       </main>
 
       {saveWarning ? <p className="save-warning" role="status">{saveWarning}</p> : null}
-      <QuestDock active={view} onAction={handleDockAction} />
+      {route.kind === "home" ? <QuestDock active={view} onAction={handleDockAction} /> : null}
       <p className="sr-only" aria-live="polite">
         {statusMessage}
       </p>
 
+      {route.kind !== "home" ? <main id="journey-content" tabIndex={-1} className="journey-main">
+      <JourneyWayfinding route={route} from={from} back={back} navigate={navigate} missionTitle={id => findMission(portals, id).shortTitle} />
       {allMissionsOpen ? (
-        <Modal
+        <PageContent
           label="All missions"
           titleId="mission-directory-title"
           className="mission-directory"
@@ -394,7 +412,7 @@ export function QuestMapScreen() {
           <ol className="mission-directory-list">
             {portals.map((portal) => (
               <li key={portal.id}>
-                <button type="button" aria-label={`${portal.id} ${portal.title}`} onClick={() => selectMission(portal.id)}>
+                <button type="button" aria-label={`${portal.id} ${portal.title}`} onClick={() => openMission(portal.id)}>
                   <span className="mission-directory-code">{portal.id}</span>
                   <span className="mission-directory-title">
                     <strong>{portal.title}</strong>
@@ -411,20 +429,21 @@ export function QuestMapScreen() {
               </li>
             ))}
           </ol>
-        </Modal>
+        </PageContent>
       ) : null}
 
       {schoolWorkspace === "scrapbook" ? <Scrapbook onClose={() => setSchoolWorkspace(null)} /> : null}
       {schoolWorkspace === "maps" ? <MapLab onClose={() => setSchoolWorkspace(null)} onScrapbook={() => setSchoolWorkspace("scrapbook")} /> : null}
-      {practiceOpen ? <SolPractice key={selectedId} missionId={selectedId} title={selectedMission.shortTitle} onClose={() => setPracticeOpen(false)} /> : null}
+      {practiceOpen ? <SolPractice key={selectedId} missionId={selectedId} title={selectedMission.shortTitle} onClose={() => from?.kind === "mission" && from.missionId === selectedId ? back() : navigate({ kind: "mission", missionId: selectedId }, true)} /> : null}
 
-      {tripChapter !== null ? <FieldTripTrail initialChapter={tripChapter} onClose={() => setTripChapter(null)} onMission={(id) => { setTripChapter(null); openMission(id); }} /> : null}
+      {route.kind === "trips" ? <FieldTripTrail initialChapter={tripChapter} onClose={() => setTripChapter(null)} onMission={openMission} /> : null}
 
       {briefingOpen ? (
-        <Modal
+        <PageContent
           label={`${selectedMission.shortTitle} mission briefing`}
           titleId="briefing-title"
-          onClose={() => setBriefingOpen(false)}
+          onClose={back}
+          className="mission-briefing-page"
         >
           <p className="briefing-kicker">
             {selectedMission.id} · 3 challenges · Play at your pace
@@ -441,33 +460,33 @@ export function QuestMapScreen() {
             <span>Let’s investigate</span>
             <ChevronRight aria-hidden="true" />
           </button>
-        </Modal>
+          <button className="text-button" type="button" onClick={() => setPracticeOpen(true)}>Practice this topic · SOL questions</button>
+        </PageContent>
       ) : null}
 
-      {playerOpen ? (
-        <MissionPlayer
+      {(playerOpen || (practiceOpen && !["AVAILABLE", "ORIENTING"].includes(selectedRecord.state))) ? (
+        <div hidden={!playerOpen}><MissionPlayer
           key={selectedId}
           mission={selectedMission}
           record={progress.find((item) => item.missionId === selectedId)!}
           audioEnabled={audioEnabled}
-          onClose={() => {
-            setPlayerOpen(false);
-            if (["PROVISIONAL_MASTERY", "MASTERED"].includes(selectedMission.progressState)) {
-              setSelectedId(projection.continueMissionId ?? selectedId);
-            }
-          }}
+          onClose={() => navigate({ kind: 'home' })}
+          onPause={back}
+          onMap={() => navigate({ kind: 'home' })}
+
           onPass={(index) => saveProgress(progress.map((record) =>
             record.missionId === selectedId ? passChallenge(record, index) : record))}
-          onPractice={() => { setPlayerOpen(false); setPracticeOpen(true); }}
+          onPractice={() => setPracticeOpen(true)}
           nextMissionTitle={portals.find((portal) => portal.id !== selectedId && !hasBadge(progress.find((record) => record.missionId === portal.id)!))?.shortTitle}
           onNext={() => {
-            setPlayerOpen(false);
             const remaining = portals.find((portal) => portal.id !== selectedId && !hasBadge(progress.find((record) => record.missionId === portal.id)!));
             if (remaining) openMission(remaining.id);
             else setAllMissionsOpen(true);
           }}
-        />
+        /></div>
       ) : null}
+
+      </main> : null}
 
       {connectionMode ? (
         <Modal

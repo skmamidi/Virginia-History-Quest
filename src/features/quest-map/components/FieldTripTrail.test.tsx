@@ -42,7 +42,7 @@ describe("field trip connection stories", () => {
     await user.click(screen.getByRole("button", { name: "Connect these places" }));
     expect(screen.getByRole("heading", { name: "Three places, four April days" })).toBeVisible();
     expect((await axe(container)).violations).toEqual([]);
-    await user.keyboard("{Escape}");
+    await user.click(within(screen.getByRole("navigation", { name: "Explore Virginia" })).getByRole("link", { name: "Quest map" }));
     await user.click(screen.getByRole("button", { name: /Connect our field trips/ }));
     expect(screen.getByRole("heading", { name: "Yorktown" })).toBeVisible();
     await user.click(screen.getByRole("button", { name: /People reaching for freedom/ }));

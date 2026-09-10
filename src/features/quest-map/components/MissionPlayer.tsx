@@ -5,7 +5,7 @@ import { ACTIVITY_SOURCES, MISSION_ACTIVITIES } from "../../../contexts/publishe
 import { challengeIndex } from "../../../contexts/quest-journey/application/playMission";
 import type { MissionProgress } from "../../../contexts/quest-journey/domain/missionProgress";
 import type { QuestPortalView } from "../types";
-import { Modal } from "./Modal";
+import { PageContent } from "./PageContent";
 
 interface Props {
   mission: QuestPortalView;
@@ -13,19 +13,21 @@ interface Props {
   audioEnabled: boolean;
   onPass: (index: number) => void;
   onClose: () => void;
+  onPause?: () => void;
+  onMap?: () => void;
   onNext: () => void;
   onPractice?: () => void;
   nextMissionTitle?: string;
 }
 
-export function MissionPlayer({ mission, record, audioEnabled, onPass, onClose, onNext, onPractice, nextMissionTitle }: Props) {
+export function MissionPlayer({ mission, record, audioEnabled, onPass, onClose, onPause, onMap, onNext, onPractice, nextMissionTitle }: Props) {
   const activity = MISSION_ACTIVITIES[mission.id];
   const [index, setIndex] = useState(() => challengeIndex(record));
   const [selected, setSelected] = useState<number | null>(null);
   const [sequence, setSequence] = useState<number[]>([]);
   const [feedback, setFeedback] = useState<"correct" | "retry" | null>(null);
   const [hintOpen, setHintOpen] = useState(false);
-  const [finished, setFinished] = useState(false);
+  const [finished, setFinished] = useState(() => ["PROVISIONAL_MASTERY", "MASTERED"].includes(record.state));
   const heading = useRef<HTMLHeadingElement>(null);
   const audio = useRef<AudioContext | null>(null);
   const challenge = activity.challenges[index];
@@ -81,8 +83,26 @@ export function MissionPlayer({ mission, record, audioEnabled, onPass, onClose, 
   }
 
   return (
-    <Modal label={`${mission.shortTitle} adventure`} titleId="adventure-title" className="mission-player" onClose={onClose}>
-      <p className="briefing-kicker">{mission.id} · {mission.shortTitle}</p>
+    <PageContent label={`${mission.shortTitle} adventure`} titleId="adventure-title" className="mission-player" onClose={onClose}>
+      <div className="mission-learning-layout">
+      <aside className="mission-journey" aria-label="Your mission trail">
+        <h2>{mission.shortTitle}</h2><p className="mission-code">{mission.id}</p>
+        <p className="mission-goal">{activity.goal}</p>
+          <div className="adventure-progress" aria-label={`Challenge ${index + 1} of 3`}>
+            {["Find a clue", "Connect the story", "Final challenge"].map((label, step) => (
+              <span key={label} className={finished || step <= index ? "step-active" : ""} aria-current={step === index ? "step" : undefined}>
+                {finished || step < index ? <CheckCircle2 aria-hidden="true" /> : <span>{step + 1}</span>}{label}
+              </span>
+            ))}
+          </div>
+
+        {finished ? <p className="mission-trail-complete"><CheckCircle2 aria-hidden="true" />Three discoveries complete</p> : null}
+        <div className="mission-journey-links">
+          {onPause ? <button type="button" onClick={onPause}>Pause & return</button> : null}
+          <button type="button" onClick={onMap ?? onClose}>Back to quest map</button>
+        </div>
+      </aside>
+      <div className="mission-reading">
       {finished ? (
         <div className="mission-celebration">
           <div className="earned-badge"><Award aria-hidden="true" /></div>
@@ -100,13 +120,6 @@ export function MissionPlayer({ mission, record, audioEnabled, onPass, onClose, 
         </div>
       ) : (
         <>
-          <div className="adventure-progress" aria-label={`Challenge ${index + 1} of 3`}>
-            {["Find a clue", "Connect the story", "Final challenge"].map((label, step) => (
-              <span key={label} className={step <= index ? "step-active" : ""} aria-current={step === index ? "step" : undefined}>
-                {step < index ? <CheckCircle2 aria-hidden="true" /> : <span>{step + 1}</span>}{label}
-              </span>
-            ))}
-          </div>
           <h2 id="adventure-title" ref={heading} tabIndex={-1}>{isReview ? "Memory check: " : ""}{challenge.prompt}</h2>
           <p className="mission-instructions">{challenge.kind === "order" ? "Build the story from first to last." : "Find the answer using the clue. It’s okay to try again!"}</p>
           {index === 0 ? <div className="clue-card"><Lightbulb aria-hidden="true" /><p>{challenge.clue}</p></div> : (
@@ -153,6 +166,7 @@ export function MissionPlayer({ mission, record, audioEnabled, onPass, onClose, 
         </>
       )}
       <details className="activity-sources"><summary>Sources for curious explorers and grown-ups</summary><ul>{ACTIVITY_SOURCES.map((source) => <li key={source.url}><a href={source.url} target="_blank" rel="noreferrer">{source.label}</a></li>)}</ul></details>
-    </Modal>
+      </div></div>
+    </PageContent>
   );
 }

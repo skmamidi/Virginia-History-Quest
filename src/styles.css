@@ -1785,7 +1785,7 @@ input:focus-visible,
 }
 @media print {
   body:has(.scrapbook-preview) { overflow: visible !important; background: white; }
-  body:has(.scrapbook-preview) .quest-app > :not(.modal-backdrop) { display: none !important; }
+  body:has(.scrapbook-preview) .quest-app > :not(.journey-main) { display: none !important; }
   body:has(.scrapbook-preview) .modal-backdrop { display: block; position: static; padding: 0; background: white; overflow: visible; }
   body:has(.scrapbook-preview) .modal-shell { width: 100%; max-width: none; max-height: none; height: auto; overflow: visible; border: 0; box-shadow: none; padding: 0; }
   body:has(.scrapbook-preview) .scrapbook-controls, body:has(.scrapbook-preview) .modal-close { display: none !important; }
@@ -1932,4 +1932,107 @@ input:focus-visible,
 @media (max-width: 700px) {
   .scrapbook-exploring-header h2 { font-size: 25px; }
   .explorer-filters label { flex-basis: 145px; }
+}
+
+/* One continuous learning journey: normal pages, persistent wayfinding. */
+[hidden] { display: none !important; }
+.journey-navigation { position: sticky; top: 0; z-index: 45; display: flex; align-items: stretch; justify-content: center; gap: clamp(12px, 4vw, 65px); min-height: 64px; padding: 0 20px; border-bottom: 1px solid #d6cfbf; background: #faf7eef5; backdrop-filter: blur(12px); }
+.journey-navigation a { display: flex; align-items: center; justify-content: center; gap: 10px; color: #223e50; text-decoration: none; border-bottom: 4px solid transparent; padding: 12px 20px 9px; font-size: 16px; font-weight: 650; }
+.journey-navigation a svg { width: 21px; height: 21px; flex-shrink: 0; }
+.journey-navigation a[aria-current="page"] { color: #245844; border-bottom-color: #245844; background: #e9eddc73; }
+.journey-navigation a:hover { background: #e9eddc; }
+.journey-main { max-width: 1240px; padding: 24px 30px 50px; margin: 0 auto; min-height: calc(100vh - 138px); outline: none; }
+.journey-wayfinding { display: flex; align-items: center; flex-wrap: wrap; gap: 18px; margin-bottom: 30px; color: #596879; font-size: 13px; }
+.journey-back { display: flex; align-items: center; gap: 9px; min-height: 44px; padding: 10px 14px; border: 1px solid #879d92; border-radius: 8px; background: #fffdf7; color: #285442; cursor: pointer; font-weight: 650; }
+.journey-back svg { width: 18px; height: 18px; }
+.journey-wayfinding ol { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; padding: 0; margin: 0; list-style: none; }
+.journey-wayfinding li + li::before { content: '/'; margin-right: 8px; color: #85918b; }
+.journey-wayfinding li[aria-current="page"] { color: #183e4f; font-weight: 700; }
+.journey-wayfinding a { color: inherit; text-decoration: none; padding: 7px 0; }
+.journey-wayfinding a:hover { text-decoration: underline; }
+.journey-main [data-page-title]:focus { outline: none; }
+.learning-content { width: 100%; max-width: none; padding: 0; border: 0; box-shadow: none; background: transparent; }
+.learning-content > h2, .learning-content .scrapbook-controls > h2 { font: 750 clamp(28px, 3vw, 42px)/1.18 Georgia, serif; margin: 10px 0 20px; color: #092c4a; outline: none; }
+.learning-content .modal-lead { max-width: 850px; line-height: 1.65; color: #445e6c; }
+.learning-content.school-workspace { width: 100%; }
+.learning-content.mission-player { width: 100%; }
+.mission-learning-layout { display: grid; grid-template-columns: 255px minmax(0, 1fr); gap: 42px; align-items: start; }
+.mission-journey { position: sticky; top: 90px; border-radius: 12px; border: 1px solid #e0e1d0; padding: 26px 20px; background: #eceede; color: #264b3c; }
+.mission-journey h2 { font: 750 27px/1.22 Georgia, serif; color: #092c4a; margin: 0 0 10px; }
+.mission-code { font-size: 13px; margin: 0 0 20px; }
+.mission-goal { border-top: 1px solid #bec7b6; padding-top: 18px; line-height: 1.65; font-size: 14px; }
+.mission-journey .adventure-progress { display: grid; gap: 14px; margin: 24px 0; }
+.mission-journey .adventure-progress > span { border: 0; padding: 12px 8px; border-radius: 8px; font-size: 14px; font-weight: 600; gap: 12px; }
+.mission-journey .adventure-progress > span[aria-current="step"] { background: #d9e2cc; color: #174a39; }
+.mission-journey .adventure-progress > span > span, .mission-journey .adventure-progress svg { width: 32px; height: 32px; border: 1px solid #8b9e8b; border-radius: 50%; background: #fffdf6; }
+.mission-journey .adventure-progress > span[aria-current="step"] > span { background: #285442; color: #fff; }
+.mission-journey .adventure-progress svg { padding: 5px; color: #285442; }
+.mission-trail-complete { display: flex; align-items: center; gap: 8px; font-size: 13px; }
+.mission-trail-complete svg { width: 20px; flex-shrink: 0; }
+.mission-journey-links { border-top: 1px solid #bec7b6; padding-top: 16px; display: grid; gap: 5px; }
+.mission-journey-links button { border: 0; background: transparent; text-align: left; min-height: 44px; color: #285442; font-size: 13px; cursor: pointer; text-decoration: underline; text-underline-offset: 4px; }
+.mission-reading { min-width: 0; padding-bottom: 20px; }
+.mission-reading h2 { font: 750 clamp(28px, 3vw, 38px)/1.2 Georgia, serif; margin: 0 0 14px; color: #092c4a; }
+.mission-reading .mission-instructions { font-size: 17px; margin-bottom: 22px; }
+.mission-reading .clue-card { border-color: #c7cfb7; background: #ecefdd; padding: 20px; font-size: 17px; }
+.mission-reading .challenge-choice { min-height: 74px; background: #fffdf8; border-width: 1px; padding: 16px 18px; font-size: 17px; font-weight: 550; }
+.mission-reading .challenge-choice[aria-pressed="true"] { background: #e4edde; border: 2px solid #285442; }
+.mission-reading .choice-marker { width: 38px; height: 38px; border: 1px solid #9bab9c; background: #f2f3e9; color: #244a3b; border-radius: 50%; font-weight: 750; }
+.mission-reading .next-step-cue { background: transparent; border: 0; padding-left: 0; font-size: 13px; margin: 10px 0; }
+.mission-reading .mission-action-bar { position: static; margin: 18px 0 0; padding: 0; background: transparent; border: 0; box-shadow: none; }
+.mission-reading .primary-action { width: auto; min-width: 270px; max-width: 100%; justify-content: center; }
+.mission-reading .checkpoint-note { text-align: left; }
+.mission-briefing-page { max-width: 820px; padding: 24px 0 55px; }
+.mission-briefing-page .briefing-steps { max-width: 650px; }
+.learning-content.mission-directory { max-width: 100%; }
+.journey-main .mission-directory-list { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.journey-main .mission-directory-list button { min-height: 108px; height: 100%; background: #fffdf7; }
+.learning-content.sol-practice, .learning-content.field-trip-trail { width: 100%; max-width: 1040px; margin-inline: auto; }
+.journey-main .scrapbook-explorer .explorer-map-stage { height: 410px; }
+.journey-main .scrapbook-explorer .explorer-story { padding: 25px; }
+.journey-main .scrapbook-explorer .explorer-story p { font-size: 15px; }
+.journey-main .learning-map svg { max-height: 480px; }
+.journey-main .learning-map-viewport.map-enlarged svg { max-height: none; }
+.journey-main .school-note { font-size: 13px; }
+.journey-main h2, .journey-main h3, .journey-main h4 { scroll-margin-top: 90px; }
+.quest-app:has(> .journey-main) { padding-bottom: 0; }
+@media (max-width: 900px) {
+  .journey-navigation { gap: 4px; padding-inline: 10px; }
+  .journey-navigation a { padding-inline: 14px; font-size: 14px; }
+  .mission-learning-layout { grid-template-columns: 205px minmax(0, 1fr); gap: 24px; }
+  .mission-journey { padding: 20px 14px; }
+  .mission-journey h2 { font-size: 23px; }
+  .journey-main { padding-inline: 20px; }
+}
+@media (max-width: 680px) {
+  .journey-navigation { min-height: 63px; justify-content: space-between; gap: 0; padding-inline: 5px; }
+  .journey-navigation a { flex: 1; flex-direction: column; padding: 9px 4px 7px; gap: 5px; font-size: 10px; white-space: nowrap; }
+  .journey-navigation a svg { width: 19px; height: 19px; }
+  .journey-main { padding: 16px 16px 40px; }
+  .journey-wayfinding { margin-bottom: 20px; gap: 12px; font-size: 11px; }
+  .journey-wayfinding > nav { flex-basis: 100%; }
+  .mission-learning-layout { display: block; }
+  .mission-journey { position: static; padding: 16px; margin-bottom: 24px; }
+  .mission-journey h2 { font-size: 23px; margin: 0; }
+  .mission-code { margin: 5px 0 10px; font-size: 11px; }
+  .mission-goal { display: none; }
+  .mission-journey .adventure-progress { display: flex; gap: 8px; margin: 14px 0 0; }
+  .mission-journey .adventure-progress > span { display: grid; align-content: start; justify-items: start; gap: 7px; font-size: 10px; padding: 8px 5px; }
+  .mission-journey-links { display: none; }
+  .mission-reading h2 { font-size: 27px; }
+  .mission-reading .mission-instructions, .mission-reading .clue-card, .mission-reading .challenge-choice { font-size: 16px; }
+  .mission-reading .clue-card { padding: 16px; }
+  .mission-reading .challenge-choice { min-height: 70px; padding: 12px; }
+  .mission-reading .primary-action { width: 100%; min-width: 0; }
+  .journey-main .mission-directory-list { grid-template-columns: 1fr; }
+  .journey-main .scrapbook-explorer .explorer-map-stage { height: 320px; }
+  .journey-main .school-workspace { padding: 0; }
+  .journey-main .school-note { font-size: 12px; }
+}
+@media print {
+  body:has(.scrapbook-preview) .quest-header, body:has(.scrapbook-preview) .journey-navigation,
+  body:has(.scrapbook-preview) .journey-wayfinding, body:has(.scrapbook-preview) .quest-dock,
+  body:has(.scrapbook-preview) .skip-link { display: none !important; }
+  body:has(.scrapbook-preview) .quest-app > .journey-main { display: block !important; }
+  body:has(.scrapbook-preview) .journey-main { padding: 0; margin: 0; max-width: none; min-height: 0; }
 }

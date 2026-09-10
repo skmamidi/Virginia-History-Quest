@@ -13,13 +13,13 @@ describe("QuestMapScreen", () => {
     expect(within(map).getAllByRole("button", { name: /VS\./i })).toHaveLength(13);
 
     await user.click(screen.getByRole("button", { name: /all missions/i }));
-    const list = screen.getByRole("dialog", { name: /all missions/i });
+    const list = screen.getByRole("region", { name: /all missions/i });
     expect(within(list).getAllByRole("button", { name: /VS\./i })).toHaveLength(13);
 
     await user.click(
       within(list).getByRole("button", { name: /VS\.11.*Civil Rights/i }),
     );
-    expect(screen.getByRole("heading", { name: /Civil Rights in Virginia/i })).toBeVisible();
+    expect(screen.getByRole("heading", { name: /Your mission: Civil Rights/i })).toBeVisible();
   });
 
   it("switches between map, timeline, and standards projections", async () => {
@@ -71,7 +71,7 @@ it("guides a new explorer directly into a mission and updates the next action", 
   expect(screen.getByText("Ready! Tap Check my discovery below.")).toBeVisible();
   await user.click(screen.getByRole("button", { name: "Check my discovery" }));
   expect(screen.getByText("Nice work! Tap Next challenge to keep going.")).toBeVisible();
-  await user.keyboard("{Escape}");
+  await user.click(within(screen.getByRole("navigation", { name: "Explore Virginia" })).getByRole("link", { name: "Quest map" }));
   expect(screen.getByRole("button", { name: "Continue my adventure" })).toBeVisible();
   expect(screen.getByText(/Next up: challenge 2 of 3/)).toBeVisible();
 });

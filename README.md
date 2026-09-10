@@ -191,3 +191,24 @@ existing page; pages containing any work are never overwritten. Reading discover
 are temporary and distinct from actual visits. The full DHR register is linked for
 places beyond the collection. Region boundaries and pins are approximate; see
 `docs/ATTRIBUTIONS.md` for data sources and boundary conventions.
+
+
+## Full-page learning journey
+
+Missions, their briefings, SOL practice, the mission directory, map lab, field trips,
+and scrapbook now open as full pages. The shared five-destination navigation stays
+available while scrolling. Breadcrumbs identify the current destination; the return
+button names the page the learner came from. Missions use a wide reading column and
+a three-step trail, which becomes a compact progress strip on phones.
+
+Hash URLs such as `#/mission/VS.2` survive refresh and work on static hosting.
+Browser Back and Forward restore destinations, focus, and page scroll. The quest map
+stays mounted so its selected portal, layers, and view remain intact. Solved mission
+checkpoints and scrapbook drafts keep using the existing stores; leaving an
+unfinished question resumes from the last saved checkpoint. Completed missions
+reopen on their badge page unless a review is due. Small informational connection
+dialogs remain overlays; learning destinations no longer trap focus or lock scrolling.
+
+Validation: 69 automated checks cover all 13 missions, saved checkpoints, accessibility,
+practice, classroom tools, direct mission links, and browser history navigation.
+The production build passes. See `docs/JOURNEY-DESIGN-REVIEW.md` for visual verification.

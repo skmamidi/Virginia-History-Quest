@@ -1,6 +1,7 @@
 import { List, Pause, Play, Volume2, VolumeX } from "lucide-react";
 
 interface QuestHeaderProps {
+  onHome: () => void;
   motionPaused: boolean;
   audioEnabled: boolean;
   onToggleMotion: () => void;
@@ -9,6 +10,7 @@ interface QuestHeaderProps {
 }
 
 export function QuestHeader({
+  onHome,
   motionPaused,
   audioEnabled,
   onToggleMotion,
@@ -17,7 +19,7 @@ export function QuestHeader({
 }: QuestHeaderProps) {
   return (
     <header className="quest-header">
-      <a className="brand" href="#quest-map" aria-label="Virginia History Quest home">
+      <a className="brand" href="#/home" onClick={event => { event.preventDefault(); onHome(); }} aria-label="Virginia History Quest home">
         <img
           className="brand-mark"
           src={`${import.meta.env.BASE_URL}assets/quest-compass.png`}

@@ -1,6 +1,6 @@
 import { lazy, Suspense, useRef, useState } from 'react';
 import { BookOpen, Download, Printer, Compass } from 'lucide-react';
-import { Modal } from './Modal';
+import { PageContent } from './PageContent';
 import { REGION_LESSONS } from '../../../contexts/published-content/adapters/schoolMaterials';
 import { parseScrapbook, projectChecklist, visitChecklist, pageForPlace, type Scrapbook as Book, type Visit } from '../../../contexts/scrapbook/domain/scrapbook';
 import { downloadScrapbook, loadScrapbook, preparePhoto, saveScrapbook } from '../../../contexts/scrapbook/adapters/browserScrapbook';
@@ -67,7 +67,7 @@ export function Scrapbook({ onClose }: { onClose: () => void }) {
       else setStatus('This file is not a compatible scrapbook backup. Your current scrapbook has not changed.');
     } catch { setStatus('Could not read this backup. Your current scrapbook has not changed.'); }
   }
-  return <Modal label="My Virginia scrapbook" titleId="scrapbook-title" className="school-workspace scrapbook-workspace" onClose={onClose}>
+  return <PageContent label="My Virginia scrapbook" titleId="scrapbook-title" className="school-workspace scrapbook-workspace" onClose={onClose}>
     <div className={`scrapbook-controls ${exploring ? "scrapbook-exploring-header" : ""}`}>
       <p className="briefing-kicker">Your fourth-grade project · September 2026–May 28, 2027</p>
       <h2 id="scrapbook-title">My Virginia scrapbook</h2>
@@ -128,5 +128,5 @@ export function Scrapbook({ onClose }: { onClose: () => void }) {
       <label className="school-check"><input type="checkbox" checked={book.rehearsed} onChange={e => commit({ ...book, rehearsed: e.target.checked })} />I practiced speaking clearly, loudly enough, and making eye contact.</label>
       <p>{Object.values(checks).every(Boolean) ? 'All planning checks are complete! Review your scrapbook with an adult before sharing.' : 'Keep building your stories, one visit at a time.'}</p>
     </section>}
-  </Modal>;
+  </PageContent>;
 }

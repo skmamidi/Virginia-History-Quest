@@ -19,8 +19,8 @@ beforeEach(() => {
 it('opens both classroom connections from the home screen', () => {
   render(<QuestMapScreen />);
   fireEvent.click(screen.getByRole('button', { name: /My Virginia scrapbook/ }));
-  expect(screen.getByRole('dialog', { name: 'My Virginia scrapbook' })).toBeVisible();
-  fireEvent.click(screen.getByRole('button', { name: 'Close My Virginia scrapbook' }));
+  expect(screen.getByRole('region', { name: 'My Virginia scrapbook' })).toBeVisible();
+  fireEvent.click(within(screen.getByRole('navigation', { name: 'Explore Virginia' })).getByRole('link', { name: 'Quest map' }));
   fireEvent.click(screen.getByRole('button', { name: /Virginia map lab/ }));
   expect(screen.getByRole('heading', { name: 'Read the landscape' })).toBeVisible();
 });

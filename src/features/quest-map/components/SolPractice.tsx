@@ -3,7 +3,7 @@ import { BookOpen, CheckCircle2, ChevronRight, Lightbulb, Sparkles, Star, Volume
 import { SOL_PRACTICE, SOL_FACT_CHECK_SOURCES, solGuideUrl, type PracticeTrail } from "../../../contexts/published-content/adapters/solPractice";
 import type { MissionId } from "../../../contexts/published-content/domain/mission";
 import { PRACTICE_STORAGE_KEY, practiceKey, readPracticeProgress } from "../../../contexts/quest-journey/adapters/solPracticeStore";
-import { Modal } from "./Modal";
+import { PageContent } from "./PageContent";
 
 interface Props {
   missionId: MissionId;
@@ -64,7 +64,7 @@ export function SolPractice({ missionId, title, onClose }: Props) {
     window.speechSynthesis?.speak(new SpeechSynthesisUtterance(text));
   }
 
-  return <Modal label={title + " SOL practice"} titleId="practice-title" className="sol-practice" onClose={onClose}>
+  return <PageContent label={title + " SOL practice"} titleId="practice-title" className="sol-practice" onClose={onClose}>
     <p className="briefing-kicker">{missionId} · Virginia Studies practice</p>
     {!active ? <>
       <h2 id="practice-title" ref={heading} tabIndex={-1}>Practice: {title}</h2>
@@ -120,5 +120,5 @@ export function SolPractice({ missionId, title, onClose }: Props) {
       <ul>{(SOL_FACT_CHECK_SOURCES[missionId] ?? []).map(source => <li key={source.url}><a href={source.url} target="_blank" rel="noreferrer">{source.label}</a></li>)}<li><a href={solGuideUrl(missionId)} target="_blank" rel="noreferrer">SOLpass: {missionId} study guide (school login may be needed)</a></li>
         <li><a href="https://www.doe.virginia.gov/teaching-learning-assessment/k-12-standards-instruction/history-and-social-science/standards-of-learning" target="_blank" rel="noreferrer">Virginia Department of Education: 2023 standards</a></li></ul>
     </details>
-  </Modal>;
+  </PageContent>;
 }

@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import { Award, CheckCircle2, ChevronRight, Lightbulb, MapPin } from "lucide-react";
 import { FIELD_TRIP_CHAPTERS, MISSION_TRIP_LINKS } from "../../../contexts/published-content/adapters/fieldTrips";
 import type { MissionId } from "../../../contexts/published-content/domain/mission";
-import { Modal } from "./Modal";
+import { PageContent } from "./PageContent";
 
 const STAMP_KEY = "virginia-history-quest:field-trips:v1";
 export function readTripStamps(storage: Pick<Storage, "getItem">): string[] {
@@ -53,7 +53,7 @@ export function FieldTripTrail({ initialChapter = 0, onClose, onMission }: {
     }
   }
 
-  return <Modal label="Connect our field trips" titleId="field-trip-title" className="field-trip-trail" onClose={onClose}>
+  return <PageContent label="Connect our field trips" titleId="field-trip-title" className="field-trip-trail" onClose={onClose}>
     <h2 id="field-trip-title">Connect our field trips</h2>
     <p className="modal-lead">You’ve stood in these places. Now uncover the stories between them!</p>
     <nav className="trip-chapters" aria-label="Field trip stories">
@@ -106,5 +106,5 @@ export function FieldTripTrail({ initialChapter = 0, onClose, onMission }: {
     </section>}
     {saveWarning ? <p role="status">Your discoveries count for this visit, but this browser couldn’t save them for next time.</p> : null}
     <p className="checkpoint-note">These are connections through history, not driving directions. Your three field-trip discoveries are separate from mission badges.</p>
-  </Modal>;
+  </PageContent>;
 }

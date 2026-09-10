@@ -116,7 +116,7 @@ describe("practice flow", () => {
     const user = userEvent.setup();
     const { container } = render(<QuestMapScreen />);
     await user.click(screen.getByRole("button", { name: "All missions" }));
-    await user.click(within(screen.getByRole("dialog")).getByRole("button", { name: /VS\.7.*Civil War/ }));
+    await user.click(within(screen.getByRole("main")).getByRole("button", { name: /VS\.7.*Civil War/ }));
     await user.click(screen.getByRole("button", { name: "Practice this topic · SOL questions" }));
     expect(screen.getByRole("heading", { name: "Practice: Civil War" })).toBeVisible();
     expect((await axe(container)).violations).toEqual([]);
@@ -124,9 +124,8 @@ describe("practice flow", () => {
     await user.click(screen.getByRole("button", { name: "Try the first question" }));
     expect(screen.getByRole("heading", { name: /ironclad exhibit/ })).toBeVisible();
     expect((await axe(container)).violations).toEqual([]);
-    await user.keyboard("{Escape}");
+    await user.click(screen.getByRole("button", { name: "Back to Civil War" }));
+    expect(await screen.findByRole("heading", { name: "Your mission: Civil War" })).toBeVisible();
     expect(screen.queryByRole("dialog")).toBeNull();
-    expect(screen.getByRole("button", { name: "Practice this topic · SOL questions" })).toHaveFocus();
-    expect(screen.getByRole("button", { name: "Begin mission" })).toBeVisible();
   });
 });
