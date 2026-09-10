@@ -1,6 +1,6 @@
 import { MissionTripClue } from "./FieldTripTrail";
 import { useEffect, useRef, useState } from "react";
-import { Award, CheckCircle2, ChevronRight, Hand, Lightbulb, RotateCcw, Sparkles, Star, Volume2 } from "lucide-react";
+import { Award, BookOpen, CheckCircle2, ChevronRight, Hand, Lightbulb, RotateCcw, Sparkles, Star, Volume2 } from "lucide-react";
 import { ACTIVITY_SOURCES, MISSION_ACTIVITIES } from "../../../contexts/published-content/adapters/missionActivities";
 import { challengeIndex } from "../../../contexts/quest-journey/application/playMission";
 import type { MissionProgress } from "../../../contexts/quest-journey/domain/missionProgress";
@@ -17,10 +17,11 @@ interface Props {
   onMap?: () => void;
   onNext: () => void;
   onPractice?: () => void;
+  onStory?: () => void;
   nextMissionTitle?: string;
 }
 
-export function MissionPlayer({ mission, record, audioEnabled, onPass, onClose, onPause, onMap, onNext, onPractice, nextMissionTitle }: Props) {
+export function MissionPlayer({ mission, record, audioEnabled, onPass, onClose, onPause, onMap, onNext, onPractice, onStory, nextMissionTitle }: Props) {
   const activity = MISSION_ACTIVITIES[mission.id];
   const [index, setIndex] = useState(() => challengeIndex(record));
   const [selected, setSelected] = useState<number | null>(null);
@@ -103,6 +104,7 @@ export function MissionPlayer({ mission, record, audioEnabled, onPass, onClose, 
         </div>
       </aside>
       <div className="mission-reading">
+      {onStory ? <button type="button" className="story-revisit" onClick={onStory}><BookOpen aria-hidden="true" />Revisit the story</button> : null}
       {finished ? (
         <div className="mission-celebration">
           <div className="earned-badge"><Award aria-hidden="true" /></div>

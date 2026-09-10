@@ -9,7 +9,9 @@ import { QuestMapScreen } from "../QuestMapScreen";
 async function openMission(user: ReturnType<typeof userEvent.setup>, id: string) {
   await user.click(screen.getByRole("button", { name: "All missions" }));
   await user.click(within(screen.getByRole("main")).getByRole("button", { name: new RegExp(`${id.replace(".", "\\.")} `) }));
-  await user.click(screen.getByRole("button", { name: "Let’s investigate" }));
+  await user.click(screen.getByRole("button", { name: "Next story stop" }));
+  await user.click(screen.getByRole("button", { name: "Next story stop" }));
+  await user.click(screen.getByRole("button", { name: "Try the challenges" }));
 }
 
 describe("mission adventures", () => {
@@ -33,6 +35,12 @@ describe("mission adventures", () => {
       await user.click(screen.getByRole("button", { name: index === 2 ? "Reveal my badge" : "Next challenge" }));
     }
     expect(within(screen.getByRole("main")).getByText(activity.badge)).toBeVisible();
+    if (id === "VS.11") {
+      await user.click(screen.getByRole("button", { name: "Revisit the story" }));
+      await user.click(screen.getByRole("button", { name: "Return to my challenges" }));
+      expect(await screen.findByRole("heading", { name: "You did it, explorer!" })).toBeVisible();
+      expect(within(screen.getByRole("main")).getByText(activity.badge)).toBeVisible();
+    }
     if (id === "VS.1") {
       await user.click(screen.getByRole("button", { name: "Next adventure: Indigenous Virginia" }));
       expect(screen.getByRole("heading", { name: "Your mission: Indigenous Virginia" })).toBeVisible();

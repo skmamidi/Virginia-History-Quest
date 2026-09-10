@@ -22,7 +22,9 @@ it('uses full pages, preserves the map view, and supports browser back and forwa
   expect(window.location.hash).toBe('#/mission/VS.1');
   expect(screen.queryByRole('dialog')).toBeNull();
   expect(within(screen.getByRole('navigation', { name: 'Explore Virginia' })).getAllByRole('link')).toHaveLength(5);
-  await user.click(screen.getByRole('button', { name: 'Let’s investigate' }));
+  await user.click(screen.getByRole('button', { name: 'Next story stop' }));
+  await user.click(screen.getByRole('button', { name: 'Next story stop' }));
+  await user.click(screen.getByRole('button', { name: 'Try the challenges' }));
   expect(screen.getByRole('complementary', { name: 'Your mission trail' })).toBeVisible();
   await user.click(screen.getByRole('button', { name: 'B Waterfalls and rapids' }));
   await user.click(screen.getByRole('button', { name: 'Check my discovery' }));

@@ -65,7 +65,9 @@ it("guides a new explorer directly into a mission and updates the next action", 
   expect(screen.getByRole("tab", { name: "Standards" })).not.toBeVisible();
   expect(screen.getByRole("radio", { name: "James River" })).not.toBeVisible();
   await user.click(screen.getByRole("button", { name: "Start my adventure" }));
-  await user.click(screen.getByRole("button", { name: "Let’s investigate" }));
+  await user.click(screen.getByRole("button", { name: "Next story stop" }));
+  await user.click(screen.getByRole("button", { name: "Next story stop" }));
+  await user.click(screen.getByRole("button", { name: "Try the challenges" }));
   expect(screen.getByText("Read the clue, then tap one answer below.")).toBeVisible();
   await user.click(screen.getByRole("button", { name: "B Waterfalls and rapids" }));
   expect(screen.getByText("Ready! Tap Check my discovery below.")).toBeVisible();

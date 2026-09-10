@@ -2036,3 +2036,104 @@ input:focus-visible,
   body:has(.scrapbook-preview) .quest-app > .journey-main { display: block !important; }
   body:has(.scrapbook-preview) .journey-main { padding: 0; margin: 0; max-width: none; min-height: 0; }
 }
+
+/* Mission introductions: one explorable diagram and reading panel per active mission. */
+.mission-story { padding: 0; overflow: hidden; background: #fffdf7; }
+.story-header { padding: 30px 36px 22px; border-bottom: 1px solid #dedfd2; background: #f7f5e9; }
+.story-header h2 { margin: 8px 0 12px; font-size: clamp(1.5rem, 3vw, 2.15rem); }
+.story-invitation { max-width: 760px; font-size: 1.08rem; line-height: 1.65; color: #44554c; }
+.story-stage-label { display: flex; align-items: center; gap: 12px; font-size: .82rem; color: #53635b; margin-top: 18px; }
+.story-stage-label > span:first-child { color: #fff; background: #215345; border-radius: 20px; padding: 7px 13px; }
+.story-stage-label span { display: inline-flex; align-items: center; gap: 7px; }
+.story-stage-label svg { width: 16px; height: 16px; }
+.story-experience { display: grid; grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr); }
+.story-map { min-width: 0; padding: 28px 24px; background: #eaf1e9; border-right: 1px solid #d4dfd3; }
+.story-map-heading { padding: 0 4px; }
+.story-map h3 { font-family: Georgia, serif; font-size: clamp(1.5rem, 2.5vw, 2rem); line-height: 1.25; max-width: 420px; margin: 9px 0 20px; color: #233f35; }
+.story-diagram { position: relative; isolation: isolate; padding: 30px 0 52px; margin: 14px -12px 0; border-bottom: 2px solid #92ad99; }
+.story-scenery { position: absolute; z-index: -1; width: 100%; height: 100%; inset: 0; }
+.story-mountains-back { fill: #bdcdb5; }
+.story-mountains-front { fill: #91af92; }
+.story-river { stroke: #397f98; stroke-width: 12; fill: none; }
+.story-horizon { fill: #d1dfc9; }
+.story-sun { fill: #e6cd7c; opacity: .55; }
+.story-stops { list-style: none; padding: 0; margin: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.story-stops li { position: relative; min-width: 0; }
+.story-stop { width: 100%; border: 0; background: transparent; padding: 8px 3px; color: #274739; cursor: pointer; display: flex; align-items: center; flex-direction: column; gap: 10px; text-align: center; min-height: 154px; border-radius: 10px; }
+.story-stop > strong { font-size: .88rem; line-height: 1.3; padding: 4px; background: #f4f7ee; border-radius: 5px; }
+.story-stop > span:last-child { font-size: .73rem; line-height: 1.4; background: #f4f7ee; padding: 3px 5px; border-radius: 4px; }
+.story-stop-icon { position: relative; width: 70px; height: 70px; border-radius: 50%; border: 2px solid #759d87; display: grid; place-items: center; background: #fffdf5; box-shadow: 0 5px 0 #afc5ad; transition: transform 180ms ease, background 180ms ease; }
+.story-stop-icon > svg { width: 31px; height: 31px; stroke-width: 1.6; }
+.story-stop-number { position: absolute; right: -4px; bottom: -4px; width: 23px; height: 23px; border-radius: 50%; display: grid; place-items: center; background: #f5d879; border: 2px solid #fffdf5; font-size: .7rem; font-weight: 800; color: #283f33; }
+.story-stop-number svg { width: 13px; height: 13px; }
+.story-stop-current .story-stop-icon { background: #215345; color: white; border-color: #215345; transform: translateY(-5px); box-shadow: 0 0 0 5px #c4d6bd, 0 8px 0 #afc5ad; }
+.story-stop-current .story-stop strong { text-decoration: underline; text-underline-offset: 4px; }
+.story-stop:hover .story-stop-icon { transform: translateY(-5px); }
+.story-connection { position: absolute; width: 64%; top: 39px; left: 68%; z-index: -1; border-top: 2px dashed #668574; color: #3e6150; }
+.story-connection > svg { position: absolute; width: 18px; height: 18px; top: -10px; left: 38%; background: #eaf1e9; }
+.story-connection > span { position: absolute; width: 145%; top: 150px; left: -22%; text-align: center; font-size: .76rem; line-height: 1.3; background: #eaf1e9; padding: 3px; border-radius: 4px; }
+.story-stop-current .story-connection { border-color: #215345; }
+.story-stop-current .story-connection > svg { animation: story-flow 1.6s ease-in-out infinite; }
+@keyframes story-flow { 0%, 100% { transform: translateX(-4px); } 50% { transform: translateX(5px); } }
+.story-diagram-note { color: #526656; font-size: .75rem; line-height: 1.5; margin: 14px 0 18px; }
+.story-explored { font-size: .8rem; line-height: 1.6; display: flex; align-items: flex-start; gap: 7px; padding: 12px; background: #f5f8ef; border-radius: 9px; color: #284c3d; }
+.story-explored svg { width: 18px; height: 18px; flex-shrink: 0; margin-top: 3px; }
+.story-scene { padding: 28px 30px; min-width: 0; }
+.story-scene-top { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+.story-scene-top .briefing-kicker { flex: 1; margin: 0; line-height: 1.5; }
+.story-scene-icon { display: grid; place-items: center; width: 40px; height: 40px; border-radius: 12px; background: #e9efdf; color: #315b45; }
+.story-scene-icon svg { width: 24px; height: 24px; }
+.story-listen { display: inline-flex; align-items: center; gap: 5px; color: #315b45; background: transparent; border: 1px solid #c4d2bf; border-radius: 8px; padding: 10px; font-size: .75rem; cursor: pointer; min-height: 44px; }
+.story-listen svg { width: 16px; height: 16px; }
+.story-scene h3 { font-family: Georgia, serif; font-size: 1.65rem; line-height: 1.25; margin: 22px 0 16px; color: #263f35; }
+.story-narrative { font-size: 1.05rem; line-height: 1.85; color: #35483e; }
+.story-vocabulary { border-left: 3px solid #b78a3e; padding: 10px 14px; margin: 22px 0; font-size: .86rem; line-height: 1.6; background: #f7f2e2; }
+.story-vocabulary strong { display: block; color: #785820; margin-bottom: 3px; }
+.story-discovery-toggle { display: flex; align-items: center; width: 100%; gap: 10px; min-height: 52px; padding: 12px 14px; border: 1px solid #b7cbb7; background: #f1f6eb; border-radius: 9px; color: #254d3b; font-weight: 700; text-align: left; cursor: pointer; line-height: 1.4; }
+.story-discovery-toggle > svg { width: 20px; height: 20px; flex-shrink: 0; }
+.story-discovery-toggle > span { margin-left: auto; font-size: 1.3rem; }
+.story-discovery { border-left: 2px solid #a8be9c; padding: 0 16px; margin-left: 17px; line-height: 1.75; font-size: .95rem; color: #3a5042; }
+.story-scene-navigation { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 10px; margin-top: 24px; }
+.story-scene-navigation .primary-action, .story-scene-navigation .secondary-action { min-height: 44px; font-size: .8rem; padding: 11px 13px; display: inline-flex; align-items: center; gap: 7px; }
+.story-scene-navigation svg { width: 16px; height: 16px; }
+.story-ready { display: inline-flex; align-items: center; gap: 6px; color: #315b45; font-size: .8rem; }
+.story-finish { padding: 26px 36px; background: #f6f4e8; border-top: 1px solid #dedfd2; display: grid; grid-template-columns: 1.3fr 1fr; gap: 36px; }
+.story-wonder { display: flex; align-items: flex-start; gap: 13px; }
+.story-wonder > svg { flex-shrink: 0; width: 24px; height: 24px; color: #8d692e; }
+.story-wonder h3 { margin: 0 0 8px; font-size: 1rem; }
+.story-wonder p { margin: 0 0 10px; line-height: 1.65; }
+.story-wonder small { color: #64705d; line-height: 1.5; }
+.story-launch p { color: #54644e; font-size: .78rem; line-height: 1.6; }
+.story-source { padding: 16px 36px; margin: 0; font-size: .8rem; line-height: 1.6; color: #57654f; }
+.story-source a { color: #315b45; text-underline-offset: 3px; }
+.story-revisit { display: inline-flex; align-items: center; gap: 8px; padding: 10px 12px; margin: 0 0 20px; border: 1px solid #c1d0b7; border-radius: 8px; background: #eef4e7; color: #2d503d; cursor: pointer; min-height: 44px; font-size: .85rem; }
+.story-revisit svg { width: 18px; height: 18px; }
+.mission-story button:disabled { opacity: .5; cursor: not-allowed; }
+.mission-story button:focus-visible, .story-revisit:focus-visible { outline: 3px solid #a56d19; outline-offset: 4px; }
+.motion-paused .story-stop-icon { transition: none; }
+.motion-paused .story-connection > svg { animation: none; }
+@media (prefers-reduced-motion: reduce) {
+  .story-stop-icon { transition: none; }
+  .story-stop-current .story-connection > svg { animation: none; }
+}
+@media (max-width: 1000px) {
+  .story-experience { grid-template-columns: 1fr; }
+  .story-map { border-right: 0; border-bottom: 1px solid #d4dfd3; }
+  .story-map h3 { max-width: none; }
+  .story-diagram { max-width: 720px; margin-left: auto; margin-right: auto; }
+  .story-explored { margin-bottom: 0; }
+}
+@media (max-width: 600px) {
+  .story-header, .story-map, .story-scene { padding: 22px 18px; }
+  .story-finish { padding: 24px 18px; grid-template-columns: 1fr; gap: 24px; }
+  .story-source { padding: 16px 18px; }
+  .story-stop-icon { width: 55px; height: 55px; }
+  .story-stop-icon > svg { width: 25px; height: 25px; }
+  .story-stop > strong { font-size: .77rem; }
+  .story-stop > span:last-child { font-size: .65rem; }
+  .story-connection { top: 32px; }
+  .story-connection > span { top: 158px; font-size: .72rem; }
+  .story-scene h3 { font-size: 1.45rem; }
+  .story-stage-label { gap: 7px; font-size: .75rem; }
+  .story-narrative { font-size: 1rem; }
+}

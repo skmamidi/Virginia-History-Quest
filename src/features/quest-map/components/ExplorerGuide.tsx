@@ -14,8 +14,8 @@ export function ExplorerGuide({ mission, onStart, onPractice }: { mission: Quest
         <h2 id="explorer-guide-title" tabIndex={-1}>{isNew ? "Start here, explorer!" : isReplay ? "Ready for another discovery?" : "Let’s pick up where you left off!"}</h2>
         <p>{isNew ? "Your adventure" : isReplay ? "Play again" : isReview ? "Your memory check" : `Next up: challenge ${step} of 3`} <strong>· {mission.shortTitle}</strong></p>
         <ol className="explorer-route" aria-label="How an adventure works">
-          <li><span>1</span><Search aria-hidden="true" />Read a clue</li>
-          <li><span>2</span><Compass aria-hidden="true" />Solve 3 challenges</li>
+          <li><span>1</span><Search aria-hidden="true" />Explore the story</li>
+          <li><span>2</span><Compass aria-hidden="true" />Try 3 challenges</li>
           <li><span>3</span><Award aria-hidden="true" />Earn your badge</li>
         </ol>
       </div>

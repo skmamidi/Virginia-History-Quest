@@ -28,6 +28,8 @@ import { SolPractice } from "./components/SolPractice";
 import { FieldTripTrail } from "./components/FieldTripTrail";
 import { ExplorerGuide } from "./components/ExplorerGuide";
 import { MissionPlayer } from "./components/MissionPlayer";
+import { MissionStory } from "./components/MissionStory";
+import { createStoryStore, freshStory, type StoryProgressMap } from "./storyProgress";
 import { MissionPanel } from "./components/MissionPanel";
 import { TimelineView, StandardsView } from "./components/MissionViews";
 import { Modal } from "./components/Modal";
@@ -88,6 +90,11 @@ export function QuestMapScreen() {
   const [progress, setProgress] = useState<readonly MissionProgress[]>(() =>
     prepareProgress(progressStore.load(freshProgress)),
   );
+  const storyStore = useMemo(() => {
+    if (import.meta.env.MODE === 'test') return createStoryStore(createMemoryStorage());
+    try { return createStoryStore(window.localStorage); } catch { return createStoryStore(); }
+  }, []);
+  const [stories, setStories] = useState<StoryProgressMap>(() => storyStore.load());
   const { route, from, navigate, back } = useJourneyNavigation();
   const [mapSelectedId, setSelectedId] = useState<MissionId>(() => getQuestMap(MISSION_CATALOG, progress).continueMissionId ?? "VS.1");
   const [view, setView] = useState<QuestViewMode>("map");
@@ -102,7 +109,8 @@ export function QuestMapScreen() {
   const selectedId = 'missionId' in route ? route.missionId : mapSelectedId;
   const selectedRecord = progress.find(p => p.missionId === selectedId)!;
   const allMissionsOpen = route.kind === 'missions';
-  const briefingOpen = route.kind === 'mission' && ['AVAILABLE', 'ORIENTING'].includes(selectedRecord.state);
+  const selectedStory = stories[selectedId] ?? freshStory();
+  const briefingOpen = route.kind === 'story' || (route.kind === 'mission' && (!selectedStory.finished || ['AVAILABLE', 'ORIENTING'].includes(selectedRecord.state)));
   const playerOpen = route.kind === 'mission' && !briefingOpen;
   const practiceOpen = route.kind === 'practice';
   const schoolWorkspace = route.kind === 'maps' || route.kind === 'scrapbook' ? route.kind : null;
@@ -173,11 +181,11 @@ export function QuestMapScreen() {
 
   const completeBriefing = useCallback(() => {
     const record = progress.find((item) => item.missionId === selectedId);
-    if (record?.state === "ORIENTING") {
+    if (record && ["AVAILABLE", "ORIENTING"].includes(record.state)) {
       const next = progress.map((item) =>
         item.missionId === selectedId
           ? applyMissionEvent(
-              applyMissionEvent(item, {
+              applyMissionEvent(item.state === "AVAILABLE" ? applyMissionEvent(item, { type: "MISSION_OPENED" }) : item, {
                 type: "MEANINGFUL_STEP_REACHED",
                 step: "mission-briefing",
               }),
@@ -434,37 +442,29 @@ export function QuestMapScreen() {
 
       {schoolWorkspace === "scrapbook" ? <Scrapbook onClose={() => setSchoolWorkspace(null)} /> : null}
       {schoolWorkspace === "maps" ? <MapLab onClose={() => setSchoolWorkspace(null)} onScrapbook={() => setSchoolWorkspace("scrapbook")} /> : null}
-      {practiceOpen ? <SolPractice key={selectedId} missionId={selectedId} title={selectedMission.shortTitle} onClose={() => from?.kind === "mission" && from.missionId === selectedId ? back() : navigate({ kind: "mission", missionId: selectedId }, true)} /> : null}
+      {practiceOpen ? <SolPractice key={selectedId} missionId={selectedId} title={selectedMission.shortTitle} onClose={() => (from?.kind === "mission" || from?.kind === "story") && from.missionId === selectedId ? back() : navigate({ kind: "mission", missionId: selectedId }, true)} /> : null}
 
       {route.kind === "trips" ? <FieldTripTrail initialChapter={tripChapter} onClose={() => setTripChapter(null)} onMission={openMission} /> : null}
 
-      {briefingOpen ? (
-        <PageContent
-          label={`${selectedMission.shortTitle} mission briefing`}
-          titleId="briefing-title"
-          onClose={back}
-          className="mission-briefing-page"
-        >
-          <p className="briefing-kicker">
-            {selectedMission.id} · 3 challenges · Play at your pace
-          </p>
-          <h2 id="briefing-title">Your mission: {selectedMission.shortTitle}</h2>
-          <p className="modal-lead">{MISSION_ACTIVITIES[selectedId].goal}</p>
-          <p className="field-label">Here’s how to play</p>
-          <ol className="briefing-steps">
-            {["Read the clue. You can listen to it, too!", "Tap an answer, then tap Check my discovery.", "Solve all 3 challenges to reveal your badge."].map((focus) => (
-              <li key={focus}>{focus}</li>
-            ))}
-          </ol>
-          <button className="primary-action" type="button" onClick={completeBriefing}>
-            <span>Let’s investigate</span>
-            <ChevronRight aria-hidden="true" />
-          </button>
-          <button className="text-button" type="button" onClick={() => setPracticeOpen(true)}>Practice this topic · SOL questions</button>
-        </PageContent>
-      ) : null}
+      {briefingOpen ? <MissionStory key={selectedId} missionId={selectedId} title={selectedMission.shortTitle}
+        progress={selectedStory} replay={route.kind === 'story' && selectedStory.finished}
+        onExplore={index => {
+          const next = { ...stories, [selectedId]: { ...selectedStory, scene: index, explored: [...new Set([...selectedStory.explored, index])] } };
+          setStories(next);
+          if (!storyStore.save(next)) setSaveWarning("Your story place is safe for this visit, but this browser could not save it for next time.");
+        }}
+        onComplete={() => {
+          const next = { ...stories, [selectedId]: { ...selectedStory, finished: true } };
+          setStories(next);
+          completeBriefing();
+          if (!storyStore.save(next)) setSaveWarning("Your story place is safe for this visit, but this browser could not save it for next time.");
+          if (route.kind === 'story') {
+            if (from?.kind === 'mission' && from.missionId === selectedId) back();
+            else navigate({ kind: 'mission', missionId: selectedId }, true);
+          }
+        }} onPractice={() => setPracticeOpen(true)} /> : null}
 
-      {(playerOpen || (practiceOpen && !["AVAILABLE", "ORIENTING"].includes(selectedRecord.state))) ? (
+      {(playerOpen || ((practiceOpen || route.kind === "story") && !["AVAILABLE", "ORIENTING"].includes(selectedRecord.state))) ? (
         <div hidden={!playerOpen}><MissionPlayer
           key={selectedId}
           mission={selectedMission}
@@ -473,6 +473,7 @@ export function QuestMapScreen() {
           onClose={() => navigate({ kind: 'home' })}
           onPause={back}
           onMap={() => navigate({ kind: 'home' })}
+          onStory={() => navigate({ kind: 'story', missionId: selectedId })}
 
           onPass={(index) => saveProgress(progress.map((record) =>
             record.missionId === selectedId ? passChallenge(record, index) : record))}
