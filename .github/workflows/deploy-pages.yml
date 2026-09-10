@@ -36,6 +36,9 @@ jobs:
       - name: Build app
         run: npm run build
 
+      - name: Verify deployable Pages files
+        run: npm run check:pages
+
       - name: Configure Pages
         uses: actions/configure-pages@v5
 

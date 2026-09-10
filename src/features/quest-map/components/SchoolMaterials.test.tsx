@@ -56,33 +56,37 @@ it('does not silently replace unreadable saved data on opening', () => {
   expect(screen.getByRole('alert')).toHaveTextContent('could not be read');
   expect(values.get(SCRAPBOOK_KEY)).toBe('{bad');
 });
-it('explores all five regions, switches map legends, and gives retry feedback for every practice trail', async () => {
-  const { container } = render(<MapLab onClose={() => {}} onScrapbook={() => {}} />);
+it('explores all five regions', () => {
+  render(<MapLab onClose={() => {}} onScrapbook={() => {}} />);
   for (const region of REGION_LESSONS) {
     fireEvent.click(screen.getByRole('button', { name: `Explore ${region.name}` }));
     expect(screen.getByRole('heading', { name: region.name, level: 3 })).toBeVisible();
   }
-  for (const topic of MAP_TOPICS) {
-    fireEvent.click(screen.getByRole('button', { name: topic.label }));
-    expect((await axe(container)).violations).toEqual([]);
-    if (topic.id === 'climate') {
-      fireEvent.click(screen.getByRole('button', { name: 'Snowfall patterns' }));
-      expect(screen.getByRole('img', { name: 'Virginia snowfall patterns' })).toBeVisible();
-    }
-    for (const question of MAP_QUESTIONS[topic.id]) {
-      const group = within(screen.getByRole('group', { name: 'Map question answers' }));
-      expect(screen.getByRole('button', { name: 'Check my answer' })).toBeDisabled();
-      fireEvent.click(group.getByRole('button', { name: question.choices[(question.answer + 1) % 3] }));
-      fireEvent.click(screen.getByRole('button', { name: 'Check my answer' }));
-      expect(within(screen.getByRole('region', { name: 'Map practice' })).getByRole('status')).toHaveTextContent('Not quite');
-      fireEvent.click(group.getByRole('button', { name: question.choices[question.answer] }));
-      fireEvent.click(screen.getByRole('button', { name: 'Check my answer' }));
-      expect(within(screen.getByRole('region', { name: 'Map practice' })).getByRole('status')).toHaveTextContent(question.why);
-      fireEvent.click(screen.getByRole('button', { name: /Next map clue|Finish this practice/ }));
-    }
-    expect(screen.getByRole('heading', { name: 'Map detective discoveries complete!' })).toBeVisible();
-  }
 });
+
+// Each topic gets its own accessibility scan and complete retry/completion flow.
+// The county table scan needs headroom on shared GitHub-hosted runners.
+it.each(MAP_TOPICS)('makes $label accessible and completes its practice trail', async (topic) => {
+  const { container } = render(<MapLab onClose={() => {}} onScrapbook={() => {}} />);
+  fireEvent.click(screen.getByRole('button', { name: topic.label }));
+  expect((await axe(container)).violations).toEqual([]);
+  if (topic.id === 'climate') {
+    fireEvent.click(screen.getByRole('button', { name: 'Snowfall patterns' }));
+    expect(screen.getByRole('img', { name: 'Virginia snowfall patterns' })).toBeVisible();
+  }
+  for (const question of MAP_QUESTIONS[topic.id]) {
+    const group = within(screen.getByRole('group', { name: 'Map question answers' }));
+    expect(screen.getByRole('button', { name: 'Check my answer' })).toBeDisabled();
+    fireEvent.click(group.getByRole('button', { name: question.choices[(question.answer + 1) % 3] }));
+    fireEvent.click(screen.getByRole('button', { name: 'Check my answer' }));
+    expect(within(screen.getByRole('region', { name: 'Map practice' })).getByRole('status')).toHaveTextContent('Not quite');
+    fireEvent.click(group.getByRole('button', { name: question.choices[question.answer] }));
+    fireEvent.click(screen.getByRole('button', { name: 'Check my answer' }));
+    expect(within(screen.getByRole('region', { name: 'Map practice' })).getByRole('status')).toHaveTextContent(question.why);
+    fireEvent.click(screen.getByRole('button', { name: /Next map clue|Finish this practice/ }));
+  }
+  expect(screen.getByRole('heading', { name: 'Map detective discoveries complete!' })).toBeVisible();
+}, 15_000);
 
 
 it('lists all counties and cities, filters names without confusing like-named localities, and highlights the chosen place', () => {
