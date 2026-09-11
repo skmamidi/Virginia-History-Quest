@@ -64,12 +64,17 @@ it('explores all five regions', () => {
   }
 });
 
-// Each topic gets its own accessibility scan and complete retry/completion flow.
-// The county table scan needs headroom on shared GitHub-hosted runners.
-it.each(MAP_TOPICS)('makes $label accessible and completes its practice trail', async (topic) => {
+// Keep full-page accessibility scans separate from the 15-question interaction
+// tests so the population table scan has its own budget on hosted runners.
+it.each(MAP_TOPICS)('makes $label accessible', async (topic) => {
   const { container } = render(<MapLab onClose={() => {}} onScrapbook={() => {}} />);
   fireEvent.click(screen.getByRole('button', { name: topic.label }));
   expect((await axe(container)).violations).toEqual([]);
+}, 15_000);
+
+it.each(MAP_TOPICS)('completes and replays all $label practice questions with retries', (topic) => {
+  render(<MapLab onClose={() => {}} onScrapbook={() => {}} />);
+  fireEvent.click(screen.getByRole('button', { name: topic.label }));
   if (topic.id === 'climate') {
     fireEvent.click(screen.getByRole('button', { name: 'Snowfall patterns' }));
     expect(screen.getByRole('img', { name: 'Virginia snowfall patterns' })).toBeVisible();
@@ -80,20 +85,21 @@ it.each(MAP_TOPICS)('makes $label accessible and completes its practice trail', 
   for (const [index, question] of questions.entries()) {
     expect(practice.getByText(`Try it yourself · ${index + 1} of ${questions.length}`)).toBeVisible();
     expect(practice.getByRole('heading', { name: question.question })).toBeVisible();
-    const group = within(screen.getByRole('group', { name: 'Map question answers' }));
-    expect(screen.getByRole('button', { name: 'Check my answer' })).toBeDisabled();
+    // Search only the practice area, avoiding repeated scans of 133 table rows.
+    const group = within(practice.getByRole('group', { name: 'Map question answers' }));
+    expect(practice.getByRole('button', { name: 'Check my answer' })).toBeDisabled();
     fireEvent.click(group.getByRole('button', { name: question.choices[(question.answer + 1) % 3] }));
-    fireEvent.click(screen.getByRole('button', { name: 'Check my answer' }));
-    expect(within(screen.getByRole('region', { name: 'Map practice' })).getByRole('status')).toHaveTextContent('Not quite');
+    fireEvent.click(practice.getByRole('button', { name: 'Check my answer' }));
+    expect(practice.getByRole('status')).toHaveTextContent('Not quite');
     fireEvent.click(group.getByRole('button', { name: question.choices[question.answer] }));
-    fireEvent.click(screen.getByRole('button', { name: 'Check my answer' }));
-    expect(within(screen.getByRole('region', { name: 'Map practice' })).getByRole('status')).toHaveTextContent(question.why);
+    fireEvent.click(practice.getByRole('button', { name: 'Check my answer' }));
+    expect(practice.getByRole('status')).toHaveTextContent(question.why);
     const last = index === questions.length - 1;
     expect(practice.queryByRole('button', { name: last ? 'Next map clue' : 'Finish this practice' })).not.toBeInTheDocument();
     fireEvent.click(practice.getByRole('button', { name: last ? 'Finish this practice' : 'Next map clue' }));
   }
-  expect(screen.getByRole('heading', { name: 'Map detective discoveries complete!' })).toBeVisible();
-  fireEvent.click(screen.getByRole('button', { name: 'Practice again' }));
+  expect(practice.getByRole('heading', { name: 'Map detective discoveries complete!' })).toBeVisible();
+  fireEvent.click(practice.getByRole('button', { name: 'Practice again' }));
   expect(practice.getByText(`Try it yourself · 1 of ${questions.length}`)).toBeVisible();
   expect(practice.getByRole('heading', { name: questions[0].question })).toBeVisible();
   expect(practice.getByRole('button', { name: 'Check my answer' })).toBeDisabled();
