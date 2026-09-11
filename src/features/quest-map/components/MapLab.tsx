@@ -11,14 +11,16 @@ function MapPractice({ topic }: { topic: MapTopic }) {
   const [answer, setAnswer] = useState<number | null>(null);
   const [checked, setChecked] = useState(false);
   const [finished, setFinished] = useState(false);
-  const q = MAP_QUESTIONS[topic][step];
+  const questions = MAP_QUESTIONS[topic];
+  const q = questions[step];
+  const isLastQuestion = step === questions.length - 1;
   const correct = checked && answer === q.answer;
-  return <section className="map-practice" aria-label="Map practice"><p className="briefing-kicker">Try it yourself · {step + 1} of 3</p><h3>{finished ? 'Map detective discoveries complete!' : q.question}</h3>
+  return <section className="map-practice" aria-label="Map practice"><p className="briefing-kicker">Try it yourself · {step + 1} of {questions.length}</p><h3>{finished ? 'Map detective discoveries complete!' : q.question}</h3>
     {finished ? <><p>You practiced reading evidence from this map. Choose another map above to keep exploring.</p><button type="button" onClick={() => { setStep(0); setAnswer(null); setChecked(false); setFinished(false); }}>Practice again</button></> : <>
       <div className="map-answers" role="group" aria-label="Map question answers">{q.choices.map((choice, i) => <button key={choice} type="button" aria-pressed={answer === i} disabled={correct} onClick={() => { setAnswer(i); setChecked(false); }}>{choice}</button>)}</div>
       <button className="primary-action" type="button" disabled={answer === null || correct} onClick={() => setChecked(true)}>Check my answer</button>
       {checked ? <p role="status" className={correct ? 'map-feedback' : 'school-warning'}>{correct ? `You found it! ${q.why}` : 'Not quite. Check the map’s title, legend, or explanation, then try another answer.'}</p> : null}
-      {correct ? <button className="secondary-action" type="button" onClick={() => { if (step === 2) setFinished(true); else { setStep(step + 1); setAnswer(null); setChecked(false); } }}>{step === 2 ? 'Finish this practice' : 'Next map clue'}</button> : null}
+      {correct ? <button className="secondary-action" type="button" onClick={() => { if (isLastQuestion) setFinished(true); else { setStep(step + 1); setAnswer(null); setChecked(false); } }}>{isLastQuestion ? 'Finish this practice' : 'Next map clue'}</button> : null}
     </>}
   </section>;
 }

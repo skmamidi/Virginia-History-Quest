@@ -74,7 +74,12 @@ it.each(MAP_TOPICS)('makes $label accessible and completes its practice trail', 
     fireEvent.click(screen.getByRole('button', { name: 'Snowfall patterns' }));
     expect(screen.getByRole('img', { name: 'Virginia snowfall patterns' })).toBeVisible();
   }
-  for (const question of MAP_QUESTIONS[topic.id]) {
+  const questions = MAP_QUESTIONS[topic.id];
+  expect(questions.length).toBeGreaterThanOrEqual(15);
+  const practice = within(screen.getByRole('region', { name: 'Map practice' }));
+  for (const [index, question] of questions.entries()) {
+    expect(practice.getByText(`Try it yourself · ${index + 1} of ${questions.length}`)).toBeVisible();
+    expect(practice.getByRole('heading', { name: question.question })).toBeVisible();
     const group = within(screen.getByRole('group', { name: 'Map question answers' }));
     expect(screen.getByRole('button', { name: 'Check my answer' })).toBeDisabled();
     fireEvent.click(group.getByRole('button', { name: question.choices[(question.answer + 1) % 3] }));
@@ -83,9 +88,15 @@ it.each(MAP_TOPICS)('makes $label accessible and completes its practice trail', 
     fireEvent.click(group.getByRole('button', { name: question.choices[question.answer] }));
     fireEvent.click(screen.getByRole('button', { name: 'Check my answer' }));
     expect(within(screen.getByRole('region', { name: 'Map practice' })).getByRole('status')).toHaveTextContent(question.why);
-    fireEvent.click(screen.getByRole('button', { name: /Next map clue|Finish this practice/ }));
+    const last = index === questions.length - 1;
+    expect(practice.queryByRole('button', { name: last ? 'Next map clue' : 'Finish this practice' })).not.toBeInTheDocument();
+    fireEvent.click(practice.getByRole('button', { name: last ? 'Finish this practice' : 'Next map clue' }));
   }
   expect(screen.getByRole('heading', { name: 'Map detective discoveries complete!' })).toBeVisible();
+  fireEvent.click(screen.getByRole('button', { name: 'Practice again' }));
+  expect(practice.getByText(`Try it yourself · 1 of ${questions.length}`)).toBeVisible();
+  expect(practice.getByRole('heading', { name: questions[0].question })).toBeVisible();
+  expect(practice.getByRole('button', { name: 'Check my answer' })).toBeDisabled();
 }, 15_000);
 
 

@@ -146,7 +146,9 @@ Two classroom connections sit below the explorer guide:
 - **Virginia map lab** adds five selectable region explanations and comparison,
   temperature/snowfall concept maps, a dated population-density map with a numeric
   table and source links, compass/relative-location/scale practice, an optional
-  raised-relief activity, and twelve original questions with explanations and retries.
+  raised-relief activity, and 60 original questions with explanations and retries:
+  15 each for Five regions, Climate, Population, and Map tools. Practice mixes
+  map reading, comparisons, evidence questions, and simple arithmetic for grades 4–5.
 
 Scrapbook drafts save under `virginia-history-quest:scrapbook:v1` in localStorage,
 separately from all mission progress. Photo processing happens locally: supported
@@ -174,8 +176,8 @@ content-review limitations still apply.
 Climate explanations connect elevation, decreasing air pressure, air expansion and
 cooling, water’s heat storage, latitude, mountain lifting, rain shadows, and winter
 precipitation layers to Virginia examples. An interactive three-step diagram follows
-moist air uphill, through cloud formation, and downhill. The three climate questions
-now check understanding of these causes. The “About these learning materials”
+moist air uphill, through cloud formation, and downhill. The 15 climate questions
+check these causes, weather versus climate, and careful map reading. The “About these learning materials”
 section has been removed from the map lab; provenance remains in these docs and
 specific science/data source links remain beside the lessons.
 
