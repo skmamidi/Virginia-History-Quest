@@ -75,5 +75,5 @@ it("guides a new explorer directly into a mission and updates the next action", 
   expect(screen.getByText("Nice work! Tap Next challenge to keep going.")).toBeVisible();
   await user.click(within(screen.getByRole("navigation", { name: "Explore Virginia" })).getByRole("link", { name: "Quest map" }));
   expect(screen.getByRole("button", { name: "Continue my adventure" })).toBeVisible();
-  expect(screen.getByText(/Next up: challenge 2 of 3/)).toBeVisible();
+  expect(screen.getByText(/Next up: challenge 2 of 10/)).toBeVisible();
 });
