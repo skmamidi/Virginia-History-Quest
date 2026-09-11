@@ -234,7 +234,7 @@ export function QuestMapScreen() {
         audioEnabled={audioEnabled}
         onToggleMotion={() => {
           setMotionPaused((current) => !current);
-          setStatusMessage(motionPaused ? "Map motion resumed." : "Map motion paused.");
+          setStatusMessage(motionPaused ? "Motion resumed." : "Motion paused.");
         }}
         onToggleAudio={() => {
           setAudioEnabled((current) => !current);
@@ -447,7 +447,7 @@ export function QuestMapScreen() {
       {route.kind === "trips" ? <FieldTripTrail initialChapter={tripChapter} onClose={() => setTripChapter(null)} onMission={openMission} /> : null}
 
       {briefingOpen ? <MissionStory key={selectedId} missionId={selectedId} title={selectedMission.shortTitle}
-        progress={selectedStory} replay={route.kind === 'story' && selectedStory.finished}
+        motionPaused={motionPaused} progress={selectedStory} replay={route.kind === 'story' && selectedStory.finished}
         onExplore={index => {
           const next = { ...stories, [selectedId]: { ...selectedStory, scene: index, explored: [...new Set([...selectedStory.explored, index])] } };
           setStories(next);

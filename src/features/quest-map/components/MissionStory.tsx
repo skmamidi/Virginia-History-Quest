@@ -5,12 +5,13 @@ import { MISSION_ACTIVITIES } from '../../../contexts/published-content/adapters
 import type { MissionId } from '../../../contexts/published-content/domain/mission';
 import type { StoryProgress } from '../storyProgress';
 import { PageContent } from './PageContent';
+import { StoryAnimation } from './StoryAnimation';
 
 const ICONS = { mountain: Mountain, water: Waves, people: Users, search: Search, ship: Ship, plant: Sprout, document: BookOpen, flag: Flag, rights: ShieldCheck, bridge: Waypoints, train: TrainFront, factory: Factory, school: GraduationCap, globe: Globe } satisfies Record<StoryIcon, typeof Mountain>;
 
-export function MissionStory({ missionId, title, progress, onExplore, onComplete, onPractice, replay = false }: {
+export function MissionStory({ missionId, title, progress, onExplore, onComplete, onPractice, replay = false, motionPaused = false }: {
   missionId: MissionId; title: string; progress: StoryProgress; onExplore: (index: number) => void;
-  onComplete: () => void; onPractice: () => void; replay?: boolean;
+  onComplete: () => void; onPractice: () => void; replay?: boolean; motionPaused?: boolean;
 }) {
   const story = MISSION_STORIES[missionId];
   const scene = story.scenes[progress.scene];
@@ -18,13 +19,17 @@ export function MissionStory({ missionId, title, progress, onExplore, onComplete
   const [discoveryOpen, setDiscoveryOpen] = useState(false);
   const [speaking, setSpeaking] = useState(false);
   const heading = useRef<HTMLHeadingElement>(null);
+  const animationArea = useRef<HTMLDivElement>(null);
   const uniqueId = useId();
   const allExplored = progress.explored.length === 3;
   const canSpeak = typeof window.speechSynthesis?.speak === 'function' && typeof window.SpeechSynthesisUtterance === 'function';
   useEffect(() => () => window.speechSynthesis?.cancel(), []);
   function explore(index: number, focus = false) {
     window.speechSynthesis?.cancel(); setSpeaking(false); setDiscoveryOpen(false); onExplore(index);
-    if (focus) requestAnimationFrame(() => { heading.current?.focus(); heading.current?.scrollIntoView({ block: 'nearest' }); });
+    if (focus) requestAnimationFrame(() => {
+      const target = window.matchMedia?.('(max-width: 1000px)').matches ? animationArea.current : heading.current;
+      target?.focus({ preventScroll: true }); target?.scrollIntoView({ block: 'nearest' });
+    });
   }
   function speak() {
     window.speechSynthesis.cancel();
@@ -45,16 +50,6 @@ export function MissionStory({ missionId, title, progress, onExplore, onComplete
       <section className="story-map" aria-labelledby={`${uniqueId}-map-title`}>
         <div className="story-map-heading"><p className="briefing-kicker">Tap a stop. Make a connection.</p><h3 id={`${uniqueId}-map-title`}>{story.title}</h3></div>
         <div className={`story-diagram diagram-${story.diagram}`} role="group" aria-label={story.diagramLabel}>
-          <svg className="story-scenery" viewBox="0 0 720 280" preserveAspectRatio="none" aria-hidden="true">
-            {story.diagram === 'landscape' ? <>
-              <path className="story-mountains-back" d="M0 240L100 35 200 150 270 65 380 210 490 175 720 220V280H0Z" />
-              <path className="story-mountains-front" d="M0 280V210L90 145 165 230 255 145 345 230 480 210 600 260 720 250V280Z" />
-              <path className="story-river" d="M225 170Q300 165 325 220T470 245T710 272" />
-            </> : <>
-              <path className="story-horizon" d={story.diagram === 'network' ? 'M0 260Q150 170 290 235T720 220V280H0Z' : 'M0 250Q170 220 360 245T720 230V280H0Z'} />
-              <circle cx="640" cy="48" r="30" className="story-sun" />
-            </>}
-          </svg>
           <ol className="story-stops">
             {story.scenes.map((stop, index) => {
               const StopIcon = ICONS[stop.icon];
@@ -68,7 +63,7 @@ export function MissionStory({ missionId, title, progress, onExplore, onComplete
             })}
           </ol>
         </div>
-        <p className="story-diagram-note">{story.diagram === 'timeline' ? 'Timeline of selected events; spacing does not represent time.' : story.diagram === 'landscape' ? 'A landscape diagram, not a map. Shapes and distances are simplified.' : 'A connection diagram; it shows relationships, not exact locations.'}</p>
+        <div className="story-animation-focus" ref={animationArea} tabIndex={-1} aria-label={`Illustrated explanation: ${scene.title}`}><StoryAnimation key={`${missionId}-${progress.scene}`} missionId={missionId} scene={progress.scene} motionPaused={motionPaused} /></div>
         <p className="story-explored" role="status"><Check aria-hidden="true" />{progress.explored.length} of 3 stops explored{allExplored ? ' · Your challenges are ready when you are.' : ' · Explore all three to unlock the challenges.'}</p>
       </section>
       <article className="story-scene" id={`${uniqueId}-scene`} aria-labelledby={`${uniqueId}-scene-title`}>

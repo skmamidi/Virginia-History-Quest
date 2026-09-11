@@ -68,3 +68,20 @@ it('allows keyboard exploration and entering challenges from a direct story link
   await user.click(screen.getByRole('button', { name: 'Try the challenges' }));
   expect(screen.getByRole('heading', { name: MISSION_ACTIVITIES['VS.11'].challenges[0].prompt })).toBeVisible();
 });
+
+
+it('connects animation pause to the header and resets playback when the story stop changes', async () => {
+  window.history.replaceState(null, '', '#/story/VS.1');
+  const user = userEvent.setup();
+  render(<QuestMapScreen />);
+  await user.click(screen.getByRole('button', { name: 'Pause motion' }));
+  expect(screen.getByRole('button', { name: 'Play animation' })).toBeDisabled();
+  await user.click(screen.getByRole('button', { name: '3. A river continues' }));
+  expect(screen.getByRole('slider', { name: 'Animation progress' })).toHaveValue('12');
+  await user.click(screen.getByRole('button', { name: 'Next story stop' }));
+  expect(screen.getByRole('slider', { name: 'Animation progress' })).toHaveValue('0');
+  expect(screen.getByRole('button', { name: 'Play animation' })).toBeDisabled();
+  expect(screen.getByRole('button', { name: 'Try the challenges' })).toBeDisabled();
+  await user.click(screen.getByRole('button', { name: 'Resume motion' }));
+  expect(screen.getByRole('button', { name: 'Pause animation' })).toBeEnabled();
+});
