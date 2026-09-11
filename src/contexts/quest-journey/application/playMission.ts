@@ -1,4 +1,5 @@
 import { MISSION_CATALOG } from "../../published-content/adapters/missionCatalog";
+import { MISSION_ACTIVITIES } from "../../published-content/adapters/missionActivities";
 import { applyMissionEvent, type MissionProgress } from "../domain/missionProgress";
 
 export const freshProgress: readonly MissionProgress[] = MISSION_CATALOG.missions.map(({ id }) => ({
@@ -19,15 +20,28 @@ export function prepareProgress(records: readonly MissionProgress[], now = new D
 }
 
 export function challengeIndex(record: MissionProgress): number {
-  if (record.state === "PRACTICING") return 1;
-  if (["BOSS_READY", "DELAYED_CHECK_DUE", "TARGETED_REVIEW"].includes(record.state)) return 2;
+  const last = MISSION_ACTIVITIES[record.missionId].challenges.length - 1;
+  if (["DELAYED_CHECK_DUE", "TARGETED_REVIEW"].includes(record.state)) return last;
+  const checkpoint = /^mission-question:(\d+)$/.exec(record.lastMeaningfulStep ?? '');
+  const next = checkpoint ? Number(checkpoint[1]) : null;
+  if (record.state === "PRACTICING") return next !== null && next >= 1 && next < last ? next : 1;
+  // Old three-question records have solved the first two questions. Those stay
+  // in place; new questions are inserted before the original final challenge.
+  if (record.state === "BOSS_READY") return next === last ? last : 2;
   return 0;
 }
 
 export function passChallenge(record: MissionProgress, index: number, now = new Date()): MissionProgress {
   if (index !== challengeIndex(record)) return record;
-  if (record.state === "LEARNING") return applyMissionEvent(record, { type: "LEARNING_COMPLETED" });
-  if (record.state === "PRACTICING") return applyMissionEvent(record, { type: "PRACTICE_GATES_MET" });
+  const last = MISSION_ACTIVITIES[record.missionId].challenges.length - 1;
+  if (record.state === "BOSS_READY" && index < last) {
+    record = applyMissionEvent(record, { type: "BOSS_RETRY_NEEDED" });
+  }
+  if (record.state === "LEARNING" || record.state === "PRACTICING") {
+    if (record.state === "LEARNING") record = applyMissionEvent(record, { type: "LEARNING_COMPLETED" });
+    if (index === last - 1) record = applyMissionEvent(record, { type: "PRACTICE_GATES_MET" });
+    return applyMissionEvent(record, { type: "MEANINGFUL_STEP_REACHED", step: `mission-question:${index + 1}` });
+  }
   if (record.state === "BOSS_READY") return applyMissionEvent(record, { type: "BOSS_PASSED", occurredAt: now.toISOString() });
   if (record.state === "TARGETED_REVIEW") record = applyMissionEvent(record, { type: "TARGETED_REVIEW_COMPLETED" });
   if (record.state === "DELAYED_CHECK_DUE") return applyMissionEvent(record, { type: "DELAYED_CHECK_PASSED", occurredAt: now.toISOString() });
