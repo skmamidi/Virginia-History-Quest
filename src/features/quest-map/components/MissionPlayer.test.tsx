@@ -20,8 +20,10 @@ describe("mission adventures", () => {
     render(<QuestMapScreen />);
     await openMission(user, id);
     const activity = MISSION_ACTIVITIES[id];
-    for (let index = 0; index < 3; index++) {
+    expect(activity.challenges.length).toBeGreaterThanOrEqual(10);
+    for (let index = 0; index < activity.challenges.length; index++) {
       const challenge = activity.challenges[index];
+      expect(screen.getByText(`Question ${index + 1} of ${activity.challenges.length}`)).toBeVisible();
       expect(screen.getByRole("heading", { name: challenge.prompt })).toBeVisible();
       expect(screen.getByRole("button", { name: "Check my discovery" })).toBeDisabled();
       const answers = within(screen.getByRole("group", { name: challenge.kind === "order" ? "Timeline pieces" : "Answer choices" }));
@@ -32,7 +34,15 @@ describe("mission adventures", () => {
       }
       await user.click(screen.getByRole("button", { name: "Check my discovery" }));
       expect(screen.getByText(challenge.explanation)).toBeVisible();
-      await user.click(screen.getByRole("button", { name: index === 2 ? "Reveal my badge" : "Next challenge" }));
+      const last = index === activity.challenges.length - 1;
+      expect(screen.queryByRole('button', { name: last ? 'Next challenge' : 'Reveal my badge' })).toBeNull();
+      if (id === 'VS.1' && index === 4) {
+        await user.click(within(screen.getByRole('navigation', { name: 'Explore Virginia' })).getByRole('link', { name: 'Quest map' }));
+        expect(screen.getByText(/Next up: challenge 6 of 10/)).toBeVisible();
+        await user.click(screen.getByRole('button', { name: 'Continue my adventure' }));
+      } else {
+        await user.click(screen.getByRole("button", { name: last ? "Reveal my badge" : "Next challenge" }));
+      }
     }
     expect(within(screen.getByRole("main")).getByText(activity.badge)).toBeVisible();
     if (id === "VS.11") {
@@ -40,16 +50,19 @@ describe("mission adventures", () => {
       await user.click(screen.getByRole("button", { name: "Return to my challenges" }));
       expect(await screen.findByRole("heading", { name: "You did it, explorer!" })).toBeVisible();
       expect(within(screen.getByRole("main")).getByText(activity.badge)).toBeVisible();
+      await user.click(screen.getByRole('button', { name: 'Replay all 10 questions' }));
+      expect(screen.getByRole('heading', { name: activity.challenges[0].prompt })).toBeVisible();
+      expect(screen.getByText('Question 1 of 10')).toBeVisible();
     }
     if (id === "VS.1") {
       await user.click(screen.getByRole("button", { name: "Next adventure: Indigenous Virginia" }));
       expect(screen.getByRole("heading", { name: "Your mission: Indigenous Virginia" })).toBeVisible();
       await user.click(within(screen.getByRole("navigation", { name: "Explore Virginia" })).getByRole("link", { name: "Quest map" }));
     } else {
-      await user.click(screen.getByRole("button", { name: "Back to my map" }));
+      await user.click(screen.getByRole("button", { name: "Back to quest map" }));
     }
     expect(screen.getByRole("progressbar")).toHaveAttribute("aria-valuenow", "1");
-  });
+  }, 15000);
 
   it("supports wrong answers, ordering retries, saved checkpoints, and accessible pages", async () => {
     const user = userEvent.setup();
