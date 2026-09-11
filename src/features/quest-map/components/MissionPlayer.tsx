@@ -32,9 +32,12 @@ export function MissionPlayer({ mission, record, audioEnabled, onPass, onClose, 
   const heading = useRef<HTMLHeadingElement>(null);
   const audio = useRef<AudioContext | null>(null);
   const challenge = activity.challenges[index];
+  const count = activity.challenges.length;
+  const isLastQuestion = index === count - 1;
+  const trailStage = index === 0 ? 0 : isLastQuestion ? 2 : 1;
   const success = feedback === "correct";
   const readyToCheck = challenge.kind === "order" ? sequence.length === challenge.choices.length : selected !== null;
-  const nextCue = success ? (index === 2 ? "Tap Reveal my badge to see what you earned!" : "Nice work! Tap Next challenge to keep going.")
+  const nextCue = success ? (isLastQuestion ? "Tap Reveal my badge to see what you earned!" : "Nice work! Tap Next challenge to keep going.")
     : feedback === "retry" ? (challenge.kind === "order" ? "Read the clue, then tap Start over to try a new order." : "Read the clue, then tap a different answer.")
     : readyToCheck ? "Ready! Tap Check my discovery below."
     : challenge.kind === "order" ? `Tap the ${["first", "second", "third"][sequence.length]} piece. ${sequence.length} of 3 placed.`
@@ -79,7 +82,7 @@ export function MissionPlayer({ mission, record, audioEnabled, onPass, onClose, 
 
   function advance() {
     window.speechSynthesis?.cancel();
-    if (index === 2) { setFinished(true); return; }
+    if (isLastQuestion) { setFinished(true); return; }
     setIndex(index + 1); setSelected(null); setSequence([]); setFeedback(null); setHintOpen(false);
   }
 
@@ -89,15 +92,15 @@ export function MissionPlayer({ mission, record, audioEnabled, onPass, onClose, 
       <aside className="mission-journey" aria-label="Your mission trail">
         <h2>{mission.shortTitle}</h2><p className="mission-code">{mission.id}</p>
         <p className="mission-goal">{activity.goal}</p>
-          <div className="adventure-progress" aria-label={`Challenge ${index + 1} of 3`}>
+          <div className="adventure-progress" aria-label={`Challenge ${index + 1} of ${count}`}>
             {["Find a clue", "Connect the story", "Final challenge"].map((label, step) => (
-              <span key={label} className={finished || step <= index ? "step-active" : ""} aria-current={step === index ? "step" : undefined}>
-                {finished || step < index ? <CheckCircle2 aria-hidden="true" /> : <span>{step + 1}</span>}{label}
+              <span key={label} className={finished || step <= trailStage ? "step-active" : ""} aria-current={!finished && step === trailStage ? "step" : undefined}>
+                {finished || step < trailStage ? <CheckCircle2 aria-hidden="true" /> : <span>{step + 1}</span>}{label}
               </span>
             ))}
           </div>
 
-        {finished ? <p className="mission-trail-complete"><CheckCircle2 aria-hidden="true" />Three discoveries complete</p> : null}
+        {finished ? <p className="mission-trail-complete"><CheckCircle2 aria-hidden="true" />Badge earned</p> : null}
         <div className="mission-journey-links">
           {onPause ? <button type="button" onClick={onPause}>Pause & return</button> : null}
           <button type="button" onClick={onMap ?? onClose}>Back to quest map</button>
@@ -110,7 +113,7 @@ export function MissionPlayer({ mission, record, audioEnabled, onPass, onClose, 
           <div className="earned-badge"><Award aria-hidden="true" /></div>
           <h2 id="adventure-title" ref={heading} tabIndex={-1}>You did it, explorer!</h2>
           <p className="badge-name">{activity.badge}</p>
-          <div className="earned-stars" aria-label="Three challenges complete">
+          <div className="earned-stars" aria-label="Mission badge earned">
             {[1, 2, 3].map((star) => <Star key={star} aria-hidden="true" />)}
           </div>
           <p>You used evidence, made connections, and solved the final challenge.</p>
@@ -119,9 +122,13 @@ export function MissionPlayer({ mission, record, audioEnabled, onPass, onClose, 
           <button className="primary-action" type="button" onClick={onNext}>{nextMissionTitle ? `Next adventure: ${nextMissionTitle}` : "See all my badges"} <ChevronRight aria-hidden="true" /></button>
           {onPractice ? <button className="secondary-action" type="button" onClick={onPractice}>Practice SOL questions</button> : null}
           <button className="secondary-action" type="button" onClick={onClose}>Back to my map</button>
+          <button className="secondary-action" type="button" onClick={() => {
+            setIndex(0); setSelected(null); setSequence([]); setFeedback(null); setHintOpen(false); setFinished(false);
+          }}>Replay all {count} questions</button>
         </div>
       ) : (
         <>
+          <p className="briefing-kicker">Question {index + 1} of {count}</p>
           <h2 id="adventure-title" ref={heading} tabIndex={-1}>{isReview ? "Memory check: " : ""}{challenge.prompt}</h2>
           <p className="mission-instructions">{challenge.kind === "order" ? "Build the story from first to last." : "Find the answer using the clue. It’s okay to try again!"}</p>
           {index === 0 ? <div className="clue-card"><Lightbulb aria-hidden="true" /><p>{challenge.clue}</p></div> : (
@@ -157,14 +164,14 @@ export function MissionPlayer({ mission, record, audioEnabled, onPass, onClose, 
             {!success ? <button className="hint-button" type="button" disabled={!sequence.length} onClick={() => { setSequence([]); setFeedback(null); }}><RotateCcw aria-hidden="true" />Start over</button> : null}
           </> : null}
           <div className={`challenge-feedback ${success ? "feedback-correct" : ""}`} role="status">
-            {feedback === "correct" ? <><strong><Sparkles aria-hidden="true" />{index === 2 ? "Final challenge solved!" : "Discovery made!"}</strong><p>{challenge.explanation}</p></> : feedback === "retry" ? <><strong>Keep investigating—you can try again!</strong><p>{challenge.clue}</p></> : null}
+            {feedback === "correct" ? <><strong><Sparkles aria-hidden="true" />{isLastQuestion ? "Final challenge solved!" : "Discovery made!"}</strong><p>{challenge.explanation}</p></> : feedback === "retry" ? <><strong>Keep investigating—you can try again!</strong><p>{challenge.clue}</p></> : null}
           </div>
           <div className={`mission-action-bar ${readyToCheck || success ? "action-ready" : ""}`}>
-          {success ? <button className="primary-action" type="button" onClick={advance}>{index === 2 ? "Reveal my badge" : "Next challenge"}<ChevronRight aria-hidden="true" /></button> : (
+          {success ? <button className="primary-action" type="button" onClick={advance}>{isLastQuestion ? "Reveal my badge" : "Next challenge"}<ChevronRight aria-hidden="true" /></button> : (
             <button className="primary-action" type="button" disabled={challenge.kind === "order" ? sequence.length !== challenge.choices.length : selected === null} onClick={checkAnswer}>Check my discovery <ChevronRight aria-hidden="true" /></button>
           )}
           </div>
-          <p className="checkpoint-note">Each solved challenge saves your place. No timer. No lost lives.</p>
+          <p className="checkpoint-note">{["PROVISIONAL_MASTERY", "MASTERED"].includes(record.state) ? "Your earned badge is safe. Replay practice starts from question 1 when reopened." : "Each solved challenge saves your place. No timer. No lost lives."}</p>
         </>
       )}
       <details className="activity-sources"><summary>Sources for curious explorers and grown-ups</summary><ul>{ACTIVITY_SOURCES.map((source) => <li key={source.url}><a href={source.url} target="_blank" rel="noreferrer">{source.label}</a></li>)}</ul></details>

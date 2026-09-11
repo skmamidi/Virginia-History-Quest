@@ -1,21 +1,24 @@
 import { Award, ChevronRight, Compass, Search } from "lucide-react";
 import type { QuestPortalView } from "../types";
 import { MISSION_ACTIVITIES } from "../../../contexts/published-content/adapters/missionActivities";
+import { challengeIndex } from "../../../contexts/quest-journey/application/playMission";
+import type { MissionProgress } from "../../../contexts/quest-journey/domain/missionProgress";
 
-export function ExplorerGuide({ mission, onStart, onPractice }: { mission: QuestPortalView; onStart: () => void; onPractice?: () => void }) {
+export function ExplorerGuide({ mission, record, onStart, onPractice }: { mission: QuestPortalView; record: MissionProgress; onStart: () => void; onPractice?: () => void }) {
   const isNew = mission.progressState === "AVAILABLE" || mission.progressState === "ORIENTING";
   const isReplay = mission.progressState === "PROVISIONAL_MASTERY" || mission.progressState === "MASTERED";
   const isReview = mission.progressState === "DELAYED_CHECK_DUE" || mission.progressState === "TARGETED_REVIEW";
-  const step = mission.progressState === "PRACTICING" ? 2 : mission.progressState === "BOSS_READY" || isReview ? 3 : 1;
+  const step = challengeIndex(record) + 1;
+  const count = MISSION_ACTIVITIES[mission.id].challenges.length;
   return (
     <section className="explorer-guide" aria-labelledby="explorer-guide-title">
       <div className="guide-compass" aria-hidden="true"><Compass /></div>
       <div className="guide-copy">
         <h2 id="explorer-guide-title" tabIndex={-1}>{isNew ? "Start here, explorer!" : isReplay ? "Ready for another discovery?" : "Let’s pick up where you left off!"}</h2>
-        <p>{isNew ? "Your adventure" : isReplay ? "Play again" : isReview ? "Your memory check" : `Next up: challenge ${step} of 3`} <strong>· {mission.shortTitle}</strong></p>
+        <p>{isNew ? "Your adventure" : isReplay ? "Play again" : isReview ? "Your memory check" : `Next up: challenge ${step} of ${count}`} <strong>· {mission.shortTitle}</strong></p>
         <ol className="explorer-route" aria-label="How an adventure works">
           <li><span>1</span><Search aria-hidden="true" />Explore the story</li>
-          <li><span>2</span><Compass aria-hidden="true" />Try 3 challenges</li>
+          <li><span>2</span><Compass aria-hidden="true" />Try {count} questions</li>
           <li><span>3</span><Award aria-hidden="true" />Earn your badge</li>
         </ol>
       </div>

@@ -2,6 +2,17 @@
 
 Virginia History Quest is an accessible React and TypeScript prototype that helps fourth- and fifth-grade learners explore Virginia history through a mission-based map. The app includes 13 playable missions with clue questions, tap-to-order challenges, final challenges, and collectible explorer badges.
 
+Each mission now includes **10 questions (130 total)** with clues, explanations,
+and unlimited retries. Question counters, guide text, and badge gates use the
+mission’s actual question count. The three story stops and the separate
+three-question SOL practice trails remain distinct activities.
+
+Solved mission questions save their next index in `lastMeaningfulStep` as
+`mission-question:N`. Existing three-question progress preserves the first two
+questions; seven new questions precede the original final challenge. Existing
+badges and their dates remain valid. Completed missions offer **Replay all 10
+questions**, and the seven-day memory check still uses the final challenge.
+
 > **Prototype historical-review caveat:** Historical copy, locations, relationships, and generated artwork in this repository have not completed the specification's claim-level sourcing, historian review, tribal/community review, sensitivity review, or publication sign-off. Do not treat the prototype as a production classroom source. “SOL-aligned” does not mean approved by, endorsed by, or officially affiliated with the Virginia Department of Education.
 
 ## Requirements

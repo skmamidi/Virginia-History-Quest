@@ -1,6 +1,7 @@
 import { useEffect, useId, useRef, useState } from 'react';
 import { ArrowLeft, ArrowRight, BookOpen, Check, ChevronRight, Factory, Flag, Globe, GraduationCap, Lightbulb, Mountain, Search, ShieldCheck, Ship, Sprout, TrainFront, Users, Volume2, VolumeX, Waves, Waypoints } from 'lucide-react';
 import { MISSION_STORIES, type StoryIcon } from '../../../contexts/published-content/adapters/missionStories';
+import { MISSION_ACTIVITIES } from '../../../contexts/published-content/adapters/missionActivities';
 import type { MissionId } from '../../../contexts/published-content/domain/mission';
 import type { StoryProgress } from '../storyProgress';
 import { PageContent } from './PageContent';
@@ -38,7 +39,7 @@ export function MissionStory({ missionId, title, progress, onExplore, onComplete
       <p className="briefing-kicker">{missionId} · Explore the story · At your pace</p>
       <h2 id="briefing-title">Your mission: {title}</h2>
       <p className="story-invitation">{story.invitation}</p>
-      <div className="story-stage-label"><span><BookOpen aria-hidden="true" />Story first</span><ChevronRight aria-hidden="true" /><span>Then 3 challenges</span></div>
+      <div className="story-stage-label"><span><BookOpen aria-hidden="true" />Story first</span><ChevronRight aria-hidden="true" /><span>Then {MISSION_ACTIVITIES[missionId].challenges.length} questions</span></div>
     </header>
     <div className="story-experience">
       <section className="story-map" aria-labelledby={`${uniqueId}-map-title`}>

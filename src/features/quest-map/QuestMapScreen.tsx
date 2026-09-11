@@ -195,7 +195,7 @@ export function QuestMapScreen() {
       );
       saveProgress(next);
     }
-    setStatusMessage("Your investigation is ready. Solve three challenges to earn a badge.");
+    setStatusMessage(`Your investigation is ready. Solve ${MISSION_ACTIVITIES[selectedId].challenges.length} questions to earn a badge.`);
   }, [progress, saveProgress, selectedId]);
 
   const toggleLayer = (layer: keyof MapLayers) => {
@@ -261,7 +261,7 @@ export function QuestMapScreen() {
           </button>
         </div>
 
-        <ExplorerGuide mission={selectedMission} onStart={startSelectedMission} onPractice={() => setPracticeOpen(true)} />
+        <ExplorerGuide mission={selectedMission} record={selectedRecord} onStart={startSelectedMission} onPractice={() => setPracticeOpen(true)} />
         <button className="field-trip-launch" type="button" onClick={() => setTripChapter(0)}>
           <MapPin aria-hidden="true" /><span><strong>Connect our field trips</strong><small>Yorktown, Harpers Ferry, Hampton Roads & the road to Appomattox</small></span><ChevronRight aria-hidden="true" />
         </button>
