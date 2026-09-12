@@ -10,6 +10,9 @@ it('recognizes shareable destinations and safely handles unknown missions', () =
   expect(parseRoute('#/mission/VS.99')).toEqual({ kind: 'home' });
   expect(parseRoute('#/unknown')).toEqual({ kind: 'home' });
   expect(routeHash({ kind: 'scrapbook' })).toBe('#/scrapbook');
+  expect(parseRoute('#/science/rocks')).toEqual({ kind: 'science', topicId: 'rocks' });
+  expect(parseRoute('#/science/unknown')).toEqual({ kind: 'science' });
+  expect(routeHash({ kind: 'science', topicId: 'soil' })).toBe('#/science/soil');
 });
 
 it('uses full pages, preserves the map view, and supports browser back and forward', async () => {
@@ -21,7 +24,7 @@ it('uses full pages, preserves the map view, and supports browser back and forwa
   await user.click(launch);
   expect(window.location.hash).toBe('#/mission/VS.1');
   expect(screen.queryByRole('dialog')).toBeNull();
-  expect(within(screen.getByRole('navigation', { name: 'Explore Virginia' })).getAllByRole('link')).toHaveLength(5);
+  expect(within(screen.getByRole('navigation', { name: 'Explore Virginia' })).getAllByRole('link')).toHaveLength(6);
   await user.click(screen.getByRole('button', { name: 'Next story stop' }));
   await user.click(screen.getByRole('button', { name: 'Next story stop' }));
   await user.click(screen.getByRole('button', { name: 'Try the challenges' }));
@@ -35,6 +38,19 @@ it('uses full pages, preserves the map view, and supports browser back and forwa
   expect(await screen.findByRole('heading', { name: 'Build a trail from east to west.' })).toBeVisible();
   expect(window.location.hash).toBe('#/mission/VS.1');
   expect(document.body.style.overflow).not.toBe('hidden');
+});
+
+it('opens a science lesson directly and returns to the science directory and quest map', async () => {
+  window.history.replaceState(null, '', '#/science/rocks');
+  const user = userEvent.setup();
+  render(<QuestMapScreen />);
+  expect(await screen.findByRole('heading', { name: 'Virginia’s rocky treasures' })).toBeVisible();
+  expect(screen.queryByRole('dialog')).toBeNull();
+  await user.click(screen.getByRole('button', { name: 'Back to Science' }));
+  expect(await screen.findByRole('heading', { name: 'Science & natural resources' })).toBeVisible();
+  await user.click(within(screen.getByRole('navigation', { name: 'Explore Virginia' })).getByRole('link', { name: 'Quest map' }));
+  expect(screen.getByRole('heading', { name: 'Your Virginia Memory Map' })).toBeVisible();
+  expect(screen.getByRole('button', { name: 'Start my adventure' })).toBeVisible();
 });
 
 it('opens a mission link directly and provides a safe parent destination', async () => {

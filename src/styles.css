@@ -1936,8 +1936,8 @@ input:focus-visible,
 
 /* One continuous learning journey: normal pages, persistent wayfinding. */
 [hidden] { display: none !important; }
-.journey-navigation { position: sticky; top: 0; z-index: 45; display: flex; align-items: stretch; justify-content: center; gap: clamp(12px, 4vw, 65px); min-height: 64px; padding: 0 20px; border-bottom: 1px solid #d6cfbf; background: #faf7eef5; backdrop-filter: blur(12px); }
-.journey-navigation a { display: flex; align-items: center; justify-content: center; gap: 10px; color: #223e50; text-decoration: none; border-bottom: 4px solid transparent; padding: 12px 20px 9px; font-size: 16px; font-weight: 650; }
+.journey-navigation { position: sticky; top: 0; z-index: 45; display: flex; align-items: stretch; justify-content: center; gap: clamp(4px, 2vw, 32px); min-height: 64px; padding: 0 20px; border-bottom: 1px solid #d6cfbf; background: #faf7eef5; backdrop-filter: blur(12px); }
+.journey-navigation a { display: flex; align-items: center; justify-content: center; gap: 10px; min-width: 0; color: #223e50; text-decoration: none; border-bottom: 4px solid transparent; padding: 12px 14px 9px; font-size: 16px; font-weight: 650; }
 .journey-navigation a svg { width: 21px; height: 21px; flex-shrink: 0; }
 .journey-navigation a[aria-current="page"] { color: #245844; border-bottom-color: #245844; background: #e9eddc73; }
 .journey-navigation a:hover { background: #e9eddc; }
@@ -2035,6 +2035,10 @@ input:focus-visible,
   body:has(.scrapbook-preview) .skip-link { display: none !important; }
   body:has(.scrapbook-preview) .quest-app > .journey-main { display: block !important; }
   body:has(.scrapbook-preview) .journey-main { padding: 0; margin: 0; max-width: none; min-height: 0; }
+}
+
+@media (max-width: 370px) {
+  .journey-navigation a { font-size: 9px; padding-inline: 2px; }
 }
 
 /* Mission introductions: one explorable diagram and reading panel per active mission. */

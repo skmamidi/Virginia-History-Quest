@@ -1,8 +1,9 @@
-import { useCallback, useEffect, useMemo, useState } from "react";
+import { lazy, Suspense, useCallback, useEffect, useMemo, useState } from "react";
 import {
   BookOpen,
   CheckCircle2,
   ChevronRight,
+  FlaskConical,
   Layers3,
   List,
   Map as MapIcon,
@@ -41,6 +42,8 @@ import { QuestDock, type DockAction } from "./components/QuestDock";
 import { QuestHeader } from "./components/QuestHeader";
 import type { MapLayers, QuestPortalView, QuestViewMode } from "./types";
 import { VirginiaMap } from "./VirginiaMap";
+
+const SciencePage = lazy(() => import('../science/SciencePage'));
 
 interface StorageLike {
   getItem(key: string): string | null;
@@ -269,6 +272,9 @@ export function QuestMapScreen() {
           <button type="button" onClick={() => setSchoolWorkspace("scrapbook")}><BookOpen aria-hidden="true" /><span><strong>My Virginia scrapbook</strong><small>Plan five visits. Collect photos. Tell your stories.</small></span><ChevronRight aria-hidden="true" /></button>
           <button type="button" onClick={() => setSchoolWorkspace("maps")}><MapIcon aria-hidden="true" /><span><strong>Virginia map lab</strong><small>Explore regions, climate, population & map tools.</small></span><ChevronRight aria-hidden="true" /></button>
         </div>
+        <button className="field-trip-launch science-launch" type="button" onClick={() => navigate({ kind: 'science' })}>
+          <FlaskConical aria-hidden="true" /><span><strong>Science & natural resources</strong><small>Explore Virginia’s water, wildlife, rocks & energy. Practice grade 4–5 science SOL questions.</small></span><ChevronRight aria-hidden="true" />
+        </button>
         <p className="map-choice-hint">Want a different adventure? Tap a numbered portal on the map or choose All missions.</p>
 
         <div className="mobile-progress" aria-hidden="true">
@@ -442,6 +448,7 @@ export function QuestMapScreen() {
 
       {schoolWorkspace === "scrapbook" ? <Scrapbook onClose={() => setSchoolWorkspace(null)} /> : null}
       {schoolWorkspace === "maps" ? <MapLab onClose={() => setSchoolWorkspace(null)} onScrapbook={() => setSchoolWorkspace("scrapbook")} /> : null}
+      {route.kind === 'science' ? <Suspense fallback={<p role="status">Opening your science field guide…</p>}><SciencePage topicId={route.topicId} onTopic={topicId => navigate({ kind: 'science', ...(topicId ? { topicId } : {}) })} /></Suspense> : null}
       {practiceOpen ? <SolPractice key={selectedId} missionId={selectedId} title={selectedMission.shortTitle} onClose={() => (from?.kind === "mission" || from?.kind === "story") && from.missionId === selectedId ? back() : navigate({ kind: "mission", missionId: selectedId }, true)} /> : null}
 
       {route.kind === "trips" ? <FieldTripTrail initialChapter={tripChapter} onClose={() => setTripChapter(null)} onMission={openMission} /> : null}

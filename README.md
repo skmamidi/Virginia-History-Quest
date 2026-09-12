@@ -209,7 +209,7 @@ places beyond the collection. Region boundaries and pins are approximate; see
 ## Full-page learning journey
 
 Missions, their briefings, SOL practice, the mission directory, map lab, field trips,
-and scrapbook now open as full pages. The shared five-destination navigation stays
+science, and scrapbook now open as full pages. The shared six-destination navigation stays
 available while scrolling. Breadcrumbs identify the current destination; the return
 button names the page the learner came from. Missions use a wide reading column and
 a three-step trail, which becomes a compact progress strip on phones.
@@ -225,3 +225,45 @@ dialogs remain overlays; learning destinations no longer trap focus or lock scro
 Validation: 69 automated checks cover all 13 missions, saved checkpoints, accessibility,
 practice, classroom tools, direct mission links, and browser history navigation.
 The production build passes. See `docs/JOURNEY-DESIGN-REVIEW.md` for visual verification.
+
+## Virginia science and natural resources
+
+Choose **Science** in the shared navigation or **Science & natural resources** on
+the quest map. Eight detailed lessons connect Virginia watersheds, the Chesapeake
+Bay, forests and wildlife, soil and land, rocks and fossils, energy resources,
+conservation, and scientific investigations. Each includes reading sections,
+vocabulary, a misconception explanation, a small investigation, source links, and
+six original practice questions (**48 total**). An interactive watershed model
+compares the James, Roanoke, and New river systems and streamside vegetation.
+
+The grade filter selects lessons with grade 4 or grade 5 connections. Alignment
+uses the **2018 Science SOL**, VDOE's **2026 instructional guides**, and the
+grade 5 science test blueprint, reviewed September 11, 2026. The grade 5 test
+includes grade 4 and grade 5 content. Core resource coverage is 4.8a–d and
+5.9a–c, with related content from 4.2, 4.3, 4.7, 5.2, 5.8, and scientific
+practices 4.1/5.1. This is a resource-focused review, not full coverage of every
+science standard or an official SOL test. Selected subskills, enrichment, and
+the limits of coverage are identified in the app. Questions are newly authored;
+classroom data tables are explicitly synthetic. Source-backed copy still needs
+educator review before being treated as approved curriculum.
+
+Lesson practice supports radio answers, multiple selections, and ordered steps
+with keyboard-accessible controls. It gives clues, explanations, and unlimited
+retries. A **16-question mixed review** samples two questions from each topic;
+explanations and a topic breakdown appear at the end, with targeted practice for
+missed questions. The review is untimed, starts fresh on each launch, and is not
+a prediction of an SOL score. Read-aloud is available when the browser supports it.
+
+Correct-answer discoveries save separately under
+`virginia-history-quest:science:v1`. Only known, unique question IDs are accepted.
+Lessons resume with unsolved questions; replays do not inflate discovery counts.
+Storage errors leave practice usable and show a visible warning. Mixed-review
+scores and pending answers are session-only; completed correct answers are added
+to saved discoveries at the end. History badges and scrapbook content use their
+existing stores. Science content loads in a separate JavaScript chunk and is
+included in the PWA precache. Deep links such as `#/science/rocks` work with
+refresh and browser navigation.
+
+All 137 automated checks pass. The suite includes content/answer-key checks, multi-answer and ordering rules,
+balanced review sampling, storage failures and corruption, retry/resume flows,
+mixed-review scoring, accessibility, and direct science navigation.
