@@ -43,6 +43,7 @@ import { QuestHeader } from "./components/QuestHeader";
 import type { MapLayers, QuestPortalView, QuestViewMode } from "./types";
 import { VirginiaMap } from "./VirginiaMap";
 
+const QuizHub = lazy(() => import('../quizzes/QuizHub'));
 const SciencePage = lazy(() => import('../science/SciencePage'));
 
 interface StorageLike {
@@ -447,11 +448,12 @@ export function QuestMapScreen() {
       ) : null}
 
       {schoolWorkspace === "scrapbook" ? <Scrapbook onClose={() => setSchoolWorkspace(null)} /> : null}
-      {schoolWorkspace === "maps" ? <MapLab onClose={() => setSchoolWorkspace(null)} onScrapbook={() => setSchoolWorkspace("scrapbook")} /> : null}
+      {schoolWorkspace === "maps" ? <MapLab key={route.kind === "maps" ? route.topicId : undefined} initialTopic={route.kind === "maps" ? route.topicId : undefined} onClose={() => setSchoolWorkspace(null)} onScrapbook={() => setSchoolWorkspace("scrapbook")} /> : null}
+      {route.kind === 'quizzes' ? <Suspense fallback={<p role="status">Opening all quizzes…</p>}><QuizHub /></Suspense> : null}
       {route.kind === 'science' ? <Suspense fallback={<p role="status">Opening your science field guide…</p>}><SciencePage topicId={route.topicId} onTopic={topicId => navigate({ kind: 'science', ...(topicId ? { topicId } : {}) })} /></Suspense> : null}
       {practiceOpen ? <SolPractice key={selectedId} missionId={selectedId} title={selectedMission.shortTitle} onClose={() => (from?.kind === "mission" || from?.kind === "story") && from.missionId === selectedId ? back() : navigate({ kind: "mission", missionId: selectedId }, true)} /> : null}
 
-      {route.kind === "trips" ? <FieldTripTrail initialChapter={tripChapter} onClose={() => setTripChapter(null)} onMission={openMission} /> : null}
+      {route.kind === "trips" ? <FieldTripTrail key={route.chapter ?? tripChapter} initialChapter={route.chapter ?? tripChapter} onClose={() => setTripChapter(null)} onMission={openMission} /> : null}
 
       {briefingOpen ? <MissionStory key={selectedId} missionId={selectedId} title={selectedMission.shortTitle}
         motionPaused={motionPaused} progress={selectedStory} replay={route.kind === 'story' && selectedStory.finished}

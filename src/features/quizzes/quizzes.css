@@ -1,0 +1,27 @@
+.quiz-hub { max-width: 960px; margin-inline: auto; }
+.quiz-hub h3 { font-size: clamp(1.15rem, 2vw, 1.5rem); line-height: 1.45; }
+.quiz-toolbar, .quiz-start { display: flex; flex-wrap: wrap; align-items: end; gap: 16px; margin: 24px 0; }
+.quiz-toolbar label { display: grid; gap: 8px; flex: 1; font-weight: 700; min-width: 0; }
+.quiz-toolbar select { width: 100%; max-width: 100%; padding: 12px; font: inherit; border: 1px solid #7d9688; border-radius: 12px; background: #fff; color: #183d31; }
+.quiz-note, .quiz-context span { font-size: .9rem; color: #51645a; }
+.quiz-context { display: inline-block; color: #245c4c; font-weight: 700; text-underline-offset: 4px; margin: 8px 0 16px; }
+.quiz-question, .quiz-score, .quiz-start { padding: clamp(16px, 3vw, 30px); border: 1px solid #c4d4c6; border-radius: 20px; background: #f7faf4; }
+.quiz-start { justify-content: space-between; align-items: center; }
+.quiz-question progress { width: 100%; accent-color: #326b55; }
+.quiz-options { display: grid; gap: 12px; border: 0; padding: 0; margin: 20px 0; }
+.quiz-options label, .quiz-options button { display: flex; align-items: center; gap: 12px; padding: 16px; border: 1px solid #a9bcae; border-radius: 12px; background: white; color: #183d31; font: inherit; text-align: left; cursor: pointer; }
+.quiz-options label:has(input:checked) { border-color: #326b55; background: #e5f0e5; }
+.quiz-options input { flex-shrink: 0; width: 20px; height: 20px; accent-color: #326b55; }
+.quiz-hub button:disabled { opacity: .5; cursor: default; }
+.quiz-score strong { font-size: 1.5rem; }
+.quiz-review, .quiz-directory article, .quiz-background { padding: 18px 0; border-bottom: 1px solid #c4d4c6; }
+.quiz-directory article .secondary-action { display: block; }
+.quiz-hub summary { cursor: pointer; font-weight: 700; line-height: 1.5; }
+.quiz-table { overflow-x: auto; margin: 20px 0; }
+.quiz-table table { width: 100%; border-collapse: collapse; }
+.quiz-table th, .quiz-table td { padding: 10px; border: 1px solid #a9bcae; text-align: left; }
+.quiz-table caption { font-weight: 700; padding: 10px; }
+@media (max-width: 600px) {
+  .quiz-toolbar label { flex-basis: 100%; }
+  .quiz-toolbar > button { width: 100%; }
+}

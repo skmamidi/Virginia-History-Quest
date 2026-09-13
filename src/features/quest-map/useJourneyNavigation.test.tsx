@@ -24,7 +24,7 @@ it('uses full pages, preserves the map view, and supports browser back and forwa
   await user.click(launch);
   expect(window.location.hash).toBe('#/mission/VS.1');
   expect(screen.queryByRole('dialog')).toBeNull();
-  expect(within(screen.getByRole('navigation', { name: 'Explore Virginia' })).getAllByRole('link')).toHaveLength(6);
+  expect(within(screen.getByRole('navigation', { name: 'Explore Virginia' })).getAllByRole('link')).toHaveLength(7);
   await user.click(screen.getByRole('button', { name: 'Next story stop' }));
   await user.click(screen.getByRole('button', { name: 'Next story stop' }));
   await user.click(screen.getByRole('button', { name: 'Try the challenges' }));

@@ -1,16 +1,20 @@
+import { MAP_TOPICS, type MapTopic } from '../../contexts/published-content/adapters/mapLabData';
+import { FIELD_TRIP_CHAPTERS } from '../../contexts/published-content/adapters/fieldTrips';
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { MISSION_IDS, type MissionId } from '../../contexts/published-content/domain/mission';
 import { SCIENCE_TOPIC_IDS, type ScienceTopicId } from '../../contexts/published-content/domain/science';
-export type JourneyRoute = { kind: 'home' | 'missions' | 'maps' | 'scrapbook' | 'trips' } | { kind: 'science'; topicId?: ScienceTopicId } | { kind: 'mission' | 'practice' | 'story'; missionId: MissionId };
+export type JourneyRoute = { kind: 'home' | 'missions' | 'quizzes' | 'scrapbook' } | { kind: 'maps'; topicId?: MapTopic } | { kind: 'trips'; chapter?: number } | { kind: 'science'; topicId?: ScienceTopicId } | { kind: 'mission' | 'practice' | 'story'; missionId: MissionId };
 export const HOME_ROUTE: JourneyRoute = { kind: 'home' };
 export function routeHash(route: JourneyRoute) {
-  return `#/${route.kind}${'missionId' in route ? `/${route.missionId}` : route.kind === 'science' && route.topicId ? `/${route.topicId}` : ''}`;
+  return `#/${route.kind}${'missionId' in route ? `/${route.missionId}` : (route.kind === 'science' || route.kind === 'maps') && route.topicId ? `/${route.topicId}` : route.kind === 'trips' && route.chapter !== undefined ? `/${route.chapter}` : ''}`;
 }
 export function parseRoute(hash: string): JourneyRoute {
   const [kind, id] = hash.replace(/^#\//, '').split('/');
+  if (kind === 'maps') return MAP_TOPICS.some(t => t.id === id) ? { kind, topicId: id as MapTopic } : { kind };
+  if (kind === 'trips') return id !== undefined && /^\d+$/.test(id) && Number(id) < FIELD_TRIP_CHAPTERS.length ? { kind, chapter: Number(id) } : { kind };
   if (kind === 'science') return SCIENCE_TOPIC_IDS.includes(id as ScienceTopicId) ? { kind, topicId: id as ScienceTopicId } : { kind };
   if ((kind === 'mission' || kind === 'practice' || kind === 'story') && MISSION_IDS.includes(id as MissionId)) return { kind, missionId: id as MissionId };
-  if (['missions', 'maps', 'scrapbook', 'trips'].includes(kind)) return { kind: kind as 'missions' | 'maps' | 'scrapbook' | 'trips' };
+  if (['missions', 'quizzes', 'scrapbook'].includes(kind)) return { kind: kind as 'missions' | 'quizzes' | 'scrapbook' };
   return HOME_ROUTE;
 }
 export function parentRoute(route: JourneyRoute): JourneyRoute {

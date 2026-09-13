@@ -24,8 +24,8 @@ function MapPractice({ topic }: { topic: MapTopic }) {
     </>}
   </section>;
 }
-export function MapLab({ onClose, onScrapbook }: { onClose: () => void; onScrapbook: () => void }) {
-  const [topic, setTopic] = useState<MapTopic>('regions');
+export function MapLab({ onClose, onScrapbook, initialTopic = 'regions' }: { onClose: () => void; onScrapbook: () => void; initialTopic?: MapTopic }) {
+  const [topic, setTopic] = useState<MapTopic>(initialTopic);
   const [region, setRegion] = useState(3);
   const [compare, setCompare] = useState(4);
   const [climate, setClimate] = useState<'temperature' | 'snowfall'>('temperature');

@@ -3,6 +3,7 @@ import { HOME_ROUTE, parentRoute, routeHash, type JourneyRoute } from '../useJou
 const SECTIONS = [
   { kind: 'home', label: 'Quest map', Icon: Map }, { kind: 'missions', label: 'Missions', Icon: BookOpen },
   { kind: 'maps', label: 'Map lab', Icon: Compass }, { kind: 'trips', label: 'Field trips', Icon: MapPin },
+  { kind: 'quizzes', label: 'All quizzes', Icon: BookOpen },
   { kind: 'science', label: 'Science', Icon: FlaskConical },
   { kind: 'scrapbook', label: 'Scrapbook', Icon: NotebookPen },
 ] as const;
