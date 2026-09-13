@@ -25,3 +25,8 @@
   .quiz-toolbar label { flex-basis: 100%; }
   .quiz-toolbar > button { width: 100%; }
 }
+.quiz-feedback { padding: 20px; margin: 24px 0; border: 2px solid; border-radius: 14px; line-height: 1.6; }
+.quiz-feedback-correct { background: #e5f0e5; border-color: #326b55; color: #183d31; }
+.quiz-feedback-wrong { background: #fff3df; border-color: #996422; color: #51370f; }
+.quiz-feedback > strong { font-size: 1.2rem; }
+.quiz-feedback p:last-child { margin-bottom: 0; }

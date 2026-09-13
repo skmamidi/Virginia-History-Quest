@@ -8,8 +8,12 @@ function ContextLink({ question }: { question: QuizQuestion }) {
 }
 const answerText = (q: QuizQuestion, values: readonly number[]) => values.map(i => q.choices[i]).join(q.kind === 'order' ? ' → ' : '; ');
 
-function Question({ question: q, onAnswer }: { question: QuizQuestion; onAnswer: (answer: number[]) => void }) {
+function Question({ question: q, last, onAnswer }: { question: QuizQuestion; last: boolean; onAnswer: (answer: number[]) => void }) {
   const [selection, setSelection] = useState<number[]>([]);
+  const [checked, setChecked] = useState(false);
+  const feedback = useRef<HTMLDivElement>(null);
+  const correct = isCorrect(q, selection);
+  useEffect(() => { if (checked) feedback.current?.focus(); }, [checked]);
   const [choices] = useState(() => {
     const indices = q.choices.map((_, i) => i);
     const mixed = shuffle(indices);
@@ -26,11 +30,19 @@ function Question({ question: q, onAnswer }: { question: QuizQuestion; onAnswer:
     {q.table ? <div className="quiz-table"><table><caption>{q.table.caption}</caption><thead><tr>{q.table.headings.map(h => <th scope="col" key={h}>{h}</th>)}</tr></thead><tbody>{q.table.rows.map((row, i) => <tr key={i}>{row.map((cell, j) => <td key={j}>{cell}</td>)}</tr>)}</tbody></table></div> : null}
     <p>{q.kind === 'order' ? 'Tap each step in order. Clear your steps to try a different order.' : q.kind === 'multiple' ? `Choose ${q.answer.length} answers.` : 'Choose one answer.'}</p>
     {q.kind === 'order' ? <>
-      <div className="quiz-options">{choices.map(i => <button type="button" key={i} disabled={selection.includes(i)} onClick={() => setSelection([...selection, i])}>{q.choices[i]}</button>)}</div>
+      <div className="quiz-options">{choices.map(i => <button type="button" key={i} disabled={checked || selection.includes(i)} onClick={() => setSelection([...selection, i])}>{q.choices[i]}</button>)}</div>
       <ol aria-label="Your ordered steps">{selection.map(i => <li key={i}>{q.choices[i]}</li>)}</ol>
-      <button type="button" className="secondary-action" disabled={!selection.length} onClick={() => setSelection([])}>Clear steps</button>
-    </> : <fieldset className="quiz-options"><legend className="sr-only">Answer choices</legend>{choices.map(i => <label key={i}><input type={q.kind === 'single' ? 'radio' : 'checkbox'} name={q.id} checked={selection.includes(i)} onChange={() => setSelection(q.kind === 'single' ? [i] : selection.includes(i) ? selection.filter(v => v !== i) : [...selection, i])} /><span>{q.choices[i]}</span></label>)}</fieldset>}
-    <button type="button" className="primary-action" disabled={!ready} onClick={() => onAnswer(selection)}>Save answer & continue</button>
+      <button type="button" className="secondary-action" disabled={checked || !selection.length} onClick={() => setSelection([])}>Clear steps</button>
+    </> : <fieldset className="quiz-options" disabled={checked}><legend className="sr-only">Answer choices</legend>{choices.map(i => <label key={i}><input type={q.kind === 'single' ? 'radio' : 'checkbox'} name={q.id} checked={selection.includes(i)} onChange={() => setSelection(q.kind === 'single' ? [i] : selection.includes(i) ? selection.filter(v => v !== i) : [...selection, i])} /><span>{q.choices[i]}</span></label>)}</fieldset>}
+    {checked ? <>
+      <div ref={feedback} tabIndex={-1} role="status" className={`quiz-feedback ${correct ? 'quiz-feedback-correct' : 'quiz-feedback-wrong'}`}>
+        <strong>{correct ? 'Correct! You found it.' : 'Not quite — this answer is incorrect.'}</strong>
+        {!correct ? <p><strong>Your answer:</strong> {answerText(q, selection)}</p> : null}
+        <p><strong>{q.kind === 'order' ? 'Correct order:' : 'Correct answer:'}</strong> {answerText(q, q.answer)}</p>
+        <p><strong>Why:</strong> {q.explanation}</p>
+      </div>
+      <button type="button" className="primary-action" onClick={() => onAnswer(selection)}>{last ? 'See quiz summary' : 'Next question'}</button>
+    </> : <button type="button" className="primary-action" disabled={!ready} onClick={() => setChecked(true)}>Check my answer</button>}
   </>;
 }
 
@@ -67,6 +79,6 @@ export default function QuizHub({ questions = QUESTION_BANK }: { questions?: rea
       <div className="quiz-score" role="status"><strong>{wrong.length === 0 ? 'You got every question right!' : `${wrong.length} ${wrong.length === 1 ? 'question' : 'questions'} to practice again`}</strong><p>{session.length - wrong.length} correct · {wrong.length} wrong · {session.length} total</p></div>
       <div className="quiz-toolbar">{wrong.length ? <button type="button" className="primary-action" onClick={() => start(wrong)}>Retake just the {wrong.length} wrong {wrong.length === 1 ? 'question' : 'questions'}</button> : null}<button type="button" className="secondary-action" onClick={() => start(filtered)}>Start a fresh quiz</button></div>
       <section aria-label="Review your answers">{session.map((q, i) => <details className="quiz-review" key={q.id}><summary>{isCorrect(q, answers[i]) ? 'Correct' : 'Review this'} · {q.prompt}</summary><p><strong>Your answer:</strong> {answerText(q, answers[i])}</p><p><strong>Correct answer:</strong> {answerText(q, q.answer)}</p><p>{q.explanation}</p><ContextLink question={q} /></details>)}</section>
-    </> : <div className="quiz-question"><p>Question {answers.length + 1} of {session.length}</p><progress aria-label="Questions completed" value={answers.length} max={session.length} /><Question key={`${run}:${answers.length}`} question={session[answers.length]} onAnswer={answer => setAnswers(previous => [...previous, answer])} /><p className="quiz-note">Answers and explanations appear when you finish.</p></div>}
+    </> : <div className="quiz-question"><p>Question {answers.length + 1} of {session.length}</p><progress aria-label="Questions completed" value={answers.length} max={session.length} /><Question key={`${run}:${answers.length}`} question={session[answers.length]} last={answers.length === session.length - 1} onAnswer={answer => setAnswers(previous => [...previous, answer])} /><p className="quiz-note">Check your answer, read why, then continue when you’re ready.</p></div>}
   </PageContent>;
 }

@@ -43,7 +43,13 @@ describe('all quizzes', () => {
       const river = !!screen.queryByRole('heading', { name: 'Pick the river' });
       await user.click(screen.getByRole('radio', { name: river ? 'Mountain' : 'Granite' }));
       expect(screen.getByRole('link', { name: /Read the background/ })).toHaveAttribute('target', '_blank');
-      await user.click(screen.getByRole('button', { name: 'Save answer & continue' }));
+      await user.click(screen.getByRole('button', { name: 'Check my answer' }));
+      expect(screen.getByText(`Question ${i + 1} of 2`)).toBeVisible();
+      expect(screen.getByRole('status')).toHaveTextContent(river ? 'this answer is incorrect' : 'Correct!');
+      expect(screen.getByRole('status')).toHaveTextContent(river ? 'James is a river.' : 'Granite is a rock.');
+      expect(screen.getByRole('radio', { name: river ? 'James' : 'Tree' })).toBeDisabled();
+      expect(screen.queryByRole('heading', { name: 'Your quiz summary' })).not.toBeInTheDocument();
+      await user.click(screen.getByRole('button', { name: /Next question|See quiz summary/ }));
     }
     expect(screen.getByText('1 correct · 1 wrong · 2 total')).toBeVisible();
     await user.click(screen.getByRole('button', { name: 'Retake just the 1 wrong question' }));
@@ -51,7 +57,8 @@ describe('all quizzes', () => {
     expect(screen.getByRole('heading', { name: 'Pick the river' })).toBeVisible();
     expect(screen.getByRole('radio', { name: 'Mountain' })).not.toBeChecked();
     await user.click(screen.getByRole('radio', { name: 'James' }));
-    await user.click(screen.getByRole('button', { name: 'Save answer & continue' }));
+    await user.click(screen.getByRole('button', { name: 'Check my answer' }));
+    await user.click(screen.getByRole('button', { name: /Next question|See quiz summary/ }));
     expect(screen.getByText('1 correct · 0 wrong · 1 total')).toBeVisible();
     expect(screen.queryByRole('button', { name: /Retake just/ })).not.toBeInTheDocument();
     await user.click(screen.getByRole('button', { name: 'Reset quiz & clear results' }));
@@ -75,7 +82,7 @@ describe('all quizzes', () => {
     await user.selectOptions(screen.getByLabelText('Filter by topic'), 'Rocks');
     await user.click(screen.getByRole('button', { name: 'Start quiz' }));
     expect(screen.getByRole('heading', { name: 'Pick the rock' })).toBeVisible();
-    expect(screen.getByRole('button', { name: 'Save answer & continue' })).toBeDisabled();
+    expect(screen.getByRole('button', { name: 'Check my answer' })).toBeDisabled();
   });
   it('supports multiple answers, ordered answers, and data tables', async () => {
     const user = userEvent.setup();
@@ -84,9 +91,10 @@ describe('all quizzes', () => {
     await user.click(screen.getByRole('button', { name: 'Start quiz' }));
     expect(within(screen.getByRole('table')).getByText('River')).toBeVisible();
     await user.click(screen.getByRole('checkbox', { name: 'James' }));
-    expect(screen.getByRole('button', { name: 'Save answer & continue' })).toBeDisabled();
+    expect(screen.getByRole('button', { name: 'Check my answer' })).toBeDisabled();
     await user.click(screen.getByRole('checkbox', { name: 'Mountain' }));
-    await user.click(screen.getByRole('button', { name: 'Save answer & continue' }));
+    await user.click(screen.getByRole('button', { name: 'Check my answer' }));
+    await user.click(screen.getByRole('button', { name: /Next question|See quiz summary/ }));
     expect(screen.getByText('1 correct · 0 wrong · 1 total')).toBeVisible();
     view.unmount();
     render(<QuizHub questions={[{ ...q, kind: 'order' }]} />);
@@ -95,7 +103,8 @@ describe('all quizzes', () => {
     await user.click(screen.getByRole('button', { name: 'Clear steps' }));
     await user.click(screen.getByRole('button', { name: 'James' }));
     await user.click(screen.getByRole('button', { name: 'Mountain' }));
-    await user.click(screen.getByRole('button', { name: 'Save answer & continue' }));
+    await user.click(screen.getByRole('button', { name: 'Check my answer' }));
+    await user.click(screen.getByRole('button', { name: /Next question|See quiz summary/ }));
     expect(screen.getByText('1 correct · 0 wrong · 1 total')).toBeVisible();
   });
 });
