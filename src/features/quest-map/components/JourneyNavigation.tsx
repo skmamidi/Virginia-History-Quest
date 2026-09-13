@@ -8,6 +8,7 @@ const SECTIONS = [
   { kind: 'scrapbook', label: 'Scrapbook', Icon: NotebookPen },
 ] as const;
 export function routeLabel(route: JourneyRoute, missionTitle: (id: string) => string): string {
+  if (route.kind === 'reading') return 'Question background';
   if (route.kind === 'mission') return missionTitle(route.missionId);
   if (route.kind === 'practice') return 'SOL practice';
   if (route.kind === 'story') return 'Explore the story';
@@ -15,7 +16,7 @@ export function routeLabel(route: JourneyRoute, missionTitle: (id: string) => st
   return SECTIONS.find(s => s.kind === route.kind)?.label ?? 'Quest map';
 }
 export function JourneyNavigation({ route, navigate }: { route: JourneyRoute; navigate: (route: JourneyRoute) => void }) {
-  const active = ['mission', 'practice', 'story'].includes(route.kind) ? 'missions' : route.kind;
+  const active = route.kind === 'reading' ? 'quizzes' : ['mission', 'practice', 'story'].includes(route.kind) ? 'missions' : route.kind;
   return <nav className="journey-navigation" aria-label="Explore Virginia">{SECTIONS.map(({ kind, label, Icon }) => <a key={kind} href={routeHash({ kind })} aria-current={kind === active ? 'page' : undefined} onClick={event => { if (event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return; event.preventDefault(); navigate({ kind }); }}><Icon aria-hidden="true" /><span>{label}</span></a>)}</nav>;
 }
 export function JourneyWayfinding({ route, from, back, navigate, missionTitle }: { route: JourneyRoute; from: JourneyRoute | null; back: () => void; navigate: (route: JourneyRoute) => void; missionTitle: (id: string) => string }) {

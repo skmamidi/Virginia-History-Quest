@@ -3,13 +3,14 @@ import { FIELD_TRIP_CHAPTERS } from '../../contexts/published-content/adapters/f
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { MISSION_IDS, type MissionId } from '../../contexts/published-content/domain/mission';
 import { SCIENCE_TOPIC_IDS, type ScienceTopicId } from '../../contexts/published-content/domain/science';
-export type JourneyRoute = { kind: 'home' | 'missions' | 'quizzes' | 'scrapbook' } | { kind: 'maps'; topicId?: MapTopic } | { kind: 'trips'; chapter?: number } | { kind: 'science'; topicId?: ScienceTopicId } | { kind: 'mission' | 'practice' | 'story'; missionId: MissionId };
+export type JourneyRoute = { kind: 'reading'; questionId: string } | { kind: 'home' | 'missions' | 'quizzes' | 'scrapbook' } | { kind: 'maps'; topicId?: MapTopic } | { kind: 'trips'; chapter?: number } | { kind: 'science'; topicId?: ScienceTopicId } | { kind: 'mission' | 'practice' | 'story'; missionId: MissionId };
 export const HOME_ROUTE: JourneyRoute = { kind: 'home' };
 export function routeHash(route: JourneyRoute) {
-  return `#/${route.kind}${'missionId' in route ? `/${route.missionId}` : (route.kind === 'science' || route.kind === 'maps') && route.topicId ? `/${route.topicId}` : route.kind === 'trips' && route.chapter !== undefined ? `/${route.chapter}` : ''}`;
+  return `#/${route.kind}${route.kind === 'reading' ? `/${encodeURIComponent(route.questionId)}` : 'missionId' in route ? `/${route.missionId}` : (route.kind === 'science' || route.kind === 'maps') && route.topicId ? `/${route.topicId}` : route.kind === 'trips' && route.chapter !== undefined ? `/${route.chapter}` : ''}`;
 }
 export function parseRoute(hash: string): JourneyRoute {
   const [kind, id] = hash.replace(/^#\//, '').split('/');
+  if (kind === 'reading' && id) { try { return { kind, questionId: decodeURIComponent(id) }; } catch { return { kind: 'quizzes' }; } }
   if (kind === 'maps') return MAP_TOPICS.some(t => t.id === id) ? { kind, topicId: id as MapTopic } : { kind };
   if (kind === 'trips') return id !== undefined && /^\d+$/.test(id) && Number(id) < FIELD_TRIP_CHAPTERS.length ? { kind, chapter: Number(id) } : { kind };
   if (kind === 'science') return SCIENCE_TOPIC_IDS.includes(id as ScienceTopicId) ? { kind, topicId: id as ScienceTopicId } : { kind };
@@ -18,6 +19,7 @@ export function parseRoute(hash: string): JourneyRoute {
   return HOME_ROUTE;
 }
 export function parentRoute(route: JourneyRoute): JourneyRoute {
+  if (route.kind === 'reading') return { kind: 'quizzes' };
   if (route.kind === 'science' && route.topicId) return { kind: 'science' };
   if (route.kind === 'practice' || route.kind === 'story') return { kind: 'mission', missionId: route.missionId };
   if (route.kind === 'mission') return { kind: 'missions' };

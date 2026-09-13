@@ -12,7 +12,7 @@ import type { ScienceTable } from '../../contexts/published-content/domain/scien
 export interface QuizQuestion {
   id: string; topic: string; source: string; prompt: string;
   kind: 'single' | 'multiple' | 'order'; choices: readonly string[]; answer: readonly number[];
-  explanation: string; href: string; lessonTitle: string; context?: string; table?: ScienceTable;
+  explanation: string; href: string; lessonTitle: string; lessonHref?: string; context?: string; table?: ScienceTable;
 }
 export function shuffle<T>(items: readonly T[], random = Math.random): T[] {
   const result = [...items];
@@ -26,7 +26,7 @@ export function isCorrect(q: QuizQuestion, selection: readonly number[]) {
   return selection.length === q.answer.length && new Set(selection).size === selection.length &&
     q.answer.every((value, i) => q.kind === 'order' ? selection[i] === value : selection.includes(value));
 }
-export const QUESTION_BANK: readonly QuizQuestion[] = [
+const publishedQuestions: readonly QuizQuestion[] = [
   ...MISSION_CATALOG.missions.flatMap(m => {
     const shared = { topic: `${m.id} · ${m.shortTitle}`, href: `#/story/${m.id}`, lessonTitle: m.title };
     return [
@@ -39,3 +39,5 @@ export const QUESTION_BANK: readonly QuizQuestion[] = [
   ...FIELD_TRIP_CHAPTERS.map((q, i): QuizQuestion => ({ id: `trip:${q.id}`, topic: 'Field trips', source: q.title, prompt: q.question, choices: q.choices, answer: [q.answer], kind: 'single', explanation: q.connection, href: `#/trips/${i}`, lessonTitle: q.title })),
   { id: DAILY_MAP_RETRIEVAL.id, topic: `VS.3 · ${MISSION_CATALOG.missions.find(m => m.id === 'VS.3')!.shortTitle}`, source: 'Daily map clue', prompt: DAILY_MAP_RETRIEVAL.prompt, choices: DAILY_MAP_RETRIEVAL.choices, answer: [DAILY_MAP_RETRIEVAL.choices.indexOf(DAILY_MAP_RETRIEVAL.correctChoice)], kind: 'single', explanation: DAILY_MAP_RETRIEVAL.feedbackByChoice[DAILY_MAP_RETRIEVAL.correctChoice], href: '#/story/VS.3', lessonTitle: 'Jamestown' },
 ];
+
+export const QUESTION_BANK: readonly QuizQuestion[] = publishedQuestions.map(q => ({ ...q, lessonHref: q.href, href: `#/reading/${encodeURIComponent(q.id)}` }));

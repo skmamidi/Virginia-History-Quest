@@ -1,3 +1,4 @@
+import { MissionFieldGuide } from '../../reading/MissionFieldGuide';
 import { useEffect, useId, useRef, useState } from 'react';
 import { ArrowLeft, ArrowRight, BookOpen, Check, ChevronRight, Factory, Flag, Globe, GraduationCap, Lightbulb, Mountain, Search, ShieldCheck, Ship, Sprout, TrainFront, Users, Volume2, VolumeX, Waves, Waypoints } from 'lucide-react';
 import { MISSION_STORIES, type StoryIcon } from '../../../contexts/published-content/adapters/missionStories';
@@ -80,6 +81,7 @@ export function MissionStory({ missionId, title, progress, onExplore, onComplete
       <div className="story-wonder"><Lightbulb aria-hidden="true" /><div><h3>Pause and wonder</h3><p>{story.think}</p><small>Think it through or talk with someone. No answer to submit.</small></div></div>
       <div className="story-launch"><button type="button" className="primary-action" disabled={!allExplored} onClick={onComplete}>{replay ? 'Return to my challenges' : 'Try the challenges'}<ChevronRight aria-hidden="true" /></button><p>{allExplored ? 'You can revisit this story during the challenges.' : 'Visit each story stop first. There’s no timer.'}</p><button type="button" className="text-button" onClick={onPractice}>Practice this topic · SOL questions</button></div>
     </footer>
+    <MissionFieldGuide missionId={missionId} motionPaused={motionPaused} />
     <p className="story-source">Keep exploring: <a href={story.source.url} target="_blank" rel="noreferrer">{story.source.label}<span className="sr-only"> (opens a new tab)</span></a></p>
   </PageContent>;
 }

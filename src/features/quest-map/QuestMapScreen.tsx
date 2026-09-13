@@ -43,6 +43,7 @@ import { QuestHeader } from "./components/QuestHeader";
 import type { MapLayers, QuestPortalView, QuestViewMode } from "./types";
 import { VirginiaMap } from "./VirginiaMap";
 
+const QuizReading = lazy(() => import('../reading/QuizReading'));
 const QuizHub = lazy(() => import('../quizzes/QuizHub'));
 const SciencePage = lazy(() => import('../science/SciencePage'));
 
@@ -449,6 +450,7 @@ export function QuestMapScreen() {
 
       {schoolWorkspace === "scrapbook" ? <Scrapbook onClose={() => setSchoolWorkspace(null)} /> : null}
       {schoolWorkspace === "maps" ? <MapLab key={route.kind === "maps" ? route.topicId : undefined} initialTopic={route.kind === "maps" ? route.topicId : undefined} onClose={() => setSchoolWorkspace(null)} onScrapbook={() => setSchoolWorkspace("scrapbook")} /> : null}
+      {route.kind === 'reading' ? <Suspense fallback={<p role="status">Opening your background reading…</p>}><QuizReading key={route.questionId} questionId={route.questionId} motionPaused={motionPaused} /></Suspense> : null}
       {route.kind === 'quizzes' ? <Suspense fallback={<p role="status">Opening all quizzes…</p>}><QuizHub /></Suspense> : null}
       {route.kind === 'science' ? <Suspense fallback={<p role="status">Opening your science field guide…</p>}><SciencePage topicId={route.topicId} onTopic={topicId => navigate({ kind: 'science', ...(topicId ? { topicId } : {}) })} /></Suspense> : null}
       {practiceOpen ? <SolPractice key={selectedId} missionId={selectedId} title={selectedMission.shortTitle} onClose={() => (from?.kind === "mission" || from?.kind === "story") && from.missionId === selectedId ? back() : navigate({ kind: "mission", missionId: selectedId }, true)} /> : null}

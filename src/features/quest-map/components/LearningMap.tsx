@@ -13,7 +13,7 @@ const BANDS = [
   [[-77.5,36.3],[-77.4,37.6],[-77.1,38.8],[-76.9,40],[-74,40],[-74,36.3]],
 ];
 const LABELS = [[-82.55,37.0],[-80.6,37.45],[-79.3,37.6],[-78.1,37.8],[-76.8,37.1]];
-export function LearningMap({ topic, region = 0, climate = 'temperature', selectedPlace = 0 }: { topic: MapTopic; region?: number; climate?: 'temperature' | 'snowfall'; selectedPlace?: number }) {
+export function LearningMap({ topic, region = 0, climate = 'temperature', selectedPlace = 0, landmark }: { landmark?: { lon: number; lat: number; label: string }; topic: MapTopic; region?: number; climate?: 'temperature' | 'snowfall'; selectedPlace?: number }) {
   const id = useId().replaceAll(':', '');
   const [enlarged, setEnlarged] = useState(false);
   const title = topic === 'regions' ? 'Virginia’s five geographic regions' : topic === 'climate' ? `Virginia ${climate === 'temperature' ? 'temperature' : 'snowfall'} patterns` : topic === 'population' ? 'Virginia county & city population density · 2020' : 'Virginia and its neighbors · relative location';
@@ -24,11 +24,13 @@ export function LearningMap({ topic, region = 0, climate = 'temperature', select
     <div id={`${id}-viewport`} className={`learning-map-viewport ${enlarged ? "map-enlarged" : ""}`} tabIndex={enlarged ? 0 : undefined} role={enlarged ? "region" : undefined} aria-label={enlarged ? "Enlarged map; scroll to explore" : undefined}>
     <svg viewBox="0 0 760 400" role="img" aria-label={title}>
       <title>{title}</title><desc>{topic === 'regions' ? 'Numbered regions run west to east: 1 Appalachian Plateau, 2 Valley and Ridge, 3 Blue Ridge Mountains, 4 Piedmont, 5 Coastal Plain. Full descriptions and selection buttons follow the map.' : topic === 'climate' ? 'Simplified pattern: western highlands tend to be cooler and snowier; the eastern coast tends to be warmer with less snowfall. These are broad patterns, not measured boundaries.' : topic === 'population' ? 'Dots locate all 95 counties and 38 independent cities. Their colors show 2020 population density categories. The selected locality has a larger outlined marker. The searchable table lists every locality and its exact displayed value.' : 'Maryland north, West Virginia northwest, Kentucky west, Tennessee southwest, North Carolina south, Atlantic Ocean east. Virginia is on the east side of the United States, in North America.'}</desc>
+      {landmark ? <desc>{landmark.label} is marked at an approximate location in southeastern Virginia.</desc> : null}
       <defs><clipPath id={`${id}-clip`}><path d={LEARNING_MAP_OUTLINE} fillRule="evenodd" /></clipPath></defs>
       <rect width="760" height="400" rx="16" fill="#eef4ed" />
       <path d={LEARNING_MAP_OUTLINE} fill="#e6ddbb" fillRule="evenodd" />
       {(topic === 'regions' || topic === 'climate') ? <g clipPath={`url(#${id}-clip)`}>{BANDS.map((band, i) => <path key={i} d={line(band)} fill={topic === 'regions' ? REGION_LESSONS[i].color : climateColors[i]} stroke={topic === 'regions' ? '#fff8e5' : 'none'} strokeWidth="2" opacity={topic === 'regions' && i !== region ? 0.65 : 1} />)}</g> : null}
       <path d={LEARNING_MAP_OUTLINE} fill="none" stroke="#455d56" strokeWidth="1.8" />
+      {landmark ? <g><circle cx={point(landmark.lon, landmark.lat).x} cy={point(landmark.lon, landmark.lat).y} r="7" fill="#123e59" stroke="white" strokeWidth="3" /><path d={`M${point(landmark.lon, landmark.lat).x} ${point(landmark.lon, landmark.lat).y} l-28 -40 h-112`} fill="none" stroke="#123e59" strokeWidth="2" /><text x={point(landmark.lon, landmark.lat).x - 140} y={point(landmark.lon, landmark.lat).y - 46} fontSize="16" fontWeight="700" fill="#123e59">{landmark.label}</text></g> : null}
       <g fill="#28433e" fontSize="13" fontFamily="system-ui" fontWeight="650">
         <text x="540" y="28">Maryland</text><text x="215" y="105">West Virginia</text><text x="60" y="230">Kentucky</text><text x="85" y="370">Tennessee</text><text x="365" y="370">North Carolina</text>
         <text x="685" y="285">Atlantic</text><text x="685" y="303">Ocean</text>
